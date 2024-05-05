@@ -8,17 +8,20 @@
             "name": "quicktype",
             "type": "node",
             "request": "launch",
-            "program": "${workspaceRoot}/node_modules/ts-node/dist/_bin.js",
+            "program": "${workspaceRoot}/node_modules/ts-node/dist/bin.js",
             "runtimeArgs": ["--nolazy"],
             "args": [
                 "--project",
-                "src/cli/tsconfig.json",
-                "src/cli/index.ts",
+                "tsconfig.json",
+                "src/index.ts",
                 "--lang",
-                "dart",
+                "schema",
                 "--src-lang",
                 "json",
-                "./test/inputs/json/priority/blns-object.json"
+                "--src",
+                "./data/in.json",
+                "--out",
+                "./data/out.json"
             ],
             "cwd": "${workspaceRoot}",
             "protocol": "inspector"
