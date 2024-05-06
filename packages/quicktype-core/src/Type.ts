@@ -45,7 +45,8 @@ const transformedStringTypeTargetTypeKinds = {
     "date-time": { xsd: "dateTime" },
     uri: { xsd: "anyURI" },
     "integer-string": { xsd: "integerString" },
-    "bool-string": { xsd: "booleanString" }
+    "bool-string": { xsd: "booleanString" },
+    "empty-string": { xsd: "emptyString" }
 };
 
 export const transformedStringTypeTargetTypeKindsMap = mapFromObject(

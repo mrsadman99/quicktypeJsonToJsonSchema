@@ -30,7 +30,7 @@ export class TypeReconstituter<TBuilder extends BaseGraphRewriteBuilder> {
         private readonly _typeAttributes: TypeAttributes,
         private readonly _forwardingRef: TypeRef | undefined,
         private readonly _register: (tref: TypeRef) => void
-    ) {}
+    ) { }
 
     private builderForNewType(): TBuilder {
         assert(!this._wasUsed, "TypeReconstituter used more than once");

@@ -1,9 +1,5 @@
-import URI from "urijs";
-
-import { TypeAttributeKind, TypeAttributes, emptyTypeAttributes } from "./TypeAttributes";
+import { TypeAttributeKind } from "./TypeAttributes";
 import { setUnionManyInto } from "collection-utils";
-import { JSONSchemaType, JSONSchemaAttributes, Ref } from "../input/JSONSchemaInput";
-import { JSONSchema } from "../input/JSONSchemaStore";
 import { checkArray, checkString } from "../support/Support";
 import { Type } from "../Type";
 

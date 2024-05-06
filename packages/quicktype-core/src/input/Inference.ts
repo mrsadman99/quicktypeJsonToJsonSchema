@@ -83,7 +83,6 @@ export class TypeInference {
     constructor(
         private readonly _cjson: CompressedJSON<unknown>,
         private readonly _typeBuilder: TypeBuilder,
-        private readonly _inferMaps: boolean,
         private readonly _inferEnums: boolean
     ) { }
 
@@ -246,15 +245,6 @@ export class TypeInference {
                 defined(this._refIntersections).push([tref, allRefs]);
                 return tref;
             }
-        }
-
-        if (this._inferMaps && propertyNames.length > 500) {
-            const accumulator = new UnionAccumulator<NestedValueArray, NestedValueArray>(true);
-            for (const key of propertyNames) {
-                this.addValuesToAccumulator(propertyValues[key], accumulator);
-            }
-            const values = this.makeTypeFromAccumulator(accumulator, emptyTypeAttributes, fixed);
-            return this._typeBuilder.getMapType(typeAttributes, values, forwardingRef);
         }
 
         const properties = new Map<string, ClassProperty>();

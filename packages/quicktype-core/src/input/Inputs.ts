@@ -5,7 +5,6 @@ import { panic, errorMessage, defined } from "../support/Support";
 import { messageError } from "../Messages";
 import { TypeBuilder } from "../TypeBuilder";
 import { makeNamesTypeAttributes } from "../attributes/TypeNames";
-import { descriptionTypeAttributeKind } from "../attributes/Description";
 import { TypeInference } from "./Inference";
 import { TargetLanguage } from "../TargetLanguage";
 import { RunContext } from "../Run";
@@ -14,7 +13,6 @@ import { languageNamed } from "../language/All";
 export interface Input<T> {
     readonly kind: string;
     readonly needIR: boolean;
-    readonly needSchemaProcessing: boolean;
 
     addSource(source: T): Promise<void>;
     addSourceSync(source: T): void;
@@ -24,14 +22,12 @@ export interface Input<T> {
     addTypes(
         ctx: RunContext,
         typeBuilder: TypeBuilder,
-        inferMaps: boolean,
         inferEnums: boolean,
         fixedTopLevels: boolean
     ): Promise<void>;
     addTypesSync(
         ctx: RunContext,
         typeBuilder: TypeBuilder,
-        inferMaps: boolean,
         inferEnums: boolean,
         fixedTopLevels: boolean
     ): void;
@@ -56,11 +52,10 @@ function messageParseError(name: string, description: string | undefined, e: unk
 export class JSONInput<T> implements Input<JSONSourceData<T>> {
     readonly kind: string = "json";
     readonly needIR: boolean = true;
-    readonly needSchemaProcessing: boolean = false;
 
     private readonly _topLevels: Map<string, JSONTopLevel> = new Map();
 
-    constructor(private readonly _compressedJSON: CompressedJSON<T>) {}
+    constructor(private readonly _compressedJSON: CompressedJSON<T>) { }
 
     private addSample(topLevelName: string, sample: Value): void {
         let topLevel = this._topLevels.get(topLevelName);
@@ -115,29 +110,23 @@ export class JSONInput<T> implements Input<JSONSourceData<T>> {
     async addTypes(
         ctx: RunContext,
         typeBuilder: TypeBuilder,
-        inferMaps: boolean,
         inferEnums: boolean,
         fixedTopLevels: boolean
     ): Promise<void> {
-        return this.addTypesSync(ctx, typeBuilder, inferMaps, inferEnums, fixedTopLevels);
+        return this.addTypesSync(ctx, typeBuilder, inferEnums, fixedTopLevels);
     }
 
     addTypesSync(
         _ctx: RunContext,
         typeBuilder: TypeBuilder,
-        inferMaps: boolean,
         inferEnums: boolean,
         fixedTopLevels: boolean
     ): void {
-        const inference = new TypeInference(this._compressedJSON, typeBuilder, inferMaps, inferEnums);
+        const inference = new TypeInference(this._compressedJSON, typeBuilder, inferEnums);
 
-        for (const [name, { samples, description }] of this._topLevels) {
+        for (const [name, { samples }] of this._topLevels) {
             const tref = inference.inferTopLevelType(makeNamesTypeAttributes(name, false), samples, fixedTopLevels);
             typeBuilder.addTopLevel(name, tref);
-            if (description !== undefined) {
-                const attributes = descriptionTypeAttributeKind.makeAttributes(new Set([description]));
-                typeBuilder.addAttributes(tref, attributes);
-            }
         }
     }
 }
@@ -184,33 +173,27 @@ export class InputData {
     async addTypes(
         ctx: RunContext,
         typeBuilder: TypeBuilder,
-        inferMaps: boolean,
         inferEnums: boolean,
         fixedTopLevels: boolean
     ): Promise<void> {
         for (const input of this._inputs) {
-            await input.addTypes(ctx, typeBuilder, inferMaps, inferEnums, fixedTopLevels);
+            await input.addTypes(ctx, typeBuilder, inferEnums, fixedTopLevels);
         }
     }
 
     addTypesSync(
         ctx: RunContext,
         typeBuilder: TypeBuilder,
-        inferMaps: boolean,
         inferEnums: boolean,
         fixedTopLevels: boolean
     ): void {
         for (const input of this._inputs) {
-            input.addTypesSync(ctx, typeBuilder, inferMaps, inferEnums, fixedTopLevels);
+            input.addTypesSync(ctx, typeBuilder, inferEnums, fixedTopLevels);
         }
     }
 
     get needIR(): boolean {
         return iterableSome(this._inputs, i => i.needIR);
-    }
-
-    get needSchemaProcessing(): boolean {
-        return iterableSome(this._inputs, i => i.needSchemaProcessing);
     }
 
     singleStringSchemaSource(): string | undefined {

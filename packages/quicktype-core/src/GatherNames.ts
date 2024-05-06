@@ -82,16 +82,14 @@ class UniqueQueue<T> {
 //    step 1, and its alternatives to a union of its direct and ancestor
 //    alternatives, gathered in steps 2 and 3.
 
-export function gatherNames(graph: TypeGraph, destructive: boolean, debugPrint: boolean): void {
+export function gatherNames(graph: TypeGraph, debugPrint: boolean): void {
     function setNames(t: Type, tn: TypeNames): void {
         graph.attributeStore.set(namesTypeAttributeKind, t, tn);
     }
 
-    if (destructive) {
-        for (const t of graph.allTypesUnordered()) {
-            if (t.hasNames) {
-                setNames(t, t.getNames().clearInferred());
-            }
+    for (const t of graph.allTypesUnordered()) {
+        if (t.hasNames) {
+            setNames(t, t.getNames().clearInferred());
         }
     }
 
@@ -348,7 +346,7 @@ export function gatherNames(graph: TypeGraph, destructive: boolean, debugPrint: 
                 }
             }
 
-            typeNames = TypeNames.makeWithDistance(names, alternatives, destructive ? 1 : 10);
+            typeNames = TypeNames.makeWithDistance(names, alternatives, 1);
         }
 
         setNames(t, t.hasNames ? t.getNames().add([typeNames]) : typeNames);

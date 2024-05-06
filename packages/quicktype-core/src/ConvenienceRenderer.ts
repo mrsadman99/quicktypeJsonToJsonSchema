@@ -179,17 +179,6 @@ export abstract class ConvenienceRenderer extends Renderer {
         return defined(this._nameStoreView);
     }
 
-    protected descriptionForType(t: Type): string[] | undefined {
-        let description = this.typeGraph.attributeStore.tryGet(descriptionTypeAttributeKind, t);
-        return splitDescription(description);
-    }
-
-    protected descriptionForClassProperty(o: ObjectType, name: string): string[] | undefined {
-        const descriptions = this.typeGraph.attributeStore.tryGet(propertyDescriptionsTypeAttributeKind, o);
-        if (descriptions === undefined) return undefined;
-        return splitDescription(descriptions.get(name));
-    }
-
     protected setUpNaming(): ReadonlySet<Namespace> {
         this._nameStoreView = new TypeAttributeStoreView(this.typeGraph.attributeStore, assignedNameAttributeKind);
         this._propertyNamesStoreView = new TypeAttributeStoreView(
@@ -804,87 +793,6 @@ export abstract class ConvenienceRenderer extends Renderer {
         return "// ";
     }
 
-    protected emitComments(comments: Comment[]): void {
-        comments.forEach(comment => {
-            if (isStringComment(comment)) {
-                this.emitCommentLines([comment]);
-            } else if ("lines" in comment) {
-                this.emitCommentLines(comment.lines);
-            } else if ("descriptionBlock" in comment) {
-                this.emitDescriptionBlock(comment.descriptionBlock);
-            } else {
-                this.emitCommentLines(comment.customLines, comment);
-            }
-
-            this.ensureBlankLine();
-        });
-    }
-
-    protected emitCommentLines(
-        lines: Sourcelike[],
-        {
-            lineStart = this.commentLineStart,
-            firstLineStart = lineStart,
-            lineEnd,
-            beforeComment,
-            afterComment
-        }: CommentOptions = {}
-    ): void {
-        if (beforeComment !== undefined) {
-            this.emitLine(beforeComment);
-        }
-        let first = true;
-        for (const line of lines) {
-            let start = first ? firstLineStart : lineStart;
-            first = false;
-
-            if (this.sourcelikeToString(line) === "") {
-                start = trimEnd(start);
-            }
-
-            if (lineEnd) {
-                this.emitLine(start, line, lineEnd);
-            } else {
-                this.emitLine(start, line);
-            }
-        }
-        if (afterComment !== undefined) {
-            this.emitLine(afterComment);
-        }
-    }
-
-    protected emitDescription(description: Sourcelike[] | undefined): void {
-        if (description === undefined) return;
-        // FIXME: word-wrap
-        this.emitDescriptionBlock(description);
-    }
-
-    protected emitDescriptionBlock(lines: Sourcelike[]): void {
-        this.emitCommentLines(lines);
-    }
-
-    protected emitPropertyTable(
-        c: ClassType,
-        makePropertyRow: (name: Name, jsonName: string, p: ClassProperty) => Sourcelike[]
-    ): void {
-        let table: Sourcelike[][] = [];
-        const emitTable = () => {
-            if (table.length === 0) return;
-            this.emitTable(table);
-            table = [];
-        };
-
-        this.forEachClassProperty(c, "none", (name, jsonName, p) => {
-            const description = this.descriptionForClassProperty(c, jsonName);
-            if (description !== undefined) {
-                emitTable();
-                this.emitDescription(description);
-            }
-            table.push(makePropertyRow(name, jsonName, p));
-        });
-        emitTable();
-    }
-
     private processGraph(): void {
         this._declarationIR = declarationsForGraph(
             this.typeGraph,
@@ -929,7 +837,7 @@ export abstract class ConvenienceRenderer extends Renderer {
             processed.add(process(t));
         }
 
-        for (;;) {
+        for (; ;) {
             const maybeType = queue.pop();
             if (maybeType === undefined) {
                 break;

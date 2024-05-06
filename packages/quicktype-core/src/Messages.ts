@@ -18,6 +18,8 @@ export type ErrorProperties =
     | { kind: "InferenceJSONReferenceWrongProperty"; properties: { reference: string } }
     | { kind: "InferenceJSONReferenceInvalidArrayIndex"; properties: { reference: string } }
 
+    | { kind: "SchemaMoreThanOneUnionMemberName"; properties: { names: string[] } }
+
     // Driver
     | { kind: "DriverUnknownSourceLanguage"; properties: { lang: string } }
     | { kind: "DriverUnknownOutputLanguage"; properties: { lang: string } }
@@ -64,6 +66,8 @@ const errorMessages: ErrorMessages = {
     InferenceJSONReferenceToUnion: "JSON reference points to a union type: ${reference}",
     InferenceJSONReferenceWrongProperty: "JSON reference points to a non-existant property: ${reference}",
     InferenceJSONReferenceInvalidArrayIndex: "JSON reference uses invalid array index: ${reference}",
+
+    SchemaMoreThanOneUnionMemberName: "More than one name given for union member: ${names}",
 
     // Driver
     DriverUnknownSourceLanguage: "Unknown source language ${lang}",

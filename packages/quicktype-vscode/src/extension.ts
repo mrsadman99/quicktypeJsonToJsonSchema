@@ -121,7 +121,6 @@ async function runQuicktype(
         inputData,
         rendererOptions,
         indentation,
-        inferMaps: configuration.inferMaps,
         inferEnums: configuration.inferEnums,
         inferDateTimes: configuration.inferDateTimes,
         inferIntegerStrings: configuration.inferIntegerStrings

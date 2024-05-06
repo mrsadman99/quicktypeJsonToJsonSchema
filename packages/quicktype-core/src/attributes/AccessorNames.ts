@@ -8,11 +8,9 @@ import {
 } from "collection-utils";
 
 import { TypeAttributeKind, TypeAttributes } from "./TypeAttributes";
-import { defined, isStringMap, checkStringMap, checkArray } from "../support/Support";
+import { defined, isStringMap, checkStringMap } from "../support/Support";
 import { EnumType, UnionType, Type, ObjectType } from "../Type";
 import { messageAssert } from "../Messages";
-import { JSONSchema } from "../input/JSONSchemaStore";
-import { Ref, JSONSchemaType, JSONSchemaAttributes } from "../input/JSONSchemaInput";
 
 export type AccessorEntry = string | Map<string, string>;
 
@@ -182,31 +180,4 @@ export function makeAccessorNames(x: any): AccessorNames {
     // FIXME: Do proper error reporting
     const stringMap = checkStringMap(x, isAccessorEntry);
     return mapMap(mapFromObject(stringMap), makeAccessorEntry);
-}
-
-export function accessorNamesAttributeProducer(
-    schema: JSONSchema,
-    canonicalRef: Ref,
-    _types: Set<JSONSchemaType>,
-    cases: JSONSchema[] | undefined
-): JSONSchemaAttributes | undefined {
-    if (typeof schema !== "object") return undefined;
-    const maybeAccessors = schema["qt-accessors"];
-    if (maybeAccessors === undefined) return undefined;
-
-    if (cases === undefined) {
-        return { forType: accessorNamesTypeAttributeKind.makeAttributes(makeAccessorNames(maybeAccessors)) };
-    } else {
-        const identifierAttribute = makeUnionIdentifierAttribute();
-
-        const accessors = checkArray(maybeAccessors, isAccessorEntry);
-        messageAssert(cases.length === accessors.length, "SchemaWrongAccessorEntryArrayLength", {
-            operation: "oneOf",
-            ref: canonicalRef.push("oneOf")
-        });
-        const caseAttributes = accessors.map(accessor =>
-            makeUnionMemberNamesAttribute(identifierAttribute, makeAccessorEntry(accessor))
-        );
-        return { forUnion: identifierAttribute, forCases: caseAttributes };
-    }
 }

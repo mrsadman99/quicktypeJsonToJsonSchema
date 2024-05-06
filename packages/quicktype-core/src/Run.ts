@@ -5,7 +5,6 @@ import { TargetLanguage, MultiFileRenderResult } from "./TargetLanguage";
 import { SerializedRenderResult, Annotation, Location, Span } from "./Source";
 import { assert } from "./support/Support";
 import { combineClasses } from "./rewrites/CombineClasses";
-import { inferMaps } from "./rewrites/InferMaps";
 import { TypeBuilder, StringTypeMapping } from "./TypeBuilder";
 import { TypeGraph, noneToAny, optionalToNullable, removeIndirectionIntersections } from "./TypeGraph";
 import { initTypeNames } from "./attributes/TypeNames";
@@ -16,7 +15,6 @@ import { resolveIntersections } from "./rewrites/ResolveIntersections";
 import { replaceObjectType } from "./rewrites/ReplaceObjectType";
 import { messageError } from "./Messages";
 import { InputData } from "./input/Inputs";
-import { flattenStrings } from "./rewrites/FlattenStrings";
 import { makeTransformations } from "./MakeTransformations";
 import { TransformedStringTypeKind } from "./Type";
 import { type Comment } from "./support/Comments";
@@ -43,27 +41,12 @@ export interface InferenceFlag {
 }
 
 export const inferenceFlagsObject = {
-    /** Whether to infer map types from JSON data */
-    inferMaps: {
-        description: "Detect maps",
-        negationDescription: "Don't infer maps, always use classes",
-        explanation: "Infer maps when object keys look like map keys.",
-        order: 1
-    },
     /** Whether to infer enum types from JSON data */
     inferEnums: {
         description: "Detect enums",
         negationDescription: "Don't infer enums, always use strings",
         explanation: "If string values occur within a relatively small domain,\ninfer them as enum values.",
-        order: 2
-    },
-    /** Whether to convert UUID strings to UUID objects */
-    inferUuids: {
-        description: "Detect UUIDs",
-        negationDescription: "Don't convert UUIDs to UUID objects",
-        explanation: "Detect UUIDs like '123e4567-e89b-12d3-a456-426655440000' (partial support).",
-        stringType: "uuid" as TransformedStringTypeKind,
-        order: 3
+        order: 1
     },
     /** Whether to assume that JSON strings that look like dates are dates */
     inferDateTimes: {
@@ -71,7 +54,7 @@ export const inferenceFlagsObject = {
         negationDescription: "Don't infer dates or times",
         explanation: "Infer dates from strings (partial support).",
         stringType: "date-time" as TransformedStringTypeKind,
-        order: 4
+        order: 2
     },
     /** Whether to convert stringified integers to integers */
     inferIntegerStrings: {
@@ -79,7 +62,7 @@ export const inferenceFlagsObject = {
         negationDescription: "Don't convert stringified integers to integers",
         explanation: 'Automatically convert stringified integers to integers.\nFor example, "1" is converted to 1.',
         stringType: "integer-string" as TransformedStringTypeKind,
-        order: 5
+        order: 3
     },
     /** Whether to convert stringified booleans to boolean values */
     inferBooleanStrings: {
@@ -88,7 +71,7 @@ export const inferenceFlagsObject = {
         explanation:
             'Automatically convert stringified booleans to booleans.\nFor example, "true" is converted to true.',
         stringType: "bool-string" as TransformedStringTypeKind,
-        order: 6
+        order: 4
     },
     /** Combine similar classes.  This doesn't apply to classes from a schema, only from inference. */
     combineClasses: {
@@ -96,7 +79,7 @@ export const inferenceFlagsObject = {
         negationDescription: "Don't combine similar classes",
         explanation:
             "Combine classes with significantly overlapping properties,\ntreating contingent properties as nullable.",
-        order: 7
+        order: 5
     },
     /** Whether to treat $ref as references within JSON */
     ignoreJsonRefs: {
@@ -104,7 +87,7 @@ export const inferenceFlagsObject = {
         negationDescription: "Treat $ref as a reference in JSON",
         explanation:
             "Like in JSON Schema, allow objects like\n'{ $ref: \"#/foo/bar\" }' to refer\nto another part of the input.",
-        order: 8
+        order: 6
     }
 };
 export type InferenceFlagName = keyof typeof inferenceFlagsObject;
@@ -300,7 +283,6 @@ class Run implements RunContext {
                 await allInputs.addTypes(
                     this,
                     graphInputs.typeBuilder,
-                    this._options.inferMaps,
                     this._options.inferEnums,
                     this._options.fixedTopLevels
                 )
@@ -316,7 +298,6 @@ class Run implements RunContext {
             allInputs.addTypesSync(
                 this,
                 graphInputs.typeBuilder,
-                this._options.inferMaps,
                 this._options.inferEnums,
                 this._options.fixedTopLevels
             )
@@ -344,7 +325,7 @@ class Run implements RunContext {
         }
 
         let unionsDone = false;
-        if (allInputs.needSchemaProcessing || !this._options.ignoreJsonRefs) {
+        if (!this._options.ignoreJsonRefs) {
             let intersectionsDone = false;
             do {
                 const graphBeforeRewrites = graph;
@@ -426,19 +407,7 @@ class Run implements RunContext {
             }
         }
 
-        if (this._options.inferMaps) {
-            for (; ;) {
-                const newGraph = this.time("infer maps", () =>
-                    inferMaps(graph, stringTypeMapping, true, debugPrintReconstitution)
-                );
-                if (newGraph === graph) {
-                    break;
-                }
-                graph = newGraph;
-            }
-        }
-
-        const enumInference = allInputs.needSchemaProcessing ? "all" : this._options.inferEnums ? "infer" : "none";
+        const enumInference = this._options.inferEnums ? "infer" : "none";
         this.time("expand strings", () => (graph = expandStrings(this, graph, enumInference)));
         this.time(
             "flatten unions",
@@ -452,13 +421,6 @@ class Run implements RunContext {
             ))
         );
         assert(unionsDone, "We should only have to flatten unions once after expanding strings");
-
-        if (allInputs.needSchemaProcessing) {
-            this.time(
-                "flatten strings",
-                () => (graph = flattenStrings(graph, stringTypeMapping, debugPrintReconstitution))
-            );
-        }
 
         this.time("none to any", () => (graph = noneToAny(graph, stringTypeMapping, debugPrintReconstitution)));
         if (!targetLanguage.supportsOptionalClassProperties) {
@@ -501,7 +463,7 @@ class Run implements RunContext {
             console.log("\n# gather names");
         }
         this.time("gather names", () =>
-            gatherNames(graph, !allInputs.needSchemaProcessing, this._options.debugPrintGatherNames)
+            gatherNames(graph, this._options.debugPrintGatherNames)
         );
         if (this._options.debugPrintGraph) {
             graph.printGraph();

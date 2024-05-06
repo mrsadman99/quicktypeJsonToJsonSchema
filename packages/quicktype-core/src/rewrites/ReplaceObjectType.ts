@@ -34,16 +34,8 @@ export function replaceObjectType(
             return builder.getUniqueClassType(attributes, true, reconstituteProperties(), forwardingRef);
         }
 
-        function reconstituteAdditionalProperties(): TypeRef {
-            return builder.reconstituteType(defined(additionalProperties));
-        }
-
         if (additionalProperties === undefined) {
             return makeClass();
-        }
-
-        if (properties.size === 0) {
-            return builder.getMapType(attributes, reconstituteAdditionalProperties(), forwardingRef);
         }
 
         if (additionalProperties.kind === "any") {
