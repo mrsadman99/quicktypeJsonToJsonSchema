@@ -1,6 +1,5 @@
 import { TypeAttributeKind } from "./TypeAttributes";
 import { setUnionManyInto } from "collection-utils";
-import { checkArray, checkString } from "../support/Support";
 import { Type } from "../Type";
 
 const protocolsSchemaProperty = "qt-uri-protocols";
@@ -42,33 +41,3 @@ class URITypeAttributeKind extends TypeAttributeKind<URIAttributes> {
 }
 
 export const uriTypeAttributeKind: TypeAttributeKind<URIAttributes> = new URITypeAttributeKind();
-
-
-export function uriSchemaAttributesProducer(
-    schema: JSONSchema,
-    _ref: Ref,
-    types: Set<JSONSchemaType>
-): JSONSchemaAttributes | undefined {
-    if (!(typeof schema === "object")) return undefined;
-    if (!types.has("string")) return undefined;
-
-    let protocols: ReadonlySet<string>;
-    const maybeProtocols = schema[protocolsSchemaProperty];
-    if (maybeProtocols !== undefined) {
-        protocols = new Set(checkArray(maybeProtocols, checkString));
-    } else {
-        protocols = new Set();
-    }
-
-    let extensions: ReadonlySet<string>;
-    const maybeExtensions = schema[extensionsSchemaProperty];
-    if (maybeExtensions !== undefined) {
-        extensions = new Set(checkArray(maybeExtensions, checkString));
-    } else {
-        extensions = new Set();
-    }
-
-    if (protocols.size === 0 && extensions.size === 0) return undefined;
-
-    return { forString: uriTypeAttributeKind.makeAttributes([protocols, extensions]) };
-}

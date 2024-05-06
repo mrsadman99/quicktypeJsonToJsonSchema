@@ -27,7 +27,6 @@ import { TypeNames, namesTypeAttributeKind } from "./attributes/TypeNames";
 import { TypeAttributes } from "./attributes/TypeAttributes";
 import { messageAssert } from "./Messages";
 import { TypeRef, attributesForTypeRef, derefTypeRef, TypeGraph, typeRefIndex } from "./TypeGraph";
-import { uriInferenceAttributesProducer } from "./attributes/URIAttributes";
 
 export type TransformedStringTypeTargets = {
     xsd: string;
@@ -69,14 +68,6 @@ export const transformedStringTypeKinds = new Set(
 
 export function isPrimitiveStringTypeKind(kind: string): kind is PrimitiveStringTypeKind {
     return kind === "string" || hasOwnProperty(transformedStringTypeTargetTypeKinds, kind);
-}
-
-export function targetTypeKindForTransformedStringTypeKind(
-    kind: PrimitiveStringTypeKind
-): PrimitiveNonStringTypeKind | undefined {
-    const target = transformedStringTypeTargetTypeKindsMap.get(kind);
-    if (target === undefined) return undefined;
-    return target.primitive;
 }
 
 export function isNumberTypeKind(kind: TypeKind): kind is "integer" | "double" {

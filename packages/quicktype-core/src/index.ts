@@ -66,10 +66,6 @@ export {
     TransformedStringTypeKind,
     PrimitiveStringTypeKind
 } from "./Type";
-export { getStream } from "./input/io/get-stream";
-export { readableFromFileOrURL, readFromFileOrURL } from "./input/io/NodeIO";
-export { JSONSchemaStore, JSONSchema } from "./input/JSONSchemaStore";
-export { sourcesFromPostmanCollection } from "./input/PostmanCollection";
 export { TypeBuilder, StringTypeMapping } from "./TypeBuilder";
 export { TypeRef, derefTypeRef } from "./TypeGraph";
 export { TypeAttributeKind, TypeAttributes, emptyTypeAttributes } from "./attributes/TypeAttributes";

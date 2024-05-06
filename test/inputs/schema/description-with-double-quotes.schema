@@ -1,9 +1,0 @@
-{
-  "description": "Cool \"stuff\"",
-  "type": "object",
-  "properties": {
-    "foo": {
-      "type": "boolean"
-    }
-  }
-}

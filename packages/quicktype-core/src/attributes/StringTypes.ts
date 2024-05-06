@@ -182,16 +182,7 @@ function isIntegerString(s: string): boolean {
     return i >= MIN_INTEGER_STRING && i <= MAX_INTEGER_STRING;
 }
 
-const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
-
-function isUUID(s: string): boolean {
-    return s.match(UUID) !== null;
-}
-
-// FIXME: This is obviously not a complete URI regex.  The exclusion of
-// `{}` is a hack to make `github-events.json` work, which contains URLs
-// with those characters which ajv refuses to accept as `uri`.
-const URI = /^(https?|ftp):\/\/[^{}]+$/;
+const URI = /^(https?|ftp):\/\/[^{}]+\.[^{}]+$/;
 
 function isURI(s: string): boolean {
     return s.match(URI) !== null;
@@ -220,8 +211,6 @@ export function inferTransformedStringTypeKindForString(
         return "integer-string";
     } else if (s === "false" || s === "true") {
         return "bool-string";
-    } else if (isUUID(s)) {
-        return "uuid";
     } else if (isURI(s)) {
         return "uri";
     }

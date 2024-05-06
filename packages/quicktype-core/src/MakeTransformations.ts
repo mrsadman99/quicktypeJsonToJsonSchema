@@ -1,4 +1,4 @@
-import { setFilter, iterableFirst, mapMapEntries, withDefault, iterableSome, arraySortByInto } from "collection-utils";
+import { setFilter, iterableFirst, mapMapEntries, iterableSome, arraySortByInto } from "collection-utils";
 
 import { TypeGraph, TypeRef, typeRefIndex } from "./TypeGraph";
 import { TargetLanguage } from "./TargetLanguage";
@@ -11,7 +11,6 @@ import {
     PrimitiveType,
     isNumberTypeKind,
     isPrimitiveStringTypeKind,
-    targetTypeKindForTransformedStringTypeKind,
     PrimitiveStringTypeKind
 } from "./Type";
 import { GraphRewriteBuilder } from "./GraphRewriting";
@@ -85,25 +84,7 @@ function replaceUnion(
     // Type attributes that we lost during reconstitution.
     let additionalAttributes = emptyTypeAttributes;
 
-    function reconstituteMember(t: Type): TypeRef {
-        // Special handling for some transformed string type kinds: The type in
-        // the union must be the target type, so if one already exists, use that
-        // one, otherwise make a new one.
-        if (isPrimitiveStringTypeKind(t.kind)) {
-            const targetTypeKind = targetTypeKindForTransformedStringTypeKind(t.kind);
-            if (targetTypeKind !== undefined) {
-                const targetTypeMember = union.findMember(targetTypeKind);
-                additionalAttributes = combineTypeAttributes("union", additionalAttributes, t.getAttributes());
-                if (targetTypeMember !== undefined) {
-                    return builder.reconstituteType(targetTypeMember);
-                }
-                return builder.getPrimitiveType(targetTypeKind);
-            }
-        }
-        return builder.reconstituteType(t);
-    }
-
-    const reconstitutedMembersByKind = mapMapEntries(union.members.entries(), m => [m.kind, reconstituteMember(m)]);
+    const reconstitutedMembersByKind = mapMapEntries(union.members.entries(), m => [m.kind, builder.reconstituteType(m)]);
     const reconstitutedMemberSet = new Set(reconstitutedMembersByKind.values());
     const haveUnion = reconstitutedMemberSet.size > 1;
 
@@ -309,7 +290,6 @@ function replaceTransformedStringType(
     debugPrintTransformations: boolean
 ): TypeRef {
     const reconstitutedAttributes = builder.reconstituteTypeAttributes(t.getAttributes());
-    const targetTypeKind = withDefault(targetTypeKindForTransformedStringTypeKind(kind), kind);
     const stringType = builder.getStringType(emptyTypeAttributes, StringTypes.unrestricted);
     const transformer = new DecodingTransformer(
         builder.typeGraph,
@@ -318,7 +298,7 @@ function replaceTransformedStringType(
     );
     const attributes = transformationAttributes(
         builder.typeGraph,
-        builder.getPrimitiveType(targetTypeKind, reconstitutedAttributes),
+        builder.getPrimitiveType(kind, reconstitutedAttributes),
         transformer,
         debugPrintTransformations
     );

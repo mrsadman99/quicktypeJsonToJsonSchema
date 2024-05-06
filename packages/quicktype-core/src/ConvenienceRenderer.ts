@@ -14,19 +14,14 @@ import { separateNamedTypes, nullableFromUnion, matchTypeExhaustive, isNamedType
 import { Namespace, Name, Namer, FixedName, SimpleName, DependencyName, keywordNamespace } from "./Naming";
 import { Renderer, BlankLineConfig, RenderContext, ForEachPosition } from "./Renderer";
 import { defined, panic, nonNull, assert } from "./support/Support";
-import { trimEnd } from "./support/Strings";
 import { Sourcelike, sourcelikeToSource, serializeRenderResult } from "./Source";
 
 import { declarationsForGraph, DeclarationIR, cycleBreakerTypesForGraph, Declaration } from "./DeclarationIR";
 import { TypeAttributeStoreView } from "./TypeGraph";
 import { TypeAttributeKind } from "./attributes/TypeAttributes";
-import { descriptionTypeAttributeKind, propertyDescriptionsTypeAttributeKind } from "./attributes/Description";
 import { enumCaseNames, objectPropertyNames, unionMemberName, getAccessorName } from "./attributes/AccessorNames";
 import { transformationForType, followTargetType, Transformation } from "./Transformers";
 import { TargetLanguage } from "./TargetLanguage";
-import { type Comment, isStringComment, type CommentOptions } from "./support/Comments";
-
-const wordWrap: (s: string) => string = require("wordwrap")(90);
 
 export const topLevelNameOrder = 1;
 
@@ -40,15 +35,6 @@ const enumCaseNameOrder = 20;
 const assignedEnumCaseNameOrder = 10;
 
 const unionMemberNameOrder = 40;
-
-function splitDescription(descriptions: Iterable<string> | undefined): string[] | undefined {
-    if (descriptions === undefined) return undefined;
-    const description = Array.from(descriptions).join("\n\n").trim();
-    if (description === "") return undefined;
-    return wordWrap(description)
-        .split("\n")
-        .map(l => l.trim());
-}
 
 export type ForbiddenWordsInfo = { names: (Name | string)[]; includeGlobalForbidden: boolean };
 

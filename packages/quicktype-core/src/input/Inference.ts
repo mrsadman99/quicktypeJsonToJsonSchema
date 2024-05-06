@@ -1,17 +1,16 @@
 import { Value, Tag, valueTag, CompressedJSON } from "./CompressedJSON";
-import { assertNever, defined, panic, assert } from "../support/Support";
+import { assertNever, defined, assert } from "../support/Support";
 import { TypeBuilder } from "../TypeBuilder";
 import { UnionBuilder, UnionAccumulator } from "../UnionBuilder";
 import {
     ClassProperty,
-    transformedStringTypeTargetTypeKindsMap,
     UnionType,
     ClassType,
     MapType,
     ArrayType
 } from "../Type";
 import { TypeAttributes, emptyTypeAttributes } from "../attributes/TypeAttributes";
-import { StringTypes, inferTransformedStringTypeKindForString } from "../attributes/StringTypes";
+import { StringTypes } from "../attributes/StringTypes";
 import { TypeRef, derefTypeRef } from "../TypeGraph";
 import { messageError } from "../Messages";
 import { nullableFromUnion } from "../TypeUtils";

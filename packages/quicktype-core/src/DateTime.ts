@@ -1,5 +1,7 @@
 // https://github.com/epoberezkin/ajv/blob/4d76c6fb813b136b6ec4fe74990bc97233d75dea/lib/compile/formats.js
 
+import moment from 'moment';
+
 /*
 The MIT License (MIT)
 
@@ -24,9 +26,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-const DATE = /^(\d\d\d\d)-(\d\d)-(\d\d)$/;
-const DAYS = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-const TIME = /^(\d\d):(\d\d):(\d\d)(\.\d+)?(z|[+-]\d\d:\d\d)?$/i;
 
 export interface DateTimeRecognizer {
     isDate(s: string): boolean;
@@ -34,32 +33,20 @@ export interface DateTimeRecognizer {
     isDateTime(s: string): boolean;
 }
 
-const DATE_TIME_SEPARATOR = /t|\s/i;
-
 export class DefaultDateTimeRecognizer implements DateTimeRecognizer {
-    isDate(str: string) {
-        // full-date from http://tools.ietf.org/html/rfc3339#section-5.6
-        const matches = str.match(DATE);
-        if (matches === null) return false;
+    constructor() {
+        moment.locale('ru');
+    }
 
-        const month = +matches[2];
-        const day = +matches[3];
-        return month >= 1 && month <= 12 && day >= 1 && day <= DAYS[month];
+    isDate(str: string) {
+        return moment(str, ["LL", "L"], true).isValid();
     }
 
     isTime(str: string): boolean {
-        const matches = str.match(TIME);
-        if (matches === null) return false;
-
-        const hour = +matches[1];
-        const minute = +matches[2];
-        const second = +matches[3];
-        return hour <= 23 && minute <= 59 && second <= 59;
+        return moment(str, ["LTS", "LT"], true).isValid();
     }
 
     isDateTime(str: string): boolean {
-        // http://tools.ietf.org/html/rfc3339#section-5.6
-        const dateTime = str.split(DATE_TIME_SEPARATOR);
-        return dateTime.length === 2 && this.isDate(dateTime[0]) && this.isTime(dateTime[1]);
+        return moment(str, ["lll", "LLL", "LLLL", "llll", moment.ISO_8601], true).isValid();
     }
 }
