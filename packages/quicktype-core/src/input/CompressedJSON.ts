@@ -13,13 +13,7 @@ export enum Tag {
     Object,
     Array,
     StringFormat,
-    Boolean,
-    Date,
-    DateTime,
-    Time,
-    IntegerString,
-    BooleanString,
-    URI
+    Boolean
 }
 
 export type Value = number;

@@ -21,7 +21,6 @@ import {
     panic,
     assert,
     defined,
-    assertNever,
     parseJSON,
     trainMarkovChain,
     messageError,
@@ -131,14 +130,8 @@ async function samplesFromDirectory(dataDir: string, httpHeaders?: string[]): Pr
         let jsonSamples: Readable[] = [];
 
         for (const source of await readFilesOrURLsInDirectory(dir)) {
-            switch (source.kind) {
-                case "json":
-                    jsonSamples = jsonSamples.concat(source.samples);
-                    break;
-                case "XMLWithXSD":
-                    break;
-                default:
-                    return assertNever(source);
+            if (source.kind === "json") {
+                jsonSamples = jsonSamples.concat(source.samples);
             }
         }
 
@@ -281,7 +274,7 @@ function makeOptionDefinitions(targetLanguages: TargetLanguage[]): OptionDefinit
         }
     ];
     const lang: OptionDefinition[] =
-        targetLanguages.length < 2
+        targetLanguages.length < 1
             ? []
             : [
                 {
@@ -640,23 +633,15 @@ export function jsonInputForTargetLanguage(
 async function makeInputData(
     sources: TypeSource[],
     targetLanguage: TargetLanguage,
-    additionalSchemaAddresses: ReadonlyArray<string>,
     handleJSONRefs: boolean,
-    httpHeaders?: string[]
 ): Promise<InputData> {
     const inputData = new InputData();
 
     for (const source of sources) {
-        switch (source.kind) {
-            case "XMLWithXSD":
-                break;
-            case "json":
-                await inputData.addSource("json", source, () =>
-                    jsonInputForTargetLanguage(targetLanguage, undefined, handleJSONRefs)
-                );
-                break;
-            default:
-                return assertNever(source);
+        if (source.kind === "json") {
+            await inputData.addSource("json", source, () =>
+                jsonInputForTargetLanguage(targetLanguage, undefined, handleJSONRefs)
+            );
         }
     }
 
@@ -763,9 +748,7 @@ export async function makeQuicktypeOptions(
     quicktypeOptions.inputData = await makeInputData(
         sources,
         lang,
-        options.additionalSchema,
         quicktypeOptions.ignoreJsonRefs !== true,
-        options.httpHeader
     );
 
     return quicktypeOptions;

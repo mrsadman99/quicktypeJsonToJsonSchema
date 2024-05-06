@@ -288,7 +288,7 @@ class Run implements RunContext {
                 )
         );
 
-        return this.processGraph(allInputs, graphInputs);
+        return this.processGraph(graphInputs);
     }
 
     private makeGraphSync(allInputs: InputData): TypeGraph {
@@ -303,10 +303,10 @@ class Run implements RunContext {
             )
         );
 
-        return this.processGraph(allInputs, graphInputs);
+        return this.processGraph(graphInputs);
     }
 
-    private processGraph(allInputs: InputData, graphInputs: GraphInputs): TypeGraph {
+    private processGraph(graphInputs: GraphInputs): TypeGraph {
         const { targetLanguage, stringTypeMapping, conflateNumbers, typeBuilder } = graphInputs;
 
         let graph = typeBuilder.finish();

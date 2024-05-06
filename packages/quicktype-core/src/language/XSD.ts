@@ -8,10 +8,10 @@ export class XSDLanguage extends TargetLanguage {
     }
 
     protected getOptions(): Option<any>[] {
-        throw new Error('Method not implemented.');
+        return [];
     }
 
     protected makeRenderer(renderContext: RenderContext, optionValues: { [name: string]: any; }): Renderer {
-        throw new Error('Method not implemented.');
+        throw new Error(`Method not implemented. ${renderContext} ${optionValues}`);
     }
 }

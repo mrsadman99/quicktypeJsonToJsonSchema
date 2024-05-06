@@ -90,7 +90,7 @@ let noStringTypeMapping: StringTypeMapping | undefined;
 export function getNoStringTypeMapping(): StringTypeMapping {
     if (noStringTypeMapping === undefined) {
         noStringTypeMapping = new Map(
-            Array.from(transformedStringTypeKinds).map(
+            transformedStringTypeKinds.map(
                 k => [k, k] as [TransformedStringTypeKind, PrimitiveStringTypeKind]
             )
         );

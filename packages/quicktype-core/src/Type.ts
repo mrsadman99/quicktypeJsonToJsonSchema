@@ -17,8 +17,6 @@ import {
     definedMap,
     hashCodeInit,
     addHashCode,
-    hasOwnProperty,
-    mapFromObject
 } from "collection-utils";
 
 import { defined, panic, assert } from "./support/Support";
@@ -28,33 +26,8 @@ import { TypeAttributes } from "./attributes/TypeAttributes";
 import { messageAssert } from "./Messages";
 import { TypeRef, attributesForTypeRef, derefTypeRef, TypeGraph, typeRefIndex } from "./TypeGraph";
 
-export type TransformedStringTypeTargets = {
-    xsd: string;
-};
-
-/**
- * All the transformed string type kinds and the JSON Schema formats and
- * primitive type kinds they map to.  Not all transformed string types map to
- * primitive types.  Date-time types, for example, stand on their own, but
- * stringified integers map to integers.
- */
-const transformedStringTypeTargetTypeKinds = {
-    date: { xsd: "date" },
-    time: { xsd: "time" },
-    "date-time": { xsd: "dateTime" },
-    uri: { xsd: "anyURI" },
-    "integer-string": { xsd: "integerString" },
-    "bool-string": { xsd: "booleanString" },
-    "empty-string": { xsd: "emptyString" }
-};
-
-export const transformedStringTypeTargetTypeKindsMap = mapFromObject(
-    transformedStringTypeTargetTypeKinds as {
-        [kind: string]: TransformedStringTypeTargets;
-    }
-);
-
-export type TransformedStringTypeKind = keyof typeof transformedStringTypeTargetTypeKinds;
+export const transformedStringTypeKinds = ["date", "time", "date-time", "uri", "integer-string", "bool-string"] as const;
+export type TransformedStringTypeKind = typeof transformedStringTypeKinds[number];
 export type PrimitiveStringTypeKind = "string" | TransformedStringTypeKind;
 export type PrimitiveNonStringTypeKind = "none" | "any" | "null" | "bool" | "integer" | "double";
 export type PrimitiveTypeKind = PrimitiveNonStringTypeKind | PrimitiveStringTypeKind;
@@ -62,12 +35,8 @@ export type NamedTypeKind = "class" | "enum" | "union";
 export type TypeKind = PrimitiveTypeKind | NamedTypeKind | "array" | "object" | "map" | "intersection";
 export type ObjectTypeKind = "object" | "map" | "class";
 
-export const transformedStringTypeKinds = new Set(
-    Object.getOwnPropertyNames(transformedStringTypeTargetTypeKinds)
-) as ReadonlySet<TransformedStringTypeKind>;
-
 export function isPrimitiveStringTypeKind(kind: string): kind is PrimitiveStringTypeKind {
-    return kind === "string" || hasOwnProperty(transformedStringTypeTargetTypeKinds, kind);
+    return kind === "string" || transformedStringTypeKinds.includes(kind as TransformedStringTypeKind);
 }
 
 export function isNumberTypeKind(kind: TypeKind): kind is "integer" | "double" {

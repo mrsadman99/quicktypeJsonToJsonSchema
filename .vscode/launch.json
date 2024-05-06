@@ -15,7 +15,7 @@
                 "tsconfig.json",
                 "src/index.ts",
                 "--lang",
-                "schema",
+                "xsd",
                 "--src-lang",
                 "json",
                 "--src",
