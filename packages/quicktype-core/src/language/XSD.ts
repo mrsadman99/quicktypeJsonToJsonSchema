@@ -14,4 +14,8 @@ export class XSDLanguage extends TargetLanguage {
     protected makeRenderer(renderContext: RenderContext, optionValues: { [name: string]: any; }): Renderer {
         throw new Error(`Method not implemented. ${renderContext} ${optionValues}`);
     }
+
+    get supportsOptionalClassProperties(): boolean {
+        return true;
+    }
 }
