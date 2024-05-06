@@ -129,13 +129,7 @@ $ npm install quicktype-core
 In general, first you create an `InputData` value with one or more JSON samples, JSON schemas, TypeScript sources, or other supported input types. Then you call `quicktype`, passing that `InputData` value and any options you want.
 
 ```javascript
-import {
-    quicktype,
-    InputData,
-    jsonInputForTargetLanguage,
-    JSONSchemaInput,
-    FetchingJSONSchemaStore
-} from "quicktype-core";
+import { quicktype, InputData, jsonInputForTargetLanguage, FetchingJSONSchemaStore } from "quicktype-core";
 
 async function quicktypeJSON(targetLanguage, typeName, jsonString) {
     const jsonInput = jsonInputForTargetLanguage(targetLanguage);
@@ -150,22 +144,6 @@ async function quicktypeJSON(targetLanguage, typeName, jsonString) {
 
     const inputData = new InputData();
     inputData.addInput(jsonInput);
-
-    return await quicktype({
-        inputData,
-        lang: targetLanguage
-    });
-}
-
-async function quicktypeJSONSchema(targetLanguage, typeName, jsonSchemaString) {
-    const schemaInput = new JSONSchemaInput(new FetchingJSONSchemaStore());
-
-    // We could add multiple schemas for multiple types,
-    // but here we're just making one type from JSON schema.
-    await schemaInput.addSource({ name: typeName, schema: jsonSchemaString });
-
-    const inputData = new InputData();
-    inputData.addInput(schemaInput);
 
     return await quicktype({
         inputData,

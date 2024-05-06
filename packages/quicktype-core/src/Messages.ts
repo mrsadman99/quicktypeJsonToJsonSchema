@@ -1,14 +1,13 @@
 import { StringMap } from "./support/Support";
-import { Ref } from "./input/JSONSchemaInput";
 
 export type ErrorProperties =
     | { kind: "InternalError"; properties: { message: string } }
 
     // Misc
     | {
-          kind: "MiscJSONParseError";
-          properties: { description: string; address: string; message: string };
-      }
+        kind: "MiscJSONParseError";
+        properties: { description: string; address: string; message: string };
+    }
     | { kind: "MiscReadError"; properties: { fileOrURL: string; message: string } }
     | { kind: "MiscUnicodeHighSurrogateWithoutLowSurrogate"; properties: {} }
     | { kind: "MiscInvalidMinMaxConstraint"; properties: { min: number; max: number } }
@@ -18,38 +17,6 @@ export type ErrorProperties =
     | { kind: "InferenceJSONReferenceToUnion"; properties: { reference: string } }
     | { kind: "InferenceJSONReferenceWrongProperty"; properties: { reference: string } }
     | { kind: "InferenceJSONReferenceInvalidArrayIndex"; properties: { reference: string } }
-
-    // JSON Schema input
-    | { kind: "SchemaArrayIsInvalidSchema"; properties: { ref: Ref } }
-    | { kind: "SchemaNullIsInvalidSchema"; properties: { ref: Ref } }
-    | { kind: "SchemaRefMustBeString"; properties: { actual: string; ref: Ref } }
-    | { kind: "SchemaAdditionalTypesForbidRequired"; properties: { ref: Ref } }
-    | { kind: "SchemaNoTypeSpecified"; properties: { ref: Ref } }
-    | { kind: "SchemaInvalidType"; properties: { type: string; ref: Ref } }
-    | { kind: "SchemaFalseNotSupported"; properties: { ref: Ref } }
-    | { kind: "SchemaInvalidJSONSchemaType"; properties: { type: string; ref: Ref } }
-    | { kind: "SchemaRequiredMustBeStringOrStringArray"; properties: { actual: any; ref: Ref } }
-    | { kind: "SchemaRequiredElementMustBeString"; properties: { element: any; ref: Ref } }
-    | { kind: "SchemaTypeMustBeStringOrStringArray"; properties: { actual: any } }
-    | { kind: "SchemaTypeElementMustBeString"; properties: { element: any; ref: Ref } }
-    | { kind: "SchemaArrayItemsMustBeStringOrArray"; properties: { actual: any; ref: Ref } }
-    | { kind: "SchemaIDMustHaveAddress"; properties: { id: string; ref: Ref } }
-    | { kind: "SchemaWrongAccessorEntryArrayLength"; properties: { operation: string; ref: Ref } }
-    | {
-          kind: "SchemaSetOperationCasesIsNotArray";
-          properties: { operation: string; cases: any; ref: Ref };
-      }
-    | { kind: "SchemaMoreThanOneUnionMemberName"; properties: { names: string[] } }
-    | { kind: "SchemaCannotGetTypesFromBoolean"; properties: { ref: string } }
-    | { kind: "SchemaCannotIndexArrayWithNonNumber"; properties: { actual: string; ref: Ref } }
-    | { kind: "SchemaIndexNotInArray"; properties: { index: number; ref: Ref } }
-    | { kind: "SchemaKeyNotInObject"; properties: { key: string; ref: Ref } }
-    | { kind: "SchemaFetchError"; properties: { address: string; base: Ref } }
-    | { kind: "SchemaFetchErrorTopLevel"; properties: { address: string } }
-    | { kind: "SchemaFetchErrorAdditional"; properties: { address: string } }
-
-    // GraphQL input
-    | { kind: "GraphQLNoQueriesDefined"; properties: {} }
 
     // Driver
     | { kind: "DriverUnknownSourceLanguage"; properties: { lang: string } }
@@ -97,40 +64,6 @@ const errorMessages: ErrorMessages = {
     InferenceJSONReferenceToUnion: "JSON reference points to a union type: ${reference}",
     InferenceJSONReferenceWrongProperty: "JSON reference points to a non-existant property: ${reference}",
     InferenceJSONReferenceInvalidArrayIndex: "JSON reference uses invalid array index: ${reference}",
-
-    // JSON Schema input
-    SchemaArrayIsInvalidSchema: "An array is not a valid JSON Schema at ${ref}",
-    SchemaNullIsInvalidSchema: "null is not a valid JSON Schema at ${ref}",
-    SchemaRefMustBeString: "$ref must be a string, but is an ${actual} at ${ref}",
-    SchemaAdditionalTypesForbidRequired:
-        "Can't have non-specified required properties but forbidden additionalTypes at ${ref}",
-    SchemaNoTypeSpecified: "JSON Schema must specify at least one type at ${ref}",
-    SchemaInvalidType: "Invalid type ${type} in JSON Schema at ${ref}",
-    SchemaFalseNotSupported: 'Schema "false" is not supported at ${ref}',
-    SchemaInvalidJSONSchemaType: "Value of type ${type} is not valid JSON Schema at ${ref}",
-    SchemaRequiredMustBeStringOrStringArray:
-        "`required` must be string or array of strings, but is ${actual} at ${ref}",
-    SchemaRequiredElementMustBeString: "`required` must contain only strings, but it has ${element}, at ${ref}",
-    SchemaTypeMustBeStringOrStringArray: "`type` must be string or array of strings, but is ${actual}",
-    SchemaTypeElementMustBeString: "`type` must contain only strings, but it has ${element}",
-    SchemaArrayItemsMustBeStringOrArray: "Array items must be an array or an object, but is ${actual}",
-    SchemaIDMustHaveAddress: "$id ${id} doesn't have an address at ${ref}",
-    SchemaWrongAccessorEntryArrayLength:
-        "Accessor entry array must have the same number of entries as the ${operation} at ${ref}",
-    SchemaSetOperationCasesIsNotArray: "${operation} cases must be an array, but is ${cases}, at ${ref}",
-    SchemaMoreThanOneUnionMemberName: "More than one name given for union member: ${names}",
-    SchemaCannotGetTypesFromBoolean:
-        "Schema value to get top-level types from must be an object, but is boolean, at ${ref}",
-    SchemaCannotIndexArrayWithNonNumber:
-        "Trying to index array in schema with key that is not a number, but is ${actual} at ${ref}",
-    SchemaIndexNotInArray: "Index ${index} out of range of schema array at ${ref}",
-    SchemaKeyNotInObject: "Key ${key} not in schema object at ${ref}",
-    SchemaFetchError: "Could not fetch schema ${address}, referred to from ${base}",
-    SchemaFetchErrorTopLevel: "Could not fetch top-level schema ${address}",
-    SchemaFetchErrorAdditional: "Could not fetch additional schema ${address}",
-
-    // GraphQL input
-    GraphQLNoQueriesDefined: "GraphQL file doesn't have any queries defined.",
 
     // Driver
     DriverUnknownSourceLanguage: "Unknown source language ${lang}",

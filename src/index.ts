@@ -15,7 +15,6 @@ import {
     TargetLanguage,
     languageNamed,
     InputData,
-    JSONSchemaInput,
     OptionDefinition,
     defaultTargetLanguages,
     IssueAnnotationData,
@@ -27,32 +26,22 @@ import {
     trainMarkovChain,
     messageError,
     messageAssert,
-    sourcesFromPostmanCollection,
     inferenceFlags,
     inferenceFlagNames,
     splitIntoWords,
     capitalize,
-    JSONSourceData,
     JSONInput,
-    getStream,
     readableFromFileOrURL,
-    readFromFileOrURL,
-    FetchingJSONSchemaStore
+    readFromFileOrURL
 } from "quicktype-core";
-import { schemaForTypeScriptSources } from "quicktype-typescript-input";
-import { GraphQLInput } from "quicktype-graphql-input";
 
 import { urlsFromURLGrammar } from "./URLGrammar";
-import { introspectServer } from "./GraphQLIntrospection";
-import { JSONTypeSource, TypeSource, GraphQLTypeSource, SchemaTypeSource } from "./TypeSource";
+import { JSONTypeSource, TypeSource } from "./TypeSource";
 import { CompressedJSONFromStream } from "./CompressedJSONFromStream";
-
-const stringToStream = require("string-to-stream");
 
 import commandLineArgs from "command-line-args";
 import getUsage from "command-line-usage";
 import chalk from "chalk";
-const wordWrap: (s: string) => string = require("wordwrap")(90);
 
 const packageJSON = require("../package.json");
 
@@ -140,8 +129,6 @@ async function samplesFromDirectory(dataDir: string, httpHeaders?: string[]): Pr
 
     for (const dir of directories) {
         let jsonSamples: Readable[] = [];
-        const schemaSources: SchemaTypeSource[] = [];
-        const graphQLSources: GraphQLTypeSource[] = [];
 
         for (const source of await readFilesOrURLsInDirectory(dir)) {
             switch (source.kind) {
@@ -155,13 +142,8 @@ async function samplesFromDirectory(dataDir: string, httpHeaders?: string[]): Pr
             }
         }
 
-        if (jsonSamples.length > 0 && schemaSources.length + graphQLSources.length > 0) {
+        if (jsonSamples.length > 0) {
             return messageError("DriverCannotMixJSONWithOtherSamples", { dir: dir });
-        }
-
-        const oneUnlessEmpty = (xs: any[]) => Math.sign(xs.length);
-        if (oneUnlessEmpty(schemaSources) + oneUnlessEmpty(graphQLSources) > 1) {
-            return messageError("DriverCannotMixNonJSONInputs", { dir: dir });
         }
 
         if (jsonSamples.length > 0) {
@@ -615,8 +597,6 @@ async function typeSourcesForURIs(name: string, uris: string[], options: CLIOpti
     switch (options.srcLang) {
         case "json":
             return [await sourceFromFileOrUrlArray(name, uris, options.httpHeader)];
-        case "schema":
-            return uris.map(uri => ({ kind: "schema", name, uris: [uri] }) as SchemaTypeSource);
         default:
             return panic(`typeSourceForURIs must not be called for source language ${options.srcLang}`);
     }
@@ -643,10 +623,6 @@ async function getSources(options: CLIOptions): Promise<TypeSource[]> {
     }
 
     return sources;
-}
-
-function makeTypeScriptSource(fileNames: string[]): SchemaTypeSource {
-    return Object.assign({ kind: "schema" }, schemaForTypeScriptSources(fileNames)) as SchemaTypeSource;
 }
 
 export function jsonInputForTargetLanguage(
@@ -687,10 +663,6 @@ async function makeInputData(
     return inputData;
 }
 
-function stringSourceDataToStreamSourceData(src: JSONSourceData<string>): JSONSourceData<Readable> {
-    return { name: src.name, description: src.description, samples: src.samples.map(stringToStream) };
-}
-
 export async function makeQuicktypeOptions(
     options: CLIOptions,
     targetLanguages?: TargetLanguage[]
@@ -716,74 +688,9 @@ export async function makeQuicktypeOptions(
     let leadingComments: string[] | undefined = undefined;
     let fixedTopLevels = false;
     switch (options.srcLang) {
-        case "graphql":
-            let schemaString: string | undefined = undefined;
-            let wroteSchemaToFile = false;
-            if (options.graphqlIntrospect !== undefined) {
-                schemaString = await introspectServer(
-                    options.graphqlIntrospect,
-                    withDefault(options.httpMethod, "POST"),
-                    withDefault<string[]>(options.httpHeader, [])
-                );
-                if (options.graphqlSchema !== undefined) {
-                    fs.writeFileSync(options.graphqlSchema, schemaString);
-                    wroteSchemaToFile = true;
-                }
-            }
-            const numSources = options.src.length;
-            if (numSources !== 1) {
-                if (wroteSchemaToFile) {
-                    // We're done.
-                    return undefined;
-                }
-                if (numSources === 0) {
-                    if (schemaString !== undefined) {
-                        console.log(schemaString);
-                        return undefined;
-                    }
-                    return messageError("DriverNoGraphQLQueryGiven", {});
-                }
-            }
-            const gqlSources: GraphQLTypeSource[] = [];
-            for (const queryFile of options.src) {
-                let schemaFileName: string | undefined = undefined;
-                if (schemaString === undefined) {
-                    schemaFileName = defined(options.graphqlSchema);
-                    schemaString = fs.readFileSync(schemaFileName, "utf8");
-                }
-                const schema = parseJSON(schemaString, "GraphQL schema", schemaFileName);
-                const query = await getStream(await readableFromFileOrURL(queryFile, options.httpHeader));
-                const name = numSources === 1 ? options.topLevel : typeNameFromFilename(queryFile);
-                gqlSources.push({ kind: "graphql", name, schema, query });
-            }
-            sources = gqlSources;
-            break;
         case "json":
         case "schema":
             sources = await getSources(options);
-            break;
-        case "typescript":
-            sources = [makeTypeScriptSource(options.src)];
-            break;
-        case "postman":
-            for (const collectionFile of options.src) {
-                const collectionJSON = fs.readFileSync(collectionFile, "utf8");
-                const { sources: postmanSources, description } = sourcesFromPostmanCollection(
-                    collectionJSON,
-                    collectionFile
-                );
-                for (const src of postmanSources) {
-                    sources.push(
-                        Object.assign({ kind: "json" }, stringSourceDataToStreamSourceData(src)) as JSONTypeSource
-                    );
-                }
-                if (postmanSources.length > 1) {
-                    fixedTopLevels = true;
-                }
-                if (description !== undefined) {
-                    leadingComments = wordWrap(description).split("\n");
-                }
-            }
             break;
         default:
             return messageError("DriverUnknownSourceLanguage", { lang: options.srcLang });

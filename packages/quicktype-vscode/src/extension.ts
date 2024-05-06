@@ -9,7 +9,6 @@ import {
     languageNamed,
     SerializedRenderResult,
     defaultTargetLanguages,
-    JSONSchemaInput,
     InputData,
     TargetLanguage,
     jsonInputForTargetLanguage,
@@ -17,7 +16,6 @@ import {
     Options,
     inferenceFlagNames
 } from "quicktype-core";
-import { schemaForTypeScriptSources } from "quicktype-typescript-input";
 
 const configurationSection = "quicktype";
 

@@ -119,9 +119,7 @@ export type InferenceFlags = { [F in InferenceFlagName]: boolean };
  */
 export type NonInferenceOptions = {
     /**
-     * The target language for which to produce code.  This can be either an instance of `TargetLanguage`,
-     * or a string specifying one of the names for quicktype's built-in target languages.  For example,
-     * both `cs` and `csharp` will generate C#.
+     * The target language for which to produce code.
      */
     lang: string | TargetLanguage;
     /** The input data from which to produce types */
@@ -354,24 +352,24 @@ class Run implements RunContext {
                     this.time(
                         "resolve intersections",
                         () =>
-                            ([graph, intersectionsDone] = resolveIntersections(
-                                graph,
-                                stringTypeMapping,
-                                debugPrintReconstitution
-                            ))
+                        ([graph, intersectionsDone] = resolveIntersections(
+                            graph,
+                            stringTypeMapping,
+                            debugPrintReconstitution
+                        ))
                     );
                 }
                 if (!unionsDone) {
                     this.time(
                         "flatten unions",
                         () =>
-                            ([graph, unionsDone] = flattenUnions(
-                                graph,
-                                stringTypeMapping,
-                                conflateNumbers,
-                                true,
-                                debugPrintReconstitution
-                            ))
+                        ([graph, unionsDone] = flattenUnions(
+                            graph,
+                            stringTypeMapping,
+                            conflateNumbers,
+                            true,
+                            debugPrintReconstitution
+                        ))
                     );
                 }
 
@@ -384,25 +382,25 @@ class Run implements RunContext {
         this.time(
             "replace object type",
             () =>
-                (graph = replaceObjectType(
-                    graph,
-                    stringTypeMapping,
-                    conflateNumbers,
-                    targetLanguage.supportsFullObjectType,
-                    debugPrintReconstitution
-                ))
+            (graph = replaceObjectType(
+                graph,
+                stringTypeMapping,
+                conflateNumbers,
+                targetLanguage.supportsFullObjectType,
+                debugPrintReconstitution
+            ))
         );
         do {
             this.time(
                 "flatten unions",
                 () =>
-                    ([graph, unionsDone] = flattenUnions(
-                        graph,
-                        stringTypeMapping,
-                        conflateNumbers,
-                        false,
-                        debugPrintReconstitution
-                    ))
+                ([graph, unionsDone] = flattenUnions(
+                    graph,
+                    stringTypeMapping,
+                    conflateNumbers,
+                    false,
+                    debugPrintReconstitution
+                ))
             );
         } while (!unionsDone);
 
@@ -416,20 +414,20 @@ class Run implements RunContext {
                 this.time(
                     "combine classes cleanup",
                     () =>
-                        (graph = combineClasses(
-                            this,
-                            combinedGraph,
-                            this._options.alphabetizeProperties,
-                            false,
-                            true,
-                            debugPrintReconstitution
-                        ))
+                    (graph = combineClasses(
+                        this,
+                        combinedGraph,
+                        this._options.alphabetizeProperties,
+                        false,
+                        true,
+                        debugPrintReconstitution
+                    ))
                 );
             }
         }
 
         if (this._options.inferMaps) {
-            for (;;) {
+            for (; ;) {
                 const newGraph = this.time("infer maps", () =>
                     inferMaps(graph, stringTypeMapping, true, debugPrintReconstitution)
                 );
@@ -445,13 +443,13 @@ class Run implements RunContext {
         this.time(
             "flatten unions",
             () =>
-                ([graph, unionsDone] = flattenUnions(
-                    graph,
-                    stringTypeMapping,
-                    conflateNumbers,
-                    false,
-                    debugPrintReconstitution
-                ))
+            ([graph, unionsDone] = flattenUnions(
+                graph,
+                stringTypeMapping,
+                conflateNumbers,
+                false,
+                debugPrintReconstitution
+            ))
         );
         assert(unionsDone, "We should only have to flatten unions once after expanding strings");
 
@@ -477,13 +475,13 @@ class Run implements RunContext {
         this.time(
             "flatten unions",
             () =>
-                ([graph, unionsDone] = flattenUnions(
-                    graph,
-                    stringTypeMapping,
-                    conflateNumbers,
-                    false,
-                    debugPrintReconstitution
-                ))
+            ([graph, unionsDone] = flattenUnions(
+                graph,
+                stringTypeMapping,
+                conflateNumbers,
+                false,
+                debugPrintReconstitution
+            ))
         );
         assert(unionsDone, "We should only have to flatten unions once after making transformations");
 

@@ -40,13 +40,12 @@ export type TransformedStringTypeTargets = {
  * stringified integers map to integers.
  */
 const transformedStringTypeTargetTypeKinds = {
-    date: { xsd: "date", primitive: undefined },
-    time: { xsd: "time", primitive: undefined },
-    "date-time": { xsd: "dateTime", primitive: undefined },
-    uuid: { xsd: "string", primitive: undefined },
-    uri: { xsd: "anyURI", primitive: undefined, attributesProducer: uriInferenceAttributesProducer },
-    "integer-string": { xsd: "integerString", primitive: "integer" } as TransformedStringTypeTargets,
-    "bool-string": { xsd: "booleanString", primitive: "bool" } as TransformedStringTypeTargets
+    date: { xsd: "date" },
+    time: { xsd: "time" },
+    "date-time": { xsd: "dateTime" },
+    uri: { xsd: "anyURI" },
+    "integer-string": { xsd: "integerString" },
+    "bool-string": { xsd: "booleanString" }
 };
 
 export const transformedStringTypeTargetTypeKindsMap = mapFromObject(
