@@ -29,18 +29,8 @@ import { messageAssert } from "./Messages";
 import { TypeRef, attributesForTypeRef, derefTypeRef, TypeGraph, typeRefIndex } from "./TypeGraph";
 import { uriInferenceAttributesProducer } from "./attributes/URIAttributes";
 
-/**
- * `jsonSchema` is the `format` to be used to represent this string type in
- * JSON Schema.  It's ok to "invent" a new one if the JSON Schema standard doesn't
- * have that particular type yet.
- *
- * For transformed type kinds that map to an existing primitive type, `primitive`
- * must specify that type kind.
- */
 export type TransformedStringTypeTargets = {
-    jsonSchema: string;
-    primitive: PrimitiveNonStringTypeKind | undefined;
-    attributesProducer?: (s: string) => TypeAttributes;
+    xsd: string;
 };
 
 /**
@@ -50,13 +40,13 @@ export type TransformedStringTypeTargets = {
  * stringified integers map to integers.
  */
 const transformedStringTypeTargetTypeKinds = {
-    date: { jsonSchema: "date", primitive: undefined },
-    time: { jsonSchema: "time", primitive: undefined },
-    "date-time": { jsonSchema: "date-time", primitive: undefined },
-    uuid: { jsonSchema: "uuid", primitive: undefined },
-    uri: { jsonSchema: "uri", primitive: undefined, attributesProducer: uriInferenceAttributesProducer },
-    "integer-string": { jsonSchema: "integer", primitive: "integer" } as TransformedStringTypeTargets,
-    "bool-string": { jsonSchema: "boolean", primitive: "bool" } as TransformedStringTypeTargets
+    date: { xsd: "date", primitive: undefined },
+    time: { xsd: "time", primitive: undefined },
+    "date-time": { xsd: "dateTime", primitive: undefined },
+    uuid: { xsd: "string", primitive: undefined },
+    uri: { xsd: "anyURI", primitive: undefined, attributesProducer: uriInferenceAttributesProducer },
+    "integer-string": { xsd: "integerString", primitive: "integer" } as TransformedStringTypeTargets,
+    "bool-string": { xsd: "booleanString", primitive: "bool" } as TransformedStringTypeTargets
 };
 
 export const transformedStringTypeTargetTypeKindsMap = mapFromObject(
@@ -139,7 +129,7 @@ export type MaybeTypeIdentity = TypeIdentity | undefined;
 export abstract class Type {
     abstract readonly kind: TypeKind;
 
-    constructor(readonly typeRef: TypeRef, protected readonly graph: TypeGraph) {}
+    constructor(readonly typeRef: TypeRef, protected readonly graph: TypeGraph) { }
 
     get index(): number {
         return typeRefIndex(this.typeRef);
@@ -269,7 +259,7 @@ export abstract class Type {
         const workList: Type[] = [this];
         const processed = new Set<Type>();
         const ancestors = new Set<Type>();
-        for (;;) {
+        for (; ;) {
             const t = workList.pop();
             if (t === undefined) break;
 
@@ -405,7 +395,7 @@ export class ArrayType extends Type {
 }
 
 export class GenericClassProperty<T> {
-    constructor(readonly typeData: T, readonly isOptional: boolean) {}
+    constructor(readonly typeData: T, readonly isOptional: boolean) { }
 
     equals(other: any): boolean {
         if (!(other instanceof GenericClassProperty)) {

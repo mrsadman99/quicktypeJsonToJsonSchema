@@ -7,16 +7,13 @@ import { inferTransformedStringTypeKindForString } from "../attributes/StringTyp
 
 export enum Tag {
     Null,
-    False,
-    True,
     Integer,
     Double,
     InternedString,
-    UninternedString,
     Object,
     Array,
     StringFormat,
-    TransformedString
+    Boolean
 }
 
 export type Value = number;
@@ -55,7 +52,7 @@ export abstract class CompressedJSON<T> {
     private _objects: Value[][] = [];
     private _arrays: Value[][] = [];
 
-    constructor(readonly dateTimeRecognizer: DateTimeRecognizer, readonly handleRefs: boolean) {}
+    constructor(readonly dateTimeRecognizer: DateTimeRecognizer, readonly handleRefs: boolean) { }
 
     abstract parse(input: T): Promise<Value>;
 
@@ -65,7 +62,7 @@ export abstract class CompressedJSON<T> {
 
     getStringForValue(v: Value): string {
         const tag = valueTag(v);
-        assert(tag === Tag.InternedString || tag === Tag.TransformedString);
+        assert(tag === Tag.InternedString);
         return this._strings[getIndex(v, tag)];
     }
 
@@ -146,8 +143,8 @@ export abstract class CompressedJSON<T> {
         this.commitValue(makeValue(Tag.Null, 0));
     }
 
-    protected commitBoolean(v: boolean): void {
-        this.commitValue(makeValue(v ? Tag.True : Tag.False, 0));
+    protected commitBoolean(): void {
+        this.commitValue(makeValue(Tag.Boolean, 0));
     }
 
     protected commitNumber(isDouble: boolean): void {
@@ -162,15 +159,9 @@ export abstract class CompressedJSON<T> {
         } else {
             const format = inferTransformedStringTypeKindForString(s, this.dateTimeRecognizer);
             if (format !== undefined) {
-                if (defined(transformedStringTypeTargetTypeKindsMap.get(format)).attributesProducer !== undefined) {
-                    value = makeValue(Tag.TransformedString, this.internString(s));
-                } else {
-                    value = makeValue(Tag.StringFormat, this.internString(format));
-                }
-            } else if (s.length <= 64) {
-                value = this.makeString(s);
+                value = makeValue(Tag.StringFormat, this.internString(format));
             } else {
-                value = makeValue(Tag.UninternedString, 0);
+                value = this.makeString(s);
             }
         }
         this.commitValue(value);
@@ -281,7 +272,7 @@ export class CompressedJSONFromString extends CompressedJSON<string> {
         if (json === null) {
             this.commitNull();
         } else if (typeof json === "boolean") {
-            this.commitBoolean(json);
+            this.commitBoolean();
         } else if (typeof json === "string") {
             this.commitString(json);
         } else if (typeof json === "number") {

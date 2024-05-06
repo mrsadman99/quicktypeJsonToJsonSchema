@@ -15,4 +15,8 @@ export interface GraphQLTypeSource extends GraphQLSourceData {
     kind: "graphql";
 }
 
-export type TypeSource = GraphQLTypeSource | JSONTypeSource | SchemaTypeSource;
+export interface XMLWithXSDTypeSource extends JSONSourceData<Readable> {
+    kind: "XMLWithXSD"
+}
+
+export type TypeSource = JSONTypeSource | XMLWithXSDTypeSource;

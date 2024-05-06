@@ -13,8 +13,8 @@ const methodMap: { [name: string]: string } = {
     keyValue: "setPropertyKey",
     stringValue: "commitString",
     nullValue: "commitNull",
-    trueValue: "handleTrueValue",
-    falseValue: "handleFalseValue"
+    trueValue: "handleBooleanValue",
+    falseValue: "handleBooleanValue"
 };
 
 export class CompressedJSONFromStream extends CompressedJSON<Readable> {
@@ -57,11 +57,7 @@ export class CompressedJSONFromStream extends CompressedJSON<Readable> {
         this.commitNumber(isDouble);
     }
 
-    protected handleTrueValue(): void {
-        this.commitBoolean(true);
-    }
-
-    protected handleFalseValue(): void {
-        this.commitBoolean(false);
+    protected handleBooleanValue(): void {
+        this.commitBoolean();
     }
 }

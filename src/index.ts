@@ -110,9 +110,6 @@ async function samplesFromDirectory(dataDir: string, httpHeaders?: string[]): Pr
             .filter(x => fs.lstatSync(x).isFile());
         // Each file is a (Name, JSON | URL)
         const sourcesInDir: TypeSource[] = [];
-        const graphQLSources: GraphQLTypeSource[] = [];
-        let graphQLSchema: Readable | undefined = undefined;
-        let graphQLSchemaFileName: string | undefined = undefined;
         for (let file of files) {
             const name = typeNameFromFilename(file);
 
@@ -130,36 +127,6 @@ async function samplesFromDirectory(dataDir: string, httpHeaders?: string[]): Pr
                     name,
                     samples: [await readableFromFileOrURL(fileOrUrl, httpHeaders)]
                 });
-            } else if (file.endsWith(".schema")) {
-                sourcesInDir.push({
-                    kind: "schema",
-                    name,
-                    uris: [fileOrUrl]
-                });
-            } else if (file.endsWith(".gqlschema")) {
-                messageAssert(graphQLSchema === undefined, "DriverMoreThanOneGraphQLSchemaInDir", {
-                    dir: dataDir
-                });
-                graphQLSchema = await readableFromFileOrURL(fileOrUrl, httpHeaders);
-                graphQLSchemaFileName = fileOrUrl;
-            } else if (file.endsWith(".graphql")) {
-                graphQLSources.push({
-                    kind: "graphql",
-                    name,
-                    schema: undefined,
-                    query: await getStream(await readableFromFileOrURL(fileOrUrl, httpHeaders))
-                });
-            }
-        }
-
-        if (graphQLSources.length > 0) {
-            if (graphQLSchema === undefined) {
-                return messageError("DriverNoGraphQLSchemaInDir", { dir: dataDir });
-            }
-            const schema = parseJSON(await getStream(graphQLSchema), "GraphQL schema", graphQLSchemaFileName);
-            for (const source of graphQLSources) {
-                source.schema = schema;
-                sourcesInDir.push(source);
             }
         }
 
@@ -181,11 +148,7 @@ async function samplesFromDirectory(dataDir: string, httpHeaders?: string[]): Pr
                 case "json":
                     jsonSamples = jsonSamples.concat(source.samples);
                     break;
-                case "schema":
-                    schemaSources.push(source);
-                    break;
-                case "graphql":
-                    graphQLSources.push(source);
+                case "XMLWithXSD":
                     break;
                 default:
                     return assertNever(source);
@@ -208,8 +171,6 @@ async function samplesFromDirectory(dataDir: string, httpHeaders?: string[]): Pr
                 samples: jsonSamples
             });
         }
-        sources = sources.concat(schemaSources);
-        sources = sources.concat(graphQLSources);
     }
 
     return sources;
@@ -341,14 +302,14 @@ function makeOptionDefinitions(targetLanguages: TargetLanguage[]): OptionDefinit
         targetLanguages.length < 2
             ? []
             : [
-                  {
-                      name: "lang",
-                      alias: "l",
-                      type: String,
-                      typeLabel: "LANG",
-                      description: "The target language."
-                  }
-              ];
+                {
+                    name: "lang",
+                    alias: "l",
+                    type: String,
+                    typeLabel: "LANG",
+                    description: "The target language."
+                }
+            ];
     const afterLang: OptionDefinition[] = [
         {
             name: "src-lang",
@@ -600,7 +561,7 @@ function parseOptions(definitions: OptionDefinition[], argv: string[], partial: 
         }
     }
 
-    const options: { rendererOptions: RendererOptions; [key: string]: any } = { rendererOptions: {} };
+    const options: { rendererOptions: RendererOptions;[key: string]: any } = { rendererOptions: {} };
     for (const o of definitions) {
         if (!hasOwnProperty(opts, o.name)) continue;
         const v = opts[o.name] as string;
@@ -711,19 +672,11 @@ async function makeInputData(
 
     for (const source of sources) {
         switch (source.kind) {
-            case "graphql":
-                await inputData.addSource("graphql", source, () => new GraphQLInput());
+            case "XMLWithXSD":
                 break;
             case "json":
                 await inputData.addSource("json", source, () =>
                     jsonInputForTargetLanguage(targetLanguage, undefined, handleJSONRefs)
-                );
-                break;
-            case "schema":
-                await inputData.addSource(
-                    "schema",
-                    source,
-                    () => new JSONSchemaInput(new FetchingJSONSchemaStore(httpHeaders), [], additionalSchemaAddresses)
                 );
                 break;
             default:

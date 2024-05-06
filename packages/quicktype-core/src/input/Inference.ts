@@ -85,7 +85,7 @@ export class TypeInference {
         private readonly _typeBuilder: TypeBuilder,
         private readonly _inferMaps: boolean,
         private readonly _inferEnums: boolean
-    ) {}
+    ) { }
 
     addValuesToAccumulator(valueArray: NestedValueArray, accumulator: Accumulator): void {
         forEachValueInNestedValueArray(valueArray, value => {
@@ -94,8 +94,7 @@ export class TypeInference {
                 case Tag.Null:
                     accumulator.addPrimitive("null", emptyTypeAttributes);
                     break;
-                case Tag.False:
-                case Tag.True:
+                case Tag.Boolean:
                     accumulator.addPrimitive("bool", emptyTypeAttributes);
                     break;
                 case Tag.Integer:
@@ -116,9 +115,6 @@ export class TypeInference {
                         accumulator.addStringType("string", emptyTypeAttributes);
                     }
                     break;
-                case Tag.UninternedString:
-                    accumulator.addStringType("string", emptyTypeAttributes);
-                    break;
                 case Tag.Object:
                     accumulator.addObject(this._cjson.getObjectForValue(value), emptyTypeAttributes);
                     break;
@@ -132,19 +128,6 @@ export class TypeInference {
                         emptyTypeAttributes,
                         new StringTypes(new Map(), new Set([kind]))
                     );
-                    break;
-                }
-                case Tag.TransformedString: {
-                    const s = this._cjson.getStringForValue(value);
-                    const kind = inferTransformedStringTypeKindForString(s, this._cjson.dateTimeRecognizer);
-                    if (kind === undefined) {
-                        return panic("TransformedString does not have a kind");
-                    }
-                    const producer = defined(transformedStringTypeTargetTypeKindsMap.get(kind)).attributesProducer;
-                    if (producer === undefined) {
-                        return panic("TransformedString does not have attribute producer");
-                    }
-                    accumulator.addStringType("string", producer(s), new StringTypes(new Map(), new Set([kind])));
                     break;
                 }
                 default:

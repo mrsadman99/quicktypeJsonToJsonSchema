@@ -80,7 +80,7 @@ async function getTargetLanguage(editor: vscode.TextEditor): Promise<TargetLangu
     return await pickTargetLanguage();
 }
 
-type InputKind = "json" | "schema" | "typescript";
+type InputKind = "json" | "XMLWithXSD";
 
 async function runQuicktype(
     content: string,
@@ -112,19 +112,7 @@ async function runQuicktype(
                 jsonInputForTargetLanguage(lang)
             );
             break;
-        case "schema":
-            await inputData.addSource(
-                "schema",
-                { name: topLevelName, schema: content },
-                () => new JSONSchemaInput(undefined)
-            );
-            break;
-        case "typescript":
-            await inputData.addSource(
-                "schema",
-                schemaForTypeScriptSources([`${topLevelName}.ts`]),
-                () => new JSONSchemaInput(undefined)
-            );
+        case "XMLWithXSD":
             break;
         default:
             throw new Error(`Unrecognized input format: ${kind}`);
@@ -171,21 +159,18 @@ async function pasteAsTypes(editor: vscode.TextEditor, kind: InputKind, justType
         return;
     }
 
-    if (kind !== "typescript" && !jsonIsValid(content)) {
+    if (!jsonIsValid(content)) {
         vscode.window.showErrorMessage("Clipboard does not contain valid JSON.");
         return;
     }
 
     let topLevelName: string;
-    if (kind === "typescript") {
-        topLevelName = "input";
-    } else {
-        const tln = await promptTopLevelName();
-        if (tln.cancelled) {
-            return;
-        }
-        topLevelName = tln.name;
+
+    const tln = await promptTopLevelName();
+    if (tln.cancelled) {
+        return;
     }
+    topLevelName = tln.name;
 
     let result: SerializedRenderResult;
     try {
@@ -319,7 +304,7 @@ class CodeProvider implements vscode.TextDocumentContentProvider {
             if (!this._isOpen) return;
 
             this._onDidChange.fire(this.uri);
-        } catch (e) {}
+        } catch (e) { }
     }
 
     provideTextDocumentContent(_uri: vscode.Uri, _token: vscode.CancellationToken): vscode.ProviderResult<string> {
@@ -428,23 +413,8 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         vscode.commands.registerTextEditorCommand(Command.PasteJSONAsTypesAndSerialization, editor =>
             pasteAsTypes(editor, "json", false)
         ),
-        vscode.commands.registerTextEditorCommand(Command.PasteSchemaAsTypes, editor =>
-            pasteAsTypes(editor, "schema", true)
-        ),
-        vscode.commands.registerTextEditorCommand(Command.PasteSchemaAsTypesAndSerialization, editor =>
-            pasteAsTypes(editor, "schema", false)
-        ),
-        vscode.commands.registerTextEditorCommand(Command.PasteTypeScriptAsTypesAndSerialization, editor =>
-            pasteAsTypes(editor, "typescript", false)
-        ),
         vscode.commands.registerTextEditorCommand(Command.OpenQuicktypeForJSON, editor =>
             openForEditor(editor, "json")
-        ),
-        vscode.commands.registerTextEditorCommand(Command.OpenQuicktypeForJSONSchema, editor =>
-            openForEditor(editor, "schema")
-        ),
-        vscode.commands.registerTextEditorCommand(Command.OpenQuicktypeForTypeScript, editor =>
-            openForEditor(editor, "typescript")
         ),
         vscode.commands.registerCommand(Command.ChangeTargetLanguage, changeTargetLanguage)
     );

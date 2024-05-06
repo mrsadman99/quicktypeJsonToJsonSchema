@@ -11,41 +11,12 @@
                     "items": {
                         "$ref": "#/definitions/Person"
                     }
-                },
-                "address": {
-                    "$ref": "#/definitions/Address"
                 }
             },
             "required": [
-                "address",
                 "persons"
             ],
             "title": "Out"
-        },
-        "Address": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "street": {
-                    "type": "string"
-                },
-                "city": {
-                    "type": "string"
-                },
-                "state": {
-                    "type": "string"
-                },
-                "postalCode": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "city",
-                "postalCode",
-                "state",
-                "street"
-            ],
-            "title": "Address"
         },
         "Person": {
             "type": "object",
@@ -63,46 +34,18 @@
                 "phone": {
                     "type": "string"
                 },
-                "status": {
-                    "$ref": "#/definitions/Status"
-                },
-                "address": {
-                    "$ref": "#/definitions/Address"
-                },
-                "driver": {
-                    "type": "boolean"
+                "test": {
+                    "type": "string",
+                    "format": "integer"
                 }
             },
             "required": [
-                "address",
                 "age",
                 "name",
                 "phone",
-                "status",
                 "surname"
             ],
             "title": "Person"
-        },
-        "Status": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "activity": {
-                    "type": "string"
-                },
-                "organizationName": {
-                    "type": "string"
-                },
-                "address": {
-                    "$ref": "#/definitions/Address"
-                }
-            },
-            "required": [
-                "activity",
-                "address",
-                "organizationName"
-            ],
-            "title": "Status"
         }
     }
 }
