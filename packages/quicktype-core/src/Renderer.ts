@@ -7,6 +7,7 @@ import { AnnotationData, IssueAnnotationData } from "./Annotation";
 import { assert, panic } from "./support/Support";
 import { TargetLanguage } from "./TargetLanguage";
 import { type Comment } from "./support/Comments";
+import { Type } from 'Type';
 
 export type RenderResult = {
     sources: ReadonlyMap<string, Source>;
@@ -337,5 +338,9 @@ export abstract class Renderer {
             return panic("Names accessed before they were assigned");
         }
         return this._names;
+    }
+
+    get topLevels(): ReadonlyMap<string, Type> {
+        return this.typeGraph.topLevels;
     }
 }

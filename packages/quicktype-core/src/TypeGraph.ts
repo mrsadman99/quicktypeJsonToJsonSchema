@@ -69,7 +69,7 @@ export function typeAndAttributesForTypeRef(
 export class TypeAttributeStore {
     private readonly _topLevelValues: Map<string, TypeAttributes> = new Map();
 
-    constructor(private readonly _typeGraph: TypeGraph, private _values: (TypeAttributes | undefined)[]) {}
+    constructor(private readonly _typeGraph: TypeGraph, private _values: (TypeAttributes | undefined)[]) { }
 
     private getTypeIndex(t: Type): number {
         const tref = t.typeRef;
@@ -128,7 +128,7 @@ export class TypeAttributeStoreView<T> {
     constructor(
         private readonly _attributeStore: TypeAttributeStore,
         private readonly _definition: TypeAttributeKind<T>
-    ) {}
+    ) { }
 
     set(t: Type, value: T): void {
         this._attributeStore.set(this._definition, t, value);
@@ -386,7 +386,7 @@ export class TypeGraph {
 
     rewriteFixedPoint(alphabetizeProperties: boolean, debugPrintReconstitution: boolean): TypeGraph {
         let graph: TypeGraph = this;
-        for (;;) {
+        for (; ;) {
             const newGraph = this.rewrite(
                 "fixed-point",
                 getNoStringTypeMapping(),
