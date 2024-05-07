@@ -1,18 +1,17 @@
-import { RenderContext, Renderer } from 'Renderer';
+import { RenderContext, Renderer } from '../Renderer';
+import '../ConvenienceRenderer';
+
 import { Option } from 'RendererOptions';
 import { TargetLanguage } from '../TargetLanguage';
-import { ConvenienceRenderer } from '../ConvenienceRenderer';
 import { StringTypeMapping, getNoStringTypeMapping } from '../TypeBuilder';
 import { allUpperWordStyle, combineWords, firstUpperWordStyle, legalizeCharacters, splitIntoWords } from '../support/Strings';
-import { Name, Namer, funPrefixNamer } from '../Naming';
-import { ArrayType, ClassType, PrimitiveNonStringTypeKind, PrimitiveStringTypeKind, PrimitiveType, PrimitiveTypeKind, Type, isPrimitiveStringTypeKind } from 'Type';
-import { defined } from 'support/Support';
-import { messageError } from 'Messages';
+import { Namer, Namespace, funPrefixNamer } from '../Naming';
+import { ArrayType, ClassType, PrimitiveStringTypeKind, PrimitiveType, Type, isPrimitiveStringTypeKind } from '../Type';
+import { defined } from '../support/Support';
 import xmlbuilder, { XMLElement } from 'xmlbuilder';
-import { TypeRef } from 'TypeGraph';
-import { iterableEvery, iterableFind, iterableSome, mapFirst, setFilter } from 'collection-utils';
-import { ClassProperty } from '../../dist';
-import { matchTypeExhaustive } from 'TypeUtils';
+import { TypeRef } from '../TypeGraph';
+import { mapFirst } from 'collection-utils';
+import { matchTypeExhaustive } from '../TypeUtils';
 
 const legalizeName = legalizeCharacters(cp => cp >= 32 && cp < 128 && cp !== 0x2f /* slash */);
 
@@ -45,8 +44,8 @@ export class XSDLanguage extends TargetLanguage {
         return getNoStringTypeMapping();
     }
 
-    protected makeRenderer(renderContext: RenderContext, optionValues: { [name: string]: any; }): Renderer {
-        throw new Error(`Method not implemented. ${renderContext} ${optionValues}`);
+    protected makeRenderer(renderContext: RenderContext): Renderer {
+        return new XSDRenderer(this, renderContext);
     }
 
     get supportsOptionalClassProperties(): boolean {
@@ -78,6 +77,13 @@ export class XSDRenderer extends Renderer {
             .att("targetNamespace", this.schemaNamespace)
             .att("xmlns", baseXmlns)
             .att("elementFormDefault", "qualified");
+    }
+
+    protected genereateBasicTypes() {
+
+    }
+    protected setUpNaming(): Iterable<Namespace> {
+        return [];
     }
 
     protected makeNamedTypeNamer(): Namer {
@@ -193,7 +199,11 @@ export class XSDRenderer extends Renderer {
             const complexTypeSchema = this.rootSchema.ele("complexType", { name: classType }).ele("sequence");
 
             type.getProperties().forEach((innerProp, innerKey) => {
-                this.renderType(innerProp.type, complexTypeSchema, innerKey);
+                let derivedElementAttrs = {};
+                if (innerProp.isOptional) {
+                    derivedElementAttrs = { ...derivedElementAttrs, "minOccurs": 0 };
+                }
+                this.renderType(innerProp.type, complexTypeSchema, innerKey, derivedElementAttrs);
             });
         }
     }
@@ -245,6 +255,7 @@ export class XSDRenderer extends Renderer {
 
         this.renderType(defined(mapFirst(this.topLevels)), this.rootSchema, "root");
 
-        this.emitMultiline(JSON.stringify(schema, undefined, "    "));
+        const res = this.rootSchema.end();
+        console.log(res)
     }
 }
