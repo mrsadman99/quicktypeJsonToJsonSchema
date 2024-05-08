@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<persons xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance"
+    xsd:noNamespaceSchemaLocation="out.xsd">
+    <personsItem>
+        <name>asd</name>
+        <birthday>2021-12-12</birthday>
+        <surname>asd</surname>
+        <age>123</age>
+        <phone>213</phone>
+        <status></status>
+    </personsItem>
+</persons>

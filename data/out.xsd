@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:simpleType name="dateType">
+        <xsd:union>
+            <xsd:simpleType>
+                <xsd:restriction base="xsd:date" />
+            </xsd:simpleType>
+            <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                    <xsd:pattern value="(0?[1-9]|[12][0-9]|3[01])[/.](0?[1-9]|1[0-2])[/.]\d{4}" />
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:union>
+    </xsd:simpleType>
+    <xsd:simpleType name="timeType">
+        <xsd:union>
+            <xsd:simpleType>
+                <xsd:restriction base="xsd:time" />
+            </xsd:simpleType>
+            <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                    <xsd:pattern value="([0-1]?[0-9]|2[0-3]):([0-5][0-9])" />
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                    <xsd:pattern value="(0?[0-9]|1[01]):([0-5][0-9]) (AM|PM|a\.m\.|p\.m\.)" />
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:union>
+    </xsd:simpleType>
+    <xsd:simpleType name="booleanStringType">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="true|false" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="integerStringType">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="(0|-?[1-9]*)" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="uriType">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="(https?|ftp):\/\/[^{}]+\.[^{}]+" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="nullType">
+        <xsd:restriction base="xsd:string">
+            <xsd:length value="0" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:element name="root" type="rootType" />
+    <xsd:complexType name="rootType">
+        <xsd:sequence>
+            <xsd:element name="persons" type="personsArrayType" />
+            <xsd:element name="address" type="addressType" />
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="persons" type="personsArrayType" />
+    <xsd:complexType name="personsArrayType">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="personsItem"
+                type="personsItemType" />
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="personsItemType">
+        <xsd:all>
+            <xsd:element name="name" type="xsd:string" />
+            <xsd:element name="surname" type="xsd:string" />
+            <xsd:element name="age" type="xsd:integer" />
+            <xsd:element name="birthday" type="dateType" />
+            <xsd:element name="phone" type="xsd:string" />
+            <xsd:element name="status" type="statusType" />
+            <xsd:element name="address" type="addressType" />
+            <xsd:element minOccurs="0" name="driver" type="xsd:boolean" />
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:element name="status" type="statusType" />
+    <xsd:complexType name="statusType">
+        <xsd:sequence>
+            <xsd:element name="activity" type="xsd:string" />
+            <xsd:element name="organizationName" type="xsd:string" />
+            <xsd:element name="address" type="addressType" />
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="address" type="addressType" />
+    <xsd:complexType name="addressType">
+        <xsd:sequence>
+            <xsd:element name="street" type="xsd:string" />
+            <xsd:element name="city" type="xsd:string" />
+            <xsd:element name="state" type="xsd:string" />
+            <xsd:element name="postalCode" type="xsd:string" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

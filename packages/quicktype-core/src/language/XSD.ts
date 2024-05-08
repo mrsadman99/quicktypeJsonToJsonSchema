@@ -8,10 +8,13 @@ import { allUpperWordStyle, combineWords, firstUpperWordStyle, legalizeCharacter
 import { Namer, Namespace, funPrefixNamer } from '../Naming';
 import { ArrayType, ClassType, PrimitiveStringTypeKind, PrimitiveType, Type, isPrimitiveStringTypeKind } from '../Type';
 import { defined } from '../support/Support';
-import xmlbuilder, { XMLElement } from 'xmlbuilder';
+import { convert, create as createSchema } from 'xmlbuilder2';
+import { XMLBuilder, XMLSerializedAsObject, XMLSerializedAsObjectArray } from 'xmlbuilder2/lib/interfaces';
 import { TypeRef } from '../TypeGraph';
 import { mapFirst } from 'collection-utils';
 import { matchTypeExhaustive } from '../TypeUtils';
+import { Readable } from 'readable-stream';
+import { Parser } from 'stream-json';
 
 const legalizeName = legalizeCharacters(cp => cp >= 32 && cp < 128 && cp !== 0x2f /* slash */);
 
@@ -53,35 +56,129 @@ export class XSDLanguage extends TargetLanguage {
     }
 }
 
-type renderType = (schema: XMLElement, key: string, additionalAttrs?: object, createElement?: boolean) => void;
+type renderType = (schema: XSDSchemaWrapper, key: string, additionalAttrs?: object, createElement?: boolean) => void;
+
+class XSDSchemaWrapper {
+    constructor(public inner: XMLBuilder, private baseSchemaPrefix: string) { }
+
+    static supportedBaseTypes = ["string", "integer", "decimal", "dateTime", "date", "time", "boolean"];
+
+    static typeAttributes = ["base", "type"];
+
+    static mapPrimitiveStringToXSDTypes = new Map<PrimitiveStringTypeKind, string>([
+        ["date", "dateType"],
+        ["time", "timeType"],
+        ["date-time", "dateTimeType"],
+        ["uri", "uriType"],
+        ["integer-string", "integerStringType"],
+        ["bool-string", "booleanStringType"]
+    ]);
+
+    ele(name: any, attributes?: { [key: string]: any }): XSDSchemaWrapper {
+        let processedAttrs = attributes;
+
+        XSDSchemaWrapper.typeAttributes.forEach(typeAttr => {
+            if (!processedAttrs?.hasOwnProperty(typeAttr)) {
+                return;
+            }
+            const { [typeAttr]: typeValue } = processedAttrs;
+            if (XSDSchemaWrapper.supportedBaseTypes.includes(typeValue)) {
+                processedAttrs[typeAttr] = `${this.baseSchemaPrefix}:${typeValue}`
+            }
+        })
+        const innerSchema = this.inner.ele(`${this.baseSchemaPrefix}:${name}`, processedAttrs);
+
+        return new XSDSchemaWrapper(innerSchema, this.baseSchemaPrefix);
+    }
+}
 
 export class XSDRenderer extends Renderer {
-    private rootSchema: XMLElement
+    private rootSchema: XSDSchemaWrapper
     private processedComplexTypes: Map<TypeRef, { type: string, elementTags: string[] }> = new Map();
-    private mapPrimitiveStringToXSDTypes = new Map<PrimitiveStringTypeKind, string>([
-        ["date", this.localSchemaElement("date")],
-        ["time", this.localSchemaElement("time")],
-        ["date-time", "dateTime"],
-        ["uri", this.localSchemaElement("uri")],
-        ["integer-string", this.localSchemaElement("integerString")],
-        ["bool-string", this.localSchemaElement("booleanString")]
-    ]);
+
 
     constructor(targetLanguage: TargetLanguage, renderContext: RenderContext) {
         super(targetLanguage, renderContext);
 
-        this.rootSchema = xmlbuilder.create('schema');
-        const baseXmlns = "http://www.w3.org/2001/XMLSchema";
-        this.rootSchema
-            .att(`xmlns:${this.xmlnsPrefix}`, this.schemaNamespace)
-            .att("targetNamespace", this.schemaNamespace)
-            .att("xmlns", baseXmlns)
-            .att("elementFormDefault", "qualified");
+        this.rootSchema = this.prepareSchema();
     }
 
-    protected genereateBasicTypes() {
-
+    private get xmlnsPrefix(): string {
+        return "xsd";
     }
+
+    protected prepareSchema() {
+        const innerSchema = createSchema()
+            .ele(`${this.xmlnsPrefix}:schema`, { [`xmlns:${this.xmlnsPrefix}`]: "http://www.w3.org/2001/XMLSchema" })
+        const xsdSchema = new XSDSchemaWrapper(innerSchema, this.xmlnsPrefix);
+
+        this.renderBasicTypes(xsdSchema);
+
+        return xsdSchema;
+    }
+
+    protected renderBasicTypes(xsdSchema: XSDSchemaWrapper) {
+        this.renderDateType(xsdSchema);
+        this.renderTimeType(xsdSchema);
+        this.renderBooleanStringType(xsdSchema);
+        this.renderIntegerStringType(xsdSchema);
+        this.renderUriType(xsdSchema);
+        this.renderNullType(xsdSchema);
+    }
+
+    protected renderDateType(xsdSchema: XSDSchemaWrapper) {
+        const dateMatchPattern = "(0?[1-9]|[12][0-9]|3[01])[/.](0?[1-9]|1[0-2])[/.]\\d{4}";
+        const unionScheme = xsdSchema
+            .ele("simpleType", { name: "dateType" })
+            .ele("union");
+        unionScheme.ele("simpleType")
+            .ele("restriction", { base: "date" })
+        unionScheme.ele("simpleType")
+            .ele("restriction", { base: "string" })
+            .ele("pattern", { value: dateMatchPattern })
+    }
+
+    protected renderTimeType(xsdSchema: XSDSchemaWrapper) {
+        const timeMatchPatterns = [
+            "([0-1]?[0-9]|2[0-3]):([0-5][0-9])",
+            "(0?[0-9]|1[01]):([0-5][0-9]) (AM|PM|a\\.m\\.|p\\.m\\.)"
+        ];
+        const unionScheme = xsdSchema.ele("simpleType", { name: "timeType" })
+            .ele("union");
+        unionScheme.ele("simpleType")
+            .ele("restriction", { base: "time" });
+
+        timeMatchPatterns.forEach(timeMatchPattern => {
+            unionScheme.ele("simpleType")
+                .ele("restriction", { base: "string" })
+                .ele("pattern", { value: timeMatchPattern });
+        })
+    }
+
+    protected renderIntegerStringType(xsdSchema: XSDSchemaWrapper) {
+        xsdSchema.ele("simpleType", { name: XSDSchemaWrapper.mapPrimitiveStringToXSDTypes.get("integer-string") })
+            .ele("restriction", { base: "string" })
+            .ele("pattern", { value: "(0|-?[1-9]*)" });
+    }
+
+    protected renderBooleanStringType(xsdSchema: XSDSchemaWrapper) {
+        xsdSchema.ele("simpleType", { name: XSDSchemaWrapper.mapPrimitiveStringToXSDTypes.get("bool-string") })
+            .ele("restriction", { base: "string" })
+            .ele("pattern", { value: "true|false" });
+    }
+
+    protected renderUriType(xsdSchema: XSDSchemaWrapper) {
+        xsdSchema.ele("simpleType", { name: XSDSchemaWrapper.mapPrimitiveStringToXSDTypes.get("uri") })
+            .ele("restriction", { base: "string" })
+            .ele("pattern", { value: "(https?|ftp):\\/\\/[^{}]+\\.[^{}]+" });
+    }
+
+    protected renderNullType(xsdSchema: XSDSchemaWrapper) {
+        xsdSchema.ele("simpleType", { name: "nullType" })
+            .ele("restriction", { base: "string" })
+            .ele("length", { value: "0" });
+    }
+
     protected setUpNaming(): Iterable<Namespace> {
         return [];
     }
@@ -102,39 +199,44 @@ export class XSDRenderer extends Renderer {
         return null;
     }
 
-    private renderNull = (schema: XMLElement, key: string, additionalAttrs: object = {}): void => {
-        schema.ele('element', { ...additionalAttrs, name: key, type: `${this.localSchemaElement('nullType')}` });
+    private renderNull = (schema: XSDSchemaWrapper, key: string, additionalAttrs: object = {}): void => {
+        schema.ele('element', { ...additionalAttrs, name: key, type: "nullType" });
     }
 
-    private renderBool = (schema: XMLElement, key: string, additionalAttrs: object = {}): void => {
+    private renderBool = (schema: XSDSchemaWrapper, key: string, additionalAttrs: object = {}): void => {
         schema.ele('element', { ...additionalAttrs, name: key, type: 'boolean' });
     }
 
-    private renderInteger = (schema: XMLElement, key: string, additionalAttrs: object = {}): void => {
+    private renderInteger = (schema: XSDSchemaWrapper, key: string, additionalAttrs: object = {}): void => {
         schema.ele('element', { ...additionalAttrs, name: key, type: 'integer' });
     }
 
-    private renderDouble = (schema: XMLElement, key: string, additionalAttrs: object = {}): void => {
+    private renderDouble = (schema: XSDSchemaWrapper, key: string, additionalAttrs: object = {}): void => {
         schema.ele('element', { ...additionalAttrs, name: key, type: 'decimal' });
     }
 
-    private renderString = (schema: XMLElement, key: string, additionalAttrs: object = {}): void => {
+    private renderString = (schema: XSDSchemaWrapper, key: string, additionalAttrs: object = {}): void => {
         schema.ele('element', { ...additionalAttrs, name: key, type: 'string' });
     }
 
-    private renderTransformedString = (type: PrimitiveType, schema: XMLElement, key: string, additionalAttrs: object = {}): void => {
+    private renderTransformedString = (
+        type: PrimitiveType,
+        schema: XSDSchemaWrapper,
+        key: string,
+        additionalAttrs: object = {}
+    ): void => {
         const kind = type.kind;
         if (!isPrimitiveStringTypeKind(kind)) {
             return;
         }
-        const xsdType = defined(this.mapPrimitiveStringToXSDTypes.get(kind));
+        const xsdType = defined(XSDSchemaWrapper.mapPrimitiveStringToXSDTypes.get(kind));
 
         schema.ele('element', { ...additionalAttrs, name: key, type: xsdType });
     }
 
     private renderArray = (
         type: ArrayType,
-        schema: XMLElement,
+        schema: XSDSchemaWrapper,
         key: string,
         additionalAttrs: object = {},
         createElement = true
@@ -145,7 +247,7 @@ export class XSDRenderer extends Renderer {
         const arrayType = `${key}ArrayType`;
 
         if (createElementCondition) {
-            this.rootSchema.ele("element", { name: key, type: this.localSchemaElement(processedType?.type ?? arrayType) });
+            this.rootSchema.ele("element", { name: key, type: processedType?.type ?? arrayType });
             elementTags.push(key);
         }
 
@@ -154,7 +256,7 @@ export class XSDRenderer extends Renderer {
             schema.ele("element", {
                 ...additionalAttrs,
                 name: key,
-                type: this.localSchemaElement(processedType?.type ?? arrayType)
+                type: processedType?.type ?? arrayType
             });
         }
 
@@ -169,7 +271,7 @@ export class XSDRenderer extends Renderer {
 
     private renderClass = (
         type: ClassType,
-        schema: XMLElement,
+        schema: XSDSchemaWrapper,
         key: string,
         additionalAttrs: object = {},
         createElement = true
@@ -180,7 +282,7 @@ export class XSDRenderer extends Renderer {
         const classType = `${key}Type`;
 
         if (createElementCondition) {
-            this.rootSchema.ele("element", { name: key, type: this.localSchemaElement(processedType?.type ?? classType) });
+            this.rootSchema.ele("element", { name: key, type: processedType?.type ?? classType });
             elementTags.push(key);
         }
 
@@ -189,14 +291,16 @@ export class XSDRenderer extends Renderer {
             schema.ele("element", {
                 ...additionalAttrs,
                 name: key,
-                type: this.localSchemaElement(processedType?.type ?? classType)
+                type: processedType?.type ?? classType
             });
         }
 
         if (!processedType) {
             this.processedComplexTypes.set(type.typeRef, { type: classType, elementTags });
 
-            const complexTypeSchema = this.rootSchema.ele("complexType", { name: classType }).ele("sequence");
+            const complexTypeSchema = this.rootSchema
+                .ele("complexType", { name: classType })
+                .ele("all");
 
             type.getProperties().forEach((innerProp, innerKey) => {
                 let derivedElementAttrs = {};
@@ -210,7 +314,7 @@ export class XSDRenderer extends Renderer {
 
     private renderType(
         t: Type,
-        schema: XMLElement,
+        schema: XSDSchemaWrapper,
         key: string,
         additionalAttrs: object = {},
         createElement: boolean = true
@@ -236,18 +340,6 @@ export class XSDRenderer extends Renderer {
         return renderCb?.(schema, key, additionalAttrs, createElement);
     }
 
-    private get xmlnsPrefix(): string {
-        return "local";
-    }
-
-    private get schemaNamespace(): string {
-        return "http://example.com/myschema.xsd";
-    }
-
-    private localSchemaElement(tag: string): string {
-        return `${this.xmlnsPrefix}:${tag}`
-    }
-
     protected emitSource(): void {
         if (this.topLevels.size !== 1) {
             throw Error('Not implemented multiple top levels');
@@ -255,7 +347,89 @@ export class XSDRenderer extends Renderer {
 
         this.renderType(defined(mapFirst(this.topLevels)), this.rootSchema, "root");
 
-        const res = this.rootSchema.end();
-        console.log(res)
+        convert
+        const res = this.rootSchema.inner.end();
+        console.log(res);
+    }
+}
+
+class XSDTypes {
+    constructor(private xsdObject: XMLSerializedAsObject) { }
+
+    elements: Map<string, object> = new Map();
+    simpleTypes: Map<string, object> = new Map();
+    complexTypes: Map<string, object> = new Map();
+
+    private fetchTypesFromObject() {
+        const xsdArrayOfObjects = this.xsdObject['#'] as object[];
+
+    }
+}
+
+export class XMLfromJSONStream {
+    private xsdSchema: XMLBuilder;
+    constructor(private readStream: Readable, private xsdObject: object, rootTag: string, xsdFile: string) {
+        this.xsdSchema = createSchema().ele(rootTag, {
+            'xmlns:xsd': "http://www.w3.org/2001/XMLSchema-instance",
+            'xsd:noNamespaceSchemaLocation': xsdFile
+        });
+    }
+
+    static methodMap: { [name: string]: string } = {
+        startObject: "pushObjectContext",
+        endObject: "finishObject",
+        startArray: "pushArrayContext",
+        endArray: "finishArray",
+        startNumber: "handleStartNumber",
+        numberChunk: "handleNumberChunk",
+        endNumber: "handleEndNumber",
+        keyValue: "setPropertyKey",
+        stringValue: "commitString",
+        nullValue: "commitNull",
+        trueValue: "handleBooleanValue",
+        falseValue: "handleBooleanValue"
+    };
+
+    async parse(readStream: Readable): Promise<Value> {
+        const combo = new Parser({ packKeys: true, packStrings: true });
+        combo.on("data", (item: { name: string; value: string | undefined }) => {
+            if (typeof XMLfromJSONStream.methodMap[item.name] === "string") {
+                (this as any)[XMLfromJSONStream.methodMap[item.name]](item.value);
+            }
+        });
+        const promise = new Promise<Value>((resolve, reject) => {
+            combo.on("end", () => {
+                resolve(this.finish());
+            });
+            combo.on("error", (err: any) => {
+                reject(err);
+            });
+        });
+        readStream.setEncoding("utf8");
+        readStream.pipe(combo);
+        readStream.resume();
+        return promise;
+    }
+
+    protected handleStartNumber = (): void => {
+        this.pushContext();
+        this.context.currentNumberIsDouble = false;
+    };
+
+    protected handleNumberChunk = (s: string): void => {
+        const ctx = this.context;
+        if (!ctx.currentNumberIsDouble && /[\.e]/i.test(s)) {
+            ctx.currentNumberIsDouble = true;
+        }
+    };
+
+    protected handleEndNumber(): void {
+        const isDouble = this.context.currentNumberIsDouble;
+        this.popContext();
+        this.commitNumber(isDouble);
+    }
+
+    protected handleBooleanValue(): void {
+        this.commitBoolean();
     }
 }

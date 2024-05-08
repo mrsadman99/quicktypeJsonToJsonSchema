@@ -25,7 +25,7 @@
         "unicode-properties": "^1.4.1",
         "urijs": "^1.19.1",
         "wordwrap": "^1.0.0",
-        "xmlbuilder": "^15.1.1",
+        "xmlbuilder2": "^3.1.1",
         "yaml": "^2.4.1"
     },
     "devDependencies": {
