@@ -51,10 +51,10 @@
     </xsd:simpleType>
     <xsd:element name="root" type="rootType" />
     <xsd:complexType name="rootType">
-        <xsd:sequence>
+        <xsd:all>
             <xsd:element name="persons" type="personsArrayType" />
-            <xsd:element name="address" type="addressType" />
-        </xsd:sequence>
+            <xsd:element name="address" type="statusType" />
+        </xsd:all>
     </xsd:complexType>
     <xsd:element name="persons" type="personsArrayType" />
     <xsd:complexType name="personsArrayType">
@@ -77,19 +77,20 @@
     </xsd:complexType>
     <xsd:element name="status" type="statusType" />
     <xsd:complexType name="statusType">
-        <xsd:sequence>
+        <xsd:all>
             <xsd:element name="activity" type="xsd:string" />
             <xsd:element name="organizationName" type="xsd:string" />
             <xsd:element name="address" type="addressType" />
-        </xsd:sequence>
+        </xsd:all>
     </xsd:complexType>
     <xsd:element name="address" type="addressType" />
     <xsd:complexType name="addressType">
-        <xsd:sequence>
+        <xsd:all>
             <xsd:element name="street" type="xsd:string" />
             <xsd:element name="city" type="xsd:string" />
             <xsd:element name="state" type="xsd:string" />
             <xsd:element name="postalCode" type="xsd:string" />
-        </xsd:sequence>
+        </xsd:all>
     </xsd:complexType>
+    <xsd:element name="address" type="statusType" />
 </xsd:schema>

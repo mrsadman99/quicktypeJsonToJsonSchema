@@ -9,12 +9,12 @@ import { Namer, Namespace, funPrefixNamer } from '../Naming';
 import { ArrayType, ClassType, PrimitiveStringTypeKind, PrimitiveType, Type, isPrimitiveStringTypeKind } from '../Type';
 import { defined } from '../support/Support';
 import { convert, create as createSchema } from 'xmlbuilder2';
-import { XMLBuilder, XMLSerializedAsObject, XMLSerializedAsObjectArray } from 'xmlbuilder2/lib/interfaces';
+import { AttributesObject, XMLBuilder } from 'xmlbuilder2/lib/interfaces';
 import { TypeRef } from '../TypeGraph';
-import { mapFirst } from 'collection-utils';
+import { mapFilter, mapFirst } from 'collection-utils';
 import { matchTypeExhaustive } from '../TypeUtils';
-import { Readable } from 'readable-stream';
-import { Parser } from 'stream-json';
+// import { Readable } from 'readable-stream';
+// import { Parser } from 'stream-json';
 
 const legalizeName = legalizeCharacters(cp => cp >= 32 && cp < 128 && cp !== 0x2f /* slash */);
 
@@ -94,8 +94,8 @@ class XSDSchemaWrapper {
 
 export class XSDRenderer extends Renderer {
     private rootSchema: XSDSchemaWrapper
-    private processedComplexTypes: Map<TypeRef, { type: string, elementTags: string[] }> = new Map();
-
+    private processedComplexTypes: Map<TypeRef, string> = new Map();
+    private typeRefsByElementName: Map<string, TypeRef[]> = - new Map();
 
     constructor(targetLanguage: TargetLanguage, renderContext: RenderContext) {
         super(targetLanguage, renderContext);
@@ -234,6 +234,17 @@ export class XSDRenderer extends Renderer {
         schema.ele('element', { ...additionalAttrs, name: key, type: xsdType });
     }
 
+    private findSameTypeTagsCount(currentTypeRef: TypeRef, typeTag: string): number {
+        return mapFilter(this.processedComplexTypes, (processedTypeTag, processedTypeRef) => {
+            if (processedTypeRef === currentTypeRef) {
+                return false;
+            }
+            const typeIndex = processedTypeTag.indexOf(typeTag);
+
+            return typeIndex === 0 && !isNaN(+processedTypeTag.slice(typeTag.length));
+        }).size;
+    }
+
     private renderArray = (
         type: ArrayType,
         schema: XSDSchemaWrapper,
@@ -241,14 +252,20 @@ export class XSDRenderer extends Renderer {
         additionalAttrs: object = {},
         createElement = true
     ): void => {
+        const arrayElement = `${key}Array`;
+        let arrayType = `${arrayElement}Type`;
         const processedType = this.processedComplexTypes.get(type.typeRef);
-        const elementTags = processedType?.elementTags ?? [];
-        const createElementCondition = createElement && ((processedType && !elementTags.includes(key)) || !processedType);
-        const arrayType = `${key}ArrayType`;
+        const elementTypes = this.typeRefsByElementName.get(arrayElement) ?? [];
+
+        const createElementCondition = createElement && ((processedType && !elementTypes.includes(type.typeRef)) || !processedType);
 
         if (createElementCondition) {
-            this.rootSchema.ele("element", { name: key, type: processedType?.type ?? arrayType });
-            elementTags.push(key);
+            elementTypes.push(type.typeRef);
+            this.typeRefsByElementName.set(arrayElement, elementTypes);
+        }
+
+        if (!processedType) {
+            arrayType = `${arrayType}${this.findSameTypeTagsCount(type.typeRef, arrayType) || ''}`;
         }
 
         // process inner element of type
@@ -256,12 +273,12 @@ export class XSDRenderer extends Renderer {
             schema.ele("element", {
                 ...additionalAttrs,
                 name: key,
-                type: processedType?.type ?? arrayType
+                type: processedType ?? arrayType
             });
         }
 
         if (!processedType) {
-            this.processedComplexTypes.set(type.typeRef, { type: arrayType, elementTags });
+            this.processedComplexTypes.set(type.typeRef, arrayType);
 
             const complexTypeSchema = this.rootSchema.ele("complexType", { name: arrayType }).ele("sequence");
 
@@ -276,14 +293,19 @@ export class XSDRenderer extends Renderer {
         additionalAttrs: object = {},
         createElement = true
     ): void => {
+        let classType = `${key}Type`;
         const processedType = this.processedComplexTypes.get(type.typeRef);
-        const elementTags = processedType?.elementTags ?? [];
-        const createElementCondition = createElement && ((processedType && !elementTags.includes(key)) || !processedType);
-        const classType = `${key}Type`;
+        const elementTypes = this.typeRefsByElementName.get(key) ?? [];
+
+        const createElementCondition = createElement && ((processedType && !elementTypes.includes(type.typeRef)) || !processedType);
 
         if (createElementCondition) {
-            this.rootSchema.ele("element", { name: key, type: processedType?.type ?? classType });
-            elementTags.push(key);
+            elementTypes.push(type.typeRef);
+            this.typeRefsByElementName.set(key, elementTypes);
+        }
+
+        if (!processedType) {
+            classType = `${classType}${this.findSameTypeTagsCount(type.typeRef, classType) || ''}`;
         }
 
         // process inner element of type
@@ -291,12 +313,12 @@ export class XSDRenderer extends Renderer {
             schema.ele("element", {
                 ...additionalAttrs,
                 name: key,
-                type: processedType?.type ?? classType
+                type: processedType ?? classType
             });
         }
 
         if (!processedType) {
-            this.processedComplexTypes.set(type.typeRef, { type: classType, elementTags });
+            this.processedComplexTypes.set(type.typeRef, classType);
 
             const complexTypeSchema = this.rootSchema
                 .ele("complexType", { name: classType })
@@ -340,6 +362,13 @@ export class XSDRenderer extends Renderer {
         return renderCb?.(schema, key, additionalAttrs, createElement);
     }
 
+    private renderElements() {
+        this.typeRefsByElementName.forEach((typeRefs, elementName) => {
+            this.rootSchema.ele(elementName,)
+            this.processedComplexTypes.get(ty)
+        })
+    }
+
     protected emitSource(): void {
         if (this.topLevels.size !== 1) {
             throw Error('Not implemented multiple top levels');
@@ -353,83 +382,83 @@ export class XSDRenderer extends Renderer {
     }
 }
 
-class XSDTypes {
-    constructor(private xsdObject: XMLSerializedAsObject) { }
+// class XSDTypes {
+//     constructor(private xsdObject: XMLSerializedAsObject) { }
 
-    elements: Map<string, object> = new Map();
-    simpleTypes: Map<string, object> = new Map();
-    complexTypes: Map<string, object> = new Map();
+//     elements: Map<string, object> = new Map();
+//     simpleTypes: Map<string, object> = new Map();
+//     complexTypes: Map<string, object> = new Map();
 
-    private fetchTypesFromObject() {
-        const xsdArrayOfObjects = this.xsdObject['#'] as object[];
+//     private fetchTypesFromObject() {
+//         const xsdArrayOfObjects = this.xsdObject['#'] as object[];
 
-    }
-}
+//     }
+// }
 
-export class XMLfromJSONStream {
-    private xsdSchema: XMLBuilder;
-    constructor(private readStream: Readable, private xsdObject: object, rootTag: string, xsdFile: string) {
-        this.xsdSchema = createSchema().ele(rootTag, {
-            'xmlns:xsd': "http://www.w3.org/2001/XMLSchema-instance",
-            'xsd:noNamespaceSchemaLocation': xsdFile
-        });
-    }
+// export class XMLfromJSONStream {
+//     private xsdSchema: XMLBuilder;
+//     constructor(private readStream: Readable, private xsdObject: object, rootTag: string, xsdFile: string) {
+//         this.xsdSchema = createSchema().ele(rootTag, {
+//             'xmlns:xsd': "http://www.w3.org/2001/XMLSchema-instance",
+//             'xsd:noNamespaceSchemaLocation': xsdFile
+//         });
+//     }
 
-    static methodMap: { [name: string]: string } = {
-        startObject: "pushObjectContext",
-        endObject: "finishObject",
-        startArray: "pushArrayContext",
-        endArray: "finishArray",
-        startNumber: "handleStartNumber",
-        numberChunk: "handleNumberChunk",
-        endNumber: "handleEndNumber",
-        keyValue: "setPropertyKey",
-        stringValue: "commitString",
-        nullValue: "commitNull",
-        trueValue: "handleBooleanValue",
-        falseValue: "handleBooleanValue"
-    };
+//     static methodMap: { [name: string]: string } = {
+//         startObject: "pushObjectContext",
+//         endObject: "finishObject",
+//         startArray: "pushArrayContext",
+//         endArray: "finishArray",
+//         startNumber: "handleStartNumber",
+//         numberChunk: "handleNumberChunk",
+//         endNumber: "handleEndNumber",
+//         keyValue: "setPropertyKey",
+//         stringValue: "commitString",
+//         nullValue: "commitNull",
+//         trueValue: "handleBooleanValue",
+//         falseValue: "handleBooleanValue"
+//     };
 
-    async parse(readStream: Readable): Promise<Value> {
-        const combo = new Parser({ packKeys: true, packStrings: true });
-        combo.on("data", (item: { name: string; value: string | undefined }) => {
-            if (typeof XMLfromJSONStream.methodMap[item.name] === "string") {
-                (this as any)[XMLfromJSONStream.methodMap[item.name]](item.value);
-            }
-        });
-        const promise = new Promise<Value>((resolve, reject) => {
-            combo.on("end", () => {
-                resolve(this.finish());
-            });
-            combo.on("error", (err: any) => {
-                reject(err);
-            });
-        });
-        readStream.setEncoding("utf8");
-        readStream.pipe(combo);
-        readStream.resume();
-        return promise;
-    }
+//     async parse(readStream: Readable): Promise<Value> {
+//         const combo = new Parser({ packKeys: true, packStrings: true });
+//         combo.on("data", (item: { name: string; value: string | undefined }) => {
+//             if (typeof XMLfromJSONStream.methodMap[item.name] === "string") {
+//                 (this as any)[XMLfromJSONStream.methodMap[item.name]](item.value);
+//             }
+//         });
+//         const promise = new Promise<Value>((resolve, reject) => {
+//             combo.on("end", () => {
+//                 resolve(this.finish());
+//             });
+//             combo.on("error", (err: any) => {
+//                 reject(err);
+//             });
+//         });
+//         readStream.setEncoding("utf8");
+//         readStream.pipe(combo);
+//         readStream.resume();
+//         return promise;
+//     }
 
-    protected handleStartNumber = (): void => {
-        this.pushContext();
-        this.context.currentNumberIsDouble = false;
-    };
+//     protected handleStartNumber = (): void => {
+//         this.pushContext();
+//         this.context.currentNumberIsDouble = false;
+//     };
 
-    protected handleNumberChunk = (s: string): void => {
-        const ctx = this.context;
-        if (!ctx.currentNumberIsDouble && /[\.e]/i.test(s)) {
-            ctx.currentNumberIsDouble = true;
-        }
-    };
+//     protected handleNumberChunk = (s: string): void => {
+//         const ctx = this.context;
+//         if (!ctx.currentNumberIsDouble && /[\.e]/i.test(s)) {
+//             ctx.currentNumberIsDouble = true;
+//         }
+//     };
 
-    protected handleEndNumber(): void {
-        const isDouble = this.context.currentNumberIsDouble;
-        this.popContext();
-        this.commitNumber(isDouble);
-    }
+//     protected handleEndNumber(): void {
+//         const isDouble = this.context.currentNumberIsDouble;
+//         this.popContext();
+//         this.commitNumber(isDouble);
+//     }
 
-    protected handleBooleanValue(): void {
-        this.commitBoolean();
-    }
-}
+//     protected handleBooleanValue(): void {
+//         this.commitBoolean();
+//     }
+// }
