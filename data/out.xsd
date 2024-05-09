@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="statusAddress" type="complexType5" />
     <xsd:simpleType name="dateType">
         <xsd:union>
             <xsd:simpleType>
@@ -7,7 +8,7 @@
             </xsd:simpleType>
             <xsd:simpleType>
                 <xsd:restriction base="xsd:string">
-                    <xsd:pattern value="(0?[1-9]|[12][0-9]|3[01])[/.](0?[1-9]|1[0-2])[/.]\d{4}" />
+                    <xsd:pattern value="(0?[1-9]|[12][0-9]|3[01])[/.](0?[1-9]|1[0-2])[/.]\\d{4}" />
                 </xsd:restriction>
             </xsd:simpleType>
         </xsd:union>
@@ -24,7 +25,7 @@
             </xsd:simpleType>
             <xsd:simpleType>
                 <xsd:restriction base="xsd:string">
-                    <xsd:pattern value="(0?[0-9]|1[01]):([0-5][0-9]) (AM|PM|a\.m\.|p\.m\.)" />
+                    <xsd:pattern value="(0?[0-9]|1[01]):([0-5][0-9]) (AM|PM|a\\.m\\.|p\\.m\\.)" />
                 </xsd:restriction>
             </xsd:simpleType>
         </xsd:union>
@@ -41,7 +42,7 @@
     </xsd:simpleType>
     <xsd:simpleType name="uriType">
         <xsd:restriction base="xsd:string">
-            <xsd:pattern value="(https?|ftp):\/\/[^{}]+\.[^{}]+" />
+            <xsd:pattern value="(https?|ftp):\\/\\/[^{}]+\\.[^{}]+" />
         </xsd:restriction>
     </xsd:simpleType>
     <xsd:simpleType name="nullType">
@@ -90,6 +91,5 @@
     <xsd:element name="root" type="complexType1" />
     <xsd:element name="persons" type="complexType2" />
     <xsd:element name="status" type="complexType4" />
-    <xsd:element name="statusAddress" type="complexType5" />
     <xsd:element name="rootAddress" type="complexType4" />
 </xsd:schema>
