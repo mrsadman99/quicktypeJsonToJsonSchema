@@ -11,7 +11,7 @@ import { defined } from '../support/Support';
 import { convert, create as createSchema } from 'xmlbuilder2';
 import { AttributesObject, XMLBuilder } from 'xmlbuilder2/lib/interfaces';
 import { TypeRef } from '../TypeGraph';
-import { mapFilter, mapFirst } from 'collection-utils';
+import { iterableFind, mapFilter, mapFirst } from 'collection-utils';
 import { matchTypeExhaustive } from '../TypeUtils';
 // import { Readable } from 'readable-stream';
 // import { Parser } from 'stream-json';
@@ -95,7 +95,7 @@ class XSDSchemaWrapper {
 export class XSDRenderer extends Renderer {
     private rootSchema: XSDSchemaWrapper
     private processedComplexTypes: Map<TypeRef, string> = new Map();
-    private typeRefsByElementName: Map<string, TypeRef[]> = - new Map();
+    private typeRefsByElementName: Map<string, { typeRef: TypeRef, elementPrefix: string }[]> = - new Map();
 
     constructor(targetLanguage: TargetLanguage, renderContext: RenderContext) {
         super(targetLanguage, renderContext);
@@ -247,6 +247,7 @@ export class XSDRenderer extends Renderer {
 
     private renderArray = (
         type: ArrayType,
+        prefix: string,
         schema: XSDSchemaWrapper,
         key: string,
         additionalAttrs: object = {},
@@ -264,8 +265,9 @@ export class XSDRenderer extends Renderer {
             this.typeRefsByElementName.set(arrayElement, elementTypes);
         }
 
-        if (!processedType) {
-            arrayType = `${arrayType}${this.findSameTypeTagsCount(type.typeRef, arrayType) || ''}`;
+        // Add prefix to type when type with same name was processed
+        if (!processedType && Array.from(this.processedComplexTypes.values()).includes(arrayType)) {
+            arrayType = `${prefix}${arrayType.charAt(0).toUpperCase() + arrayType.slice(1)}`;
         }
 
         // process inner element of type
@@ -288,24 +290,28 @@ export class XSDRenderer extends Renderer {
 
     private renderClass = (
         type: ClassType,
+        prefix: string,
         schema: XSDSchemaWrapper,
         key: string,
         additionalAttrs: object = {},
         createElement = true
     ): void => {
         let classType = `${key}Type`;
+        const newPrefix = `${prefix}${key.charAt(0).toUpperCase() + key.slice(1)}`;
         const processedType = this.processedComplexTypes.get(type.typeRef);
         const elementTypes = this.typeRefsByElementName.get(key) ?? [];
 
-        const createElementCondition = createElement && ((processedType && !elementTypes.includes(type.typeRef)) || !processedType);
+        const createElementCondition = createElement &&
+            (processedType && !elementTypes.find(({ typeRef }) => typeRef === type.typeRef) || !processedType);
 
         if (createElementCondition) {
-            elementTypes.push(type.typeRef);
+            elementTypes.push({ typeRef: type.typeRef, elementPrefix: prefix });
             this.typeRefsByElementName.set(key, elementTypes);
         }
 
-        if (!processedType) {
-            classType = `${classType}${this.findSameTypeTagsCount(type.typeRef, classType) || ''}`;
+        // Add prefix to type when type with same name was processed
+        if (!processedType && Array.from(this.processedComplexTypes.values()).includes(classType)) {
+            classType = `${newPrefix}Type`;
         }
 
         // process inner element of type
@@ -329,7 +335,7 @@ export class XSDRenderer extends Renderer {
                 if (innerProp.isOptional) {
                     derivedElementAttrs = { ...derivedElementAttrs, "minOccurs": 0 };
                 }
-                this.renderType(innerProp.type, complexTypeSchema, innerKey, derivedElementAttrs);
+                this.renderType(innerProp.type, complexTypeSchema, innerKey, newPrefix, derivedElementAttrs);
             });
         }
     }
@@ -338,6 +344,7 @@ export class XSDRenderer extends Renderer {
         t: Type,
         schema: XSDSchemaWrapper,
         key: string,
+        prefix: string,
         additionalAttrs: object = {},
         createElement: boolean = true
     ): void {
@@ -350,8 +357,8 @@ export class XSDRenderer extends Renderer {
             _integerType => this.renderInteger,
             _doubleType => this.renderDouble,
             _stringType => this.renderString,
-            arrayType => this.renderArray.bind(this, arrayType),
-            classType => this.renderClass.bind(this, classType),
+            arrayType => this.renderArray.bind(this, arrayType, prefix),
+            classType => this.renderClass.bind(this, classType, prefix),
             _mapType => null,
             _objectType => null,
             _enumType => null,
