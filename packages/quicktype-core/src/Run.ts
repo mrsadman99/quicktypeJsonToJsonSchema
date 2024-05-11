@@ -508,7 +508,7 @@ class Run implements RunContext {
 
         const graph = await this.makeGraph(inputData);
 
-        return this.renderGraph(targetLanguage, graph);
+        return this.renderGraph(targetLanguage, graph, inputData.getInputData());
     }
 
     runSync(): MultiFileRenderResult {

@@ -10,7 +10,7 @@ import { defined, nonNull, panic } from '../support/Support';
 import { convert, create as createSchema } from 'xmlbuilder2';
 import { XMLBuilder, XMLSerializedAsObject } from 'xmlbuilder2/lib/interfaces';
 import { TypeRef } from '../TypeGraph';
-import { arrayLast, iterableFirst, mapFirst, mapMap } from 'collection-utils';
+import { arrayLast, iterableFirst, mapMap } from 'collection-utils';
 import { matchTypeExhaustive } from '../TypeUtils';
 import { readFile, writeFile } from 'fs';
 // import { Readable } from 'readable-stream';
@@ -147,6 +147,10 @@ class XMLFormatConverterHandler {
                 return panic(`Failed to write XML structure into ${fileName}, error: ${err}`)
             }
         });
+    }
+
+    parseJSONtoXML(jsonObject: object, xsdTypes: XSDTypes) {
+
     }
 }
 
