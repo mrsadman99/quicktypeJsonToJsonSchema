@@ -18,7 +18,7 @@ export abstract class TargetLanguage {
         readonly displayName: string,
         readonly names: string[],
         readonly extension: string
-    ) {}
+    ) { }
 
     protected abstract getOptions(): Option<any>[];
 
@@ -44,6 +44,7 @@ export abstract class TargetLanguage {
 
     renderGraphAndSerialize(
         typeGraph: TypeGraph,
+        inputObjects: object[],
         givenOutputFilename: string,
         alphabetizeProperties: boolean,
         leadingComments: Comment[] | undefined,
@@ -58,7 +59,7 @@ export abstract class TargetLanguage {
         if ((renderer as any).setAlphabetizeProperties !== undefined) {
             (renderer as ConvenienceRenderer).setAlphabetizeProperties(alphabetizeProperties);
         }
-        const renderResult = renderer.render(givenOutputFilename);
+        const renderResult = renderer.render(givenOutputFilename, inputObjects);
         return mapMap(renderResult.sources, s => serializeRenderResult(s, renderResult.names, defined(indentation)));
     }
 

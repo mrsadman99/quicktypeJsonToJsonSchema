@@ -1,5 +1,5 @@
 import { Readable } from "readable-stream";
-import { CompressedJSON, Value } from "quicktype-core";
+import { CompressedJSON, Value, defined } from "quicktype-core";
 import { Parser } from "stream-json";
 
 const methodMap: { [name: string]: string } = {
@@ -40,24 +40,24 @@ export class CompressedJSONFromStream extends CompressedJSON<Readable> {
     }
 
     protected handleStartNumber = (): void => {
-        this.pushContext();
-        this.context.currentNumberIsDouble = false;
+        this.context.currentNumberChunk = '';
     };
 
     protected handleNumberChunk = (s: string): void => {
         const ctx = this.context;
-        if (!ctx.currentNumberIsDouble && /[\.e]/i.test(s)) {
-            ctx.currentNumberIsDouble = true;
-        }
+
+        ctx.currentNumberChunk += s;
     };
 
     protected handleEndNumber(): void {
-        const isDouble = this.context.currentNumberIsDouble;
-        this.popContext();
-        this.commitNumber(isDouble);
+        const numberChunk = defined(this.context.currentNumberChunk);
+        const value = +numberChunk;
+        this.context.currentNumberChunk = undefined;
+
+        this.commitNumber(value);
     }
 
-    protected handleBooleanValue(): void {
-        this.commitBoolean();
+    protected handleBooleanValue(value: boolean): void {
+        this.commitBoolean(value);
     }
 }

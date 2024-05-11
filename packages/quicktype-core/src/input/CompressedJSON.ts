@@ -38,7 +38,8 @@ type Context = {
     currentObject: Value[] | undefined;
     currentArray: Value[] | undefined;
     currentKey: string | undefined;
-    currentNumberIsDouble: boolean;
+    currentNumberChunk: string | undefined;
+    currentUncompressedObject: object[] | object | undefined;
 };
 
 export abstract class CompressedJSON<T> {
@@ -52,9 +53,15 @@ export abstract class CompressedJSON<T> {
     private _objects: Value[][] = [];
     private _arrays: Value[][] = [];
 
+    protected _uncompressedSource: object = {};
+
     constructor(readonly dateTimeRecognizer: DateTimeRecognizer, readonly handleRefs: boolean) { }
 
     abstract parse(input: T): Promise<Value>;
+
+    getUncompressedObject(): object {
+        return this._uncompressedSource;
+    }
 
     parseSync(_input: T): Value {
         return panic("parseSync not implemented in CompressedJSON");
@@ -140,19 +147,27 @@ export abstract class CompressedJSON<T> {
     }
 
     protected commitNull(): void {
+        this.setUncompressedObjectSimpleProperty(null);
         this.commitValue(makeValue(Tag.Null, 0));
     }
 
-    protected commitBoolean(): void {
+    protected commitBoolean(value: boolean): void {
+        this.setUncompressedObjectSimpleProperty(value);
         this.commitValue(makeValue(Tag.Boolean, 0));
     }
 
-    protected commitNumber(isDouble: boolean): void {
-        const numberTag = isDouble ? Tag.Double : Tag.Integer;
+    protected commitNumber(value: number): void {
+        this.setUncompressedObjectSimpleProperty(value);
+
+        const isIntegerLimitExceeded =
+            value !== Math.floor(value) || value < Number.MIN_SAFE_INTEGER || value > Number.MAX_SAFE_INTEGER;
+        const numberTag = isIntegerLimitExceeded || value % 1 ? Tag.Double : Tag.Integer;
         this.commitValue(makeValue(numberTag, 0));
     }
 
     protected commitString(s: string): void {
+        this.setUncompressedObjectSimpleProperty(s);
+
         let value: Value | undefined = undefined;
         if (this.handleRefs && this.isExpectingRef) {
             value = this.makeString(s);
@@ -185,13 +200,38 @@ export abstract class CompressedJSON<T> {
             currentObject: undefined,
             currentArray: undefined,
             currentKey: undefined,
-            currentNumberIsDouble: false
+            currentNumberChunk: undefined,
+            currentUncompressedObject: undefined
         };
     }
 
+    private setUncompressedObjectSimpleProperty(currentUncompressedData: any): any {
+        return this.setUncompressedObjectProperty(currentUncompressedData, this._ctx?.currentUncompressedObject, this._ctx?.currentKey);
+    }
+
+    private setUncompressedObjectProperty(
+        currentUncompressedObject: any,
+        parentStructure: object | object[] | undefined,
+        objectKey: string | undefined
+    ): any {
+        if (parentStructure === undefined && typeof currentUncompressedObject === 'object') {
+            this._uncompressedSource = currentUncompressedObject;
+        } else if (Array.isArray(parentStructure)) {
+            parentStructure.push(currentUncompressedObject)
+        } else if (typeof parentStructure === 'object' && objectKey) {
+            Object.assign(parentStructure, { [objectKey]: currentUncompressedObject });
+        }
+        return currentUncompressedObject;
+    }
+
     protected pushObjectContext(): void {
+        const parentStructure = this._ctx?.currentUncompressedObject;
+        const objectKey = this._ctx?.currentKey;
+
         this.pushContext();
-        defined(this._ctx).currentObject = [];
+        const currentCtx = defined(this._ctx);
+        currentCtx.currentObject = [];
+        currentCtx.currentUncompressedObject = this.setUncompressedObjectProperty({}, parentStructure, objectKey);
     }
 
     protected setPropertyKey(key: string): void {
@@ -209,8 +249,13 @@ export abstract class CompressedJSON<T> {
     }
 
     protected pushArrayContext(): void {
+        const parentStructure = this._ctx?.currentUncompressedObject;
+        const arrayKey = this._ctx?.currentKey;
+
         this.pushContext();
-        defined(this._ctx).currentArray = [];
+        const currentCtx = defined(this._ctx);
+        currentCtx.currentArray = [];
+        currentCtx.currentUncompressedObject = this.setUncompressedObjectProperty([], parentStructure, arrayKey);
     }
 
     protected finishArray(): void {
@@ -258,12 +303,17 @@ export abstract class CompressedJSON<T> {
 }
 
 export class CompressedJSONFromString extends CompressedJSON<string> {
+    protected makeUncompressedSource(input: string): object {
+        this._uncompressedSource = JSON.parse(input);
+        return this._uncompressedSource;
+    }
+
     async parse(input: string): Promise<Value> {
         return this.parseSync(input);
     }
 
     parseSync(input: string): Value {
-        const json = JSON.parse(input);
+        const json = this.makeUncompressedSource(input);
         this.process(json);
         return this.finish();
     }
@@ -272,13 +322,11 @@ export class CompressedJSONFromString extends CompressedJSON<string> {
         if (json === null) {
             this.commitNull();
         } else if (typeof json === "boolean") {
-            this.commitBoolean();
+            this.commitBoolean(json);
         } else if (typeof json === "string") {
             this.commitString(json);
         } else if (typeof json === "number") {
-            const isDouble =
-                json !== Math.floor(json) || json < Number.MIN_SAFE_INTEGER || json > Number.MAX_SAFE_INTEGER;
-            this.commitNumber(isDouble);
+            this.commitNumber(json);
         } else if (Array.isArray(json)) {
             this.pushArrayContext();
             for (const v of json) {

@@ -21,7 +21,7 @@
                 "--src",
                 "./data/in.json",
                 "--out",
-                "./data/out.json"
+                "./data/out.xsd"
             ],
             "cwd": "${workspaceRoot}",
             "protocol": "inspector"

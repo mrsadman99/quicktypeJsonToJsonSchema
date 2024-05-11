@@ -521,21 +521,22 @@ class Run implements RunContext {
 
         const graph = this.makeGraphSync(inputData);
 
-        return this.renderGraph(targetLanguage, graph);
+        return this.renderGraph(targetLanguage, graph, inputData.getInputData());
     }
 
-    private renderGraph(targetLanguage: TargetLanguage, graph: TypeGraph): MultiFileRenderResult {
+    private renderGraph(targetLanguage: TargetLanguage, graph: TypeGraph, inputObjects: object[]): MultiFileRenderResult {
         if (this._options.noRender) {
             return this.makeSimpleTextResult(["Done.", ""]);
         }
 
         return targetLanguage.renderGraphAndSerialize(
             graph,
+            inputObjects,
             this._options.outputFilename,
             this._options.alphabetizeProperties,
             this._options.leadingComments,
             this._options.rendererOptions,
-            this._options.indentation
+            this._options.indentation,
         );
     }
 }

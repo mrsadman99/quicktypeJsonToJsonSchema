@@ -14,6 +14,7 @@ export interface Input<T> {
     readonly kind: string;
     readonly needIR: boolean;
 
+    getInputObject(): object;
     addSource(source: T): Promise<void>;
     addSourceSync(source: T): void;
 
@@ -93,6 +94,10 @@ export class JSONInput<T> implements Input<JSONSourceData<T>> {
         }
     }
 
+    getInputObject(): object {
+        return this._compressedJSON.getUncompressedObject();
+    }
+
     addSourceSync(source: JSONSourceData<T>): void {
         const { name, samples, description } = source;
         try {
@@ -146,6 +151,10 @@ export function jsonInputForTargetLanguage(
 export class InputData {
     // FIXME: Make into a Map, indexed by kind.
     private _inputs: Set<Input<any>> = new Set();
+
+    getInputData(): object[] {
+        return [...this._inputs].map(input => input.getInputObject());
+    }
 
     addInput<T>(input: Input<T>): void {
         this._inputs = this._inputs.add(input);

@@ -4,15 +4,15 @@ import '../ConvenienceRenderer';
 import { Option } from 'RendererOptions';
 import { TargetLanguage } from '../TargetLanguage';
 import { StringTypeMapping, getNoStringTypeMapping } from '../TypeBuilder';
-import { allUpperWordStyle, combineWords, firstUpperWordStyle, legalizeCharacters, splitIntoWords } from '../support/Strings';
-import { Namer, Namespace, funPrefixNamer } from '../Naming';
+import { Namespace } from '../Naming';
 import { ArrayType, ClassType, PrimitiveType, PrimitiveTypeKind, Type, TypeKind, isPrimitiveStringTypeKind } from '../Type';
-import { defined, nonNull } from '../support/Support';
+import { defined, nonNull, panic } from '../support/Support';
 import { convert, create as createSchema } from 'xmlbuilder2';
 import { XMLBuilder, XMLSerializedAsObject } from 'xmlbuilder2/lib/interfaces';
 import { TypeRef } from '../TypeGraph';
 import { arrayLast, iterableFirst, mapFirst, mapMap } from 'collection-utils';
 import { matchTypeExhaustive } from '../TypeUtils';
+import { readFile, writeFile } from 'fs';
 // import { Readable } from 'readable-stream';
 // import { Parser } from 'stream-json';
 
@@ -58,28 +58,13 @@ const mapPrimitiveKindToXSDTypes: ReadonlyMap<PrimitiveTypeKind, string> = new M
 const mapXSDTypesToPrimitiveKind = new Map([...mapPrimitiveKindToXSDTypes.entries()]
     .map(([kind, xsdType]) => [xsdType, kind]));
 
-const legalizeName = legalizeCharacters(cp => cp >= 32 && cp < 128 && cp !== 0x2f /* slash */);
-
-function XSDNameStyle(original: string): string {
-    const words = splitIntoWords(original);
-    return combineWords(
-        words,
-        legalizeName,
-        firstUpperWordStyle,
-        firstUpperWordStyle,
-        allUpperWordStyle,
-        allUpperWordStyle,
-        "",
-        _ => true
-    );
-}
-
-const namingFunction = funPrefixNamer("namer", XSDNameStyle);
-
-
 export class XSDLanguage extends TargetLanguage {
     constructor() {
         super("XSD", ["xsd"], "xsd");
+    }
+
+    protected get defaultIndentation(): string {
+        return "  ";
     }
 
     protected getOptions(): Option<any>[] {
@@ -126,10 +111,50 @@ class XSDSchemaWrapper {
     }
 }
 
+class XMLFormatConverterHandler {
+
+    private toContentXMLString(xmlString: string): string {
+        return xmlString.split('/n').map((xmlLine) => {
+            let dataIndex = 0;
+            while (xmlLine[dataIndex] === ' ' && xmlLine.length > dataIndex) {
+                dataIndex++;
+            }
+            return xmlLine.slice(dataIndex)
+        }).join('');
+    }
+
+    toXMLObjectFromString(xmlString: string) {
+        const xmlContentString = this.toContentXMLString(xmlString);
+
+        return convert(xmlContentString, { format: 'object' }) as XMLSerializedAsObject;
+    }
+
+    toXMLObjectFromFile(fileName: string): Promise<XMLSerializedAsObject> {
+        return new Promise<XMLSerializedAsObject>(resolve => {
+            readFile(fileName, (err, xmlBuffer) => {
+                if (err) {
+                    return panic(`Failed to read XML structure from ${fileName}, error: ${err}`)
+                }
+
+                resolve(this.toXMLObjectFromString(xmlBuffer.toString()));
+            });
+        })
+    }
+
+    toXMLFile(fileName: string, xmlString: string) {
+        writeFile(fileName, xmlString, (err) => {
+            if (err) {
+                return panic(`Failed to write XML structure into ${fileName}, error: ${err}`)
+            }
+        });
+    }
+}
+
 export class XSDRenderer extends Renderer {
     private rootSchema: XSDSchemaWrapper
     private processedComplexTypes: Map<TypeRef, string> = new Map();
     private typeRefsByElementName: Map<string, { typeRef: TypeRef, elementPrefixes: string[] }[]> = new Map();
+    private xmlFormatConverter = new XMLFormatConverterHandler();
 
     constructor(targetLanguage: TargetLanguage, renderContext: RenderContext) {
         super(targetLanguage, renderContext);
@@ -137,6 +162,9 @@ export class XSDRenderer extends Renderer {
         this.rootSchema = this.prepareSchema();
     }
 
+    protected setUpNaming(): Iterable<Namespace> {
+        return [];
+    }
 
     protected prepareSchema() {
         const innerSchema = createSchema()
@@ -209,26 +237,6 @@ export class XSDRenderer extends Renderer {
         xsdSchema.ele("simpleType", { name: "nullType" })
             .ele("restriction", { base: "string" })
             .ele("length", { value: "0" });
-    }
-
-    protected setUpNaming(): Iterable<Namespace> {
-        return [];
-    }
-
-    protected makeNamedTypeNamer(): Namer {
-        return namingFunction;
-    }
-
-    protected namerForObjectProperty(): null {
-        return null;
-    }
-
-    protected makeUnionMemberNamer(): null {
-        return null;
-    }
-
-    protected makeEnumCaseNamer(): null {
-        return null;
     }
 
     private renderNull = (schema: XSDSchemaWrapper, key: string, additionalAttrs: object = {}): void => {
@@ -426,21 +434,28 @@ export class XSDRenderer extends Renderer {
         });
     }
 
-    protected emitSource(): void {
-        if (this.topLevels.size !== 1) {
+    protected async emitSource(givenOutputFilename: string, inputObjects: object[]): Promise<void> {
+        if (this.topLevels.size !== 1 || inputObjects.length !== 1) {
             throw Error('Not implemented multiple top levels');
         }
 
-        this.renderTypes(defined(mapFirst(this.topLevels)), this.rootSchema, [], "root");
-        this.renderElements();
-        const res = this.rootSchema.inner.end();
+        const [topLevelName, topLevelStructure] = defined(iterableFirst(this.topLevels));
+        const inputObject = defined(iterableFirst(inputObjects));
 
-        const xsdObject = convert(res, { format: 'object' }) as XMLSerializedAsObject;
-        new XSDTypes(xsdObject);
+        this.renderTypes(topLevelStructure, this.rootSchema, [], topLevelName);
+        this.renderElements();
+        const xsdString = this.rootSchema.inner.end({ prettyPrint: true });
+
+        // // Makes xml file lines from input
+        // new XSDTypes(this.xmlFormatConverter.toXMLObjectFromString(xsdString));
+        // this.emitMultiline(xsdString, 2);
+        // this.finishFile()
+
+        // emit XSD file lines
+        this.emitMultiline(xsdString, 2);
+        new XSDTypes(this.xmlFormatConverter.toXMLObjectFromString(xsdString));
     }
 }
-
-
 
 class XSDTypes {
     constructor(private xsdObject: XMLSerializedAsObject) {

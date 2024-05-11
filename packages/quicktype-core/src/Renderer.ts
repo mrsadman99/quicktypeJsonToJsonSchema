@@ -24,7 +24,7 @@ function getBlankLineConfig(cfg: BlankLineConfig): { position: BlankLinePosition
     return { position: cfg, count: 1 };
 }
 
-function lineIndentation(line: string): { indent: number; text: string | null } {
+function lineIndentation(line: string, indentationChildren: number = 4): { indent: number; text: string | null } {
     const len = line.length;
     let indent = 0;
     for (let i = 0; i < len; i++) {
@@ -32,7 +32,7 @@ function lineIndentation(line: string): { indent: number; text: string | null } 
         if (c === " ") {
             indent += 1;
         } else if (c === "\t") {
-            indent = (indent / 4 + 1) * 4;
+            indent = (indent / indentationChildren + 1) * indentationChildren;
         } else {
             return { indent, text: line.substring(i) };
         }
@@ -185,7 +185,7 @@ export abstract class Renderer {
         this._emitContext.emitNewline();
     }
 
-    emitMultiline(linesString: string): void {
+    emitMultiline(linesString: string, indentationChildren: number = 4): void {
         const lines = linesString.split("\n");
         const numLines = lines.length;
         if (numLines === 0) return;
@@ -193,10 +193,10 @@ export abstract class Renderer {
         let currentIndent = 0;
         for (let i = 1; i < numLines; i++) {
             const line = lines[i];
-            const { indent, text } = lineIndentation(line);
-            assert(indent % 4 === 0, "Indentation is not a multiple of 4.");
+            const { indent, text } = lineIndentation(line, indentationChildren);
+            assert(indent % indentationChildren === 0, `Indentation is not a multiple of ${indentationChildren}.`);
             if (text !== null) {
-                const newIndent = indent / 4;
+                const newIndent = indent / indentationChildren;
                 this.changeIndent(newIndent - currentIndent);
                 currentIndent = newIndent;
                 this.emitLine(text);
@@ -294,7 +294,7 @@ export abstract class Renderer {
     }
 
     protected abstract setUpNaming(): Iterable<Namespace>;
-    protected abstract emitSource(givenOutputFilename: string): void;
+    protected abstract emitSource(givenOutputFilename: string, inputObjects: object[]): void;
 
     private assignNames(): ReadonlyMap<Name, string> {
         return assignNames(this.setUpNaming());
@@ -324,9 +324,9 @@ export abstract class Renderer {
         this._emitContext = new EmitContext();
     }
 
-    render(givenOutputFilename: string): RenderResult {
+    render(givenOutputFilename: string, inputObjects: object[]): RenderResult {
         this._names = this.assignNames();
-        this.emitSource(givenOutputFilename);
+        this.emitSource(givenOutputFilename, inputObjects);
         if (!this._emitContext.isEmpty) {
             this.finishFile(givenOutputFilename);
         }
