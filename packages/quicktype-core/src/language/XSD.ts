@@ -149,7 +149,7 @@ class XMLFormatConverterHandler {
         });
     }
 
-    parseJSONtoXML(jsonObject: object, xsdTypes: XSDTypes) {
+    parseJSON(jsonObject: object, xsdTypes: XSDTypes, topLevelTag: string) {
 
     }
 }
