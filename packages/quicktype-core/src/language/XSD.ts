@@ -5,7 +5,7 @@ import { Option } from 'RendererOptions';
 import { TargetLanguage } from '../TargetLanguage';
 import { StringTypeMapping, getNoStringTypeMapping } from '../TypeBuilder';
 import { Namespace } from '../Naming';
-import { ArrayType, ClassType, PrimitiveType, PrimitiveTypeKind, Type, TypeKind, isPrimitiveStringTypeKind } from '../Type';
+import { ArrayType, ClassType, PrimitiveType, PrimitiveTypeKind, Type, TypeKind, isPrimitiveStringTypeKind, isPrimitiveTypeKind } from '../Type';
 import { defined, nonNull, panic } from '../support/Support';
 import { convert, create as createSchema } from 'xmlbuilder2';
 import { XMLBuilder, XMLSerializedAsObject } from 'xmlbuilder2/lib/interfaces';
@@ -13,10 +13,13 @@ import { TypeRef } from '../TypeGraph';
 import { arrayLast, iterableFirst, mapMap } from 'collection-utils';
 import { matchTypeExhaustive } from '../TypeUtils';
 import { readFile, writeFile } from 'fs';
+import { DateTimeRecognizer } from '../DateTime';
+import { isURI } from '../attributes/StringTypes';
 // import { Readable } from 'readable-stream';
 // import { Parser } from 'stream-json';
 
 const XMLNS_PREFIX = 'xsd';
+const BASE_XMLNS = "http://www.w3.org/2001/XMLSchema";
 const addXmlnsPrefix = (name: string): XSDBaseType<string> => `${XMLNS_PREFIX}:${name}`;
 
 type XSDBaseType<T extends string> = `${typeof XMLNS_PREFIX}:${T}`
@@ -149,8 +152,40 @@ class XMLFormatConverterHandler {
         });
     }
 
-    parseJSON(jsonObject: object, xsdTypes: XSDTypes, topLevelTag: string) {
+    parseJSON(jsonObject: object, xsdTypes: XSDTypes, topLevelTag: string, rootSchema: XMLBuilder) {
+        let currentPath = topLevelTag;
 
+        const parseCurrentObject = (currentObject: object, objectTag: string, currentSchema: XMLBuilder, kind: TypeKind) => {
+            currentPath += `.${objectTag}`;
+            const innerSchema = currentSchema.ele(objectTag);
+
+            if (Array.isArray(currentObject) && kind === 'array') {
+                const { kind: arrayItemKind, itemTag } = xsdTypes.getArrayType(currentPath);
+
+                currentObject.forEach((value) => {
+                    parseCurrentObject(value, itemTag, innerSchema, arrayItemKind);
+                });
+            } else if (typeof currentObject === 'object' && kind === 'class') {
+                const objectStructure = xsdTypes.getObjectType(currentPath);
+
+                Object.entries(currentObject).forEach(([propName, propValue]) => {
+                    const propStructure = objectStructure.get(propName);
+                    if (!propStructure) {
+                        panic(`Failed to find ${propName} in ${currentPath} object structure`);
+                    }
+                    parseCurrentObject(propValue, propName, innerSchema, propStructure.kind);
+                });
+            } else if (isPrimitiveTypeKind(kind)) {
+                innerSchema.txt(xsdTypes.parsePrimitiveKind(currentObject, kind));
+            } else {
+                panic(`Failed to parse ${currentPath} with value ${currentObject} and type ${kind}`);
+            }
+
+            const endOfParentPath = currentPath.lastIndexOf('.');
+            currentPath = currentPath.slice(0, endOfParentPath);
+        }
+
+        parseCurrentObject(jsonObject, topLevelTag, rootSchema, 'class');
     }
 }
 
@@ -172,7 +207,7 @@ export class XSDRenderer extends Renderer {
 
     protected prepareSchema() {
         const innerSchema = createSchema()
-            .ele(addXmlnsPrefix('schema'), { [`xmlns:${XMLNS_PREFIX}`]: "http://www.w3.org/2001/XMLSchema" })
+            .ele(addXmlnsPrefix('schema'), { [`xmlns:${XMLNS_PREFIX}`]: BASE_XMLNS })
         const xsdSchema = new XSDSchemaWrapper(innerSchema);
 
         this.renderBasicTypes(xsdSchema);
@@ -450,19 +485,31 @@ export class XSDRenderer extends Renderer {
         this.renderElements();
         const xsdString = this.rootSchema.inner.end({ prettyPrint: true });
 
-        // // Makes xml file lines from input
-        // new XSDTypes(this.xmlFormatConverter.toXMLObjectFromString(xsdString));
-        // this.emitMultiline(xsdString, 2);
-        // this.finishFile()
+        // Get types from XSD file format
+        const xsdTypes = new XSDTypes(
+            this.xmlFormatConverter.toXMLObjectFromString(xsdString),
+            this.targetLanguage.dateTimeRecognizer
+        );
 
-        // emit XSD file lines
-        this.emitMultiline(xsdString, 2);
-        new XSDTypes(this.xmlFormatConverter.toXMLObjectFromString(xsdString));
+        // Parses input JSON to XML
+        const xmlBuilder = createSchema().ele(topLevelName)
+            .att(`xmlns:${XMLNS_PREFIX}`, `${BASE_XMLNS}-instance`)
+            .att(addXmlnsPrefix('noNamespaceSchemaLocation'), givenOutputFilename);
+        this.xmlFormatConverter.parseJSON(inputObject, xsdTypes, topLevelName, xmlBuilder);
+
+        this.
+            // // Makes xml file lines from input
+            // new XSDTypes(this.xmlFormatConverter.toXMLObjectFromString(xsdString));
+            // this.emitMultiline(xsdString, 2);
+            // this.finishFile()
+
+            // emit XSD file lines
+            this.emitMultiline(xsdString, 2);
     }
 }
 
 class XSDTypes {
-    constructor(private xsdObject: XMLSerializedAsObject) {
+    constructor(private xsdObject: XMLSerializedAsObject, private dateTimeRecognizer: DateTimeRecognizer) {
         this.fetchTypesFromObject();
         this.getTypesStructure();
     }
@@ -470,8 +517,74 @@ class XSDTypes {
     private elements: Map<string, string> = new Map();
     private complexTypes: Map<string, XMLObjectType> = new Map();
 
-    objectTypes: Map<string, Map<string, { isOptional: boolean, kind: TypeKind }>> = new Map();
-    arrayTypes: Map<string, { kind: TypeKind, itemTag: string }> = new Map();
+    private objectTypes: Map<string, Map<string, { isOptional: boolean, kind: TypeKind }>> = new Map();
+    private arrayTypes: Map<string, { kind: TypeKind, itemTag: string }> = new Map();
+
+    public parsePrimitiveKind(value: any, kind: PrimitiveTypeKind): string {
+        switch (kind) {
+            case 'integer-string':
+            case 'double':
+            case 'integer':
+                if (!isNaN(+value)) {
+                    return Number(value).toString();
+                }
+                break;
+            case 'string':
+                if (typeof value === 'string') {
+                    return value;
+                }
+                break;
+            case 'any':
+            case 'none':
+            case 'null':
+                return '';
+            case 'bool-string':
+            case 'bool':
+                if (typeof value === 'boolean' || (value === 'true' && value === 'false')) {
+                    return value.toString();
+                }
+                break;
+            case 'date':
+                if (this.dateTimeRecognizer.isDate(value)) {
+                    return value;
+                }
+                break;
+            case 'time':
+                if (this.dateTimeRecognizer.isTime(value)) {
+                    return value;
+                }
+                break;
+            case 'date-time':
+                if (this.dateTimeRecognizer.isDateTime(value)) {
+                    return value;
+                }
+                break;
+            case 'uri':
+                if (isURI(value)) {
+                    return value;
+                }
+        }
+
+        panic(`Failed parse to XML ${value} with type ${kind}`);
+    }
+
+    public getObjectType(objectPath: string): Map<string, { isOptional: boolean, kind: TypeKind }> {
+        const objectStructure = this.objectTypes.get(objectPath);
+        if (!objectStructure) {
+            panic(`Object with path ${objectPath} not found`);
+        }
+
+        return objectStructure;
+    }
+
+    public getArrayType(arrayPath: string): { kind: TypeKind, itemTag: string } {
+        const arrayStructure = this.arrayTypes.get(arrayPath);
+        if (!arrayStructure) {
+            panic(`Array with path ${arrayPath} not found`);
+        }
+
+        return arrayStructure;
+    }
 
     private get objectInnerTag(): XSDBaseType<'all'> {
         return addXmlnsPrefix('all') as XSDBaseType<'all'>;
@@ -529,7 +642,7 @@ class XSDTypes {
         return typeof arrayItem === 'object' && arrayItem['@maxOccurs'] === 'unbounded' && +arrayItem['@minOccurs'] === 0
     }
 
-    getArrayTypeItem(complexTypeInnerStructure: any): { type: string, tag: string } | null {
+    private getArrayTypeItem(complexTypeInnerStructure: any): { type: string, tag: string } | null {
         if (!this.isArrayType(complexTypeInnerStructure)) {
             return null;
         }
@@ -582,7 +695,7 @@ class XSDTypes {
         }
     }
 
-    public getTypesStructure() {
+    private getTypesStructure() {
         this.elements.forEach((elementType, elementTag) =>
             this.getXSDObjectTypesStructure(elementType, elementTag)
         )

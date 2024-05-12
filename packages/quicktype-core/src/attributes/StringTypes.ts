@@ -184,7 +184,7 @@ function isIntegerString(s: string): boolean {
 
 const URI = /^(https?|ftp):\/\/[^{}]+\.[^{}]+$/;
 
-function isURI(s: string): boolean {
+export function isURI(s: string): boolean {
     return s.match(URI) !== null;
 }
 
