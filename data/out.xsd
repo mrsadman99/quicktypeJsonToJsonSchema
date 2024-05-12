@@ -52,7 +52,7 @@
   <xsd:complexType name="complexType1">
     <xsd:all>
       <xsd:element name="persons" type="complexType2"/>
-      <xsd:element name="address" type="complexType4"/>
+      <xsd:element name="address" type="complexType5"/>
     </xsd:all>
   </xsd:complexType>
   <xsd:complexType name="complexType2">
@@ -62,24 +62,34 @@
   </xsd:complexType>
   <xsd:complexType name="complexType3">
     <xsd:all>
-      <xsd:element name="name" type="xsd:string"/>
+      <xsd:element name="name" type="complexType4"/>
       <xsd:element name="surname" type="xsd:string"/>
       <xsd:element name="age" type="xsd:integer"/>
       <xsd:element name="birthday" type="dateType"/>
-      <xsd:element name="phone" type="xsd:string"/>
-      <xsd:element name="status" type="complexType4"/>
-      <xsd:element name="address" type="complexType5"/>
+      <xsd:element name="phone" type="complexType4"/>
+      <xsd:element name="status" type="complexType5"/>
+      <xsd:element name="address" type="complexType6"/>
       <xsd:element minOccurs="0" name="driver" type="xsd:boolean"/>
     </xsd:all>
   </xsd:complexType>
-  <xsd:complexType name="complexType4">
+  <xsd:simpleType name="complexType4">
+    <xsd:union>
+      <xsd:simpleType>
+        <xsd:restriction base="nullType"/>
+      </xsd:simpleType>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string"/>
+      </xsd:simpleType>
+    </xsd:union>
+  </xsd:simpleType>
+  <xsd:complexType name="complexType5">
     <xsd:all>
       <xsd:element name="activity" type="xsd:string"/>
       <xsd:element name="organizationName" type="xsd:string"/>
-      <xsd:element name="address" type="complexType5"/>
+      <xsd:element name="address" type="complexType6"/>
     </xsd:all>
   </xsd:complexType>
-  <xsd:complexType name="complexType5">
+  <xsd:complexType name="complexType6">
     <xsd:all>
       <xsd:element name="street" type="xsd:string"/>
       <xsd:element name="city" type="xsd:string"/>
@@ -87,9 +97,11 @@
       <xsd:element name="postalCode" type="xsd:string"/>
     </xsd:all>
   </xsd:complexType>
-  <xsd:element name="root" type="complexType1"/>
+  <xsd:element name="out" type="complexType1"/>
   <xsd:element name="persons" type="complexType2"/>
-  <xsd:element name="status" type="complexType4"/>
-  <xsd:element name="statusAddress" type="complexType5"/>
-  <xsd:element name="rootAddress" type="complexType4"/>
+  <xsd:element name="name" type="complexType4"/>
+  <xsd:element name="phone" type="complexType4"/>
+  <xsd:element name="status" type="complexType5"/>
+  <xsd:element name="statusAddress" type="complexType6"/>
+  <xsd:element name="outAddress" type="complexType5"/>
 </xsd:schema>

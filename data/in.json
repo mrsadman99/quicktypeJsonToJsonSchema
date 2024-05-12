@@ -1,11 +1,11 @@
 {
     "persons": [
         {
-            "name": "Александр",
+            "name": null,
             "surname": "Петров",
             "age": 33,
             "birthday": "01.02.1991",
-            "phone": "+7800553536",
+            "phone": null,
             "status": {
                 "activity": "работник",
                 "organizationName": "Филиал 'Тепловые сети' АО 'СИБЭКО'",

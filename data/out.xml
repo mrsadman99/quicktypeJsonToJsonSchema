@@ -1,12 +1,108 @@
 <?xml version="1.0"?>
-<persons xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance"
-    xsd:noNamespaceSchemaLocation="out.xsd">
+<out xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance" xsd:noNamespaceSchemaLocation="out.xsd">
+  <persons>
     <personsItem>
-        <name>asd</name>
-        <birthday>2021-12-12</birthday>
-        <surname>asd</surname>
-        <age>123</age>
-        <phone>213</phone>
-        <status></status>
+      <name/>
+      <surname>Петров</surname>
+      <age>33</age>
+      <birthday>01.02.1991</birthday>
+      <phone/>
+      <status>
+        <activity>работник</activity>
+        <organizationName>Филиал 'Тепловые сети' АО 'СИБЭКО'</organizationName>
+        <address>
+          <street>ул. Серебренниковская, д. 4</street>
+          <city>Новосибирск</city>
+          <state>Новосибирская область</state>
+          <postalCode>630007</postalCode>
+        </address>
+      </status>
+      <address>
+        <street>ул. Кирова, д. 10, кв 123</street>
+        <city>Новосибирск</city>
+        <state>Новосибирская область</state>
+        <postalCode>644300</postalCode>
+      </address>
     </personsItem>
-</persons>
+    <personsItem>
+      <name>Анна</name>
+      <surname>Уварова</surname>
+      <age>24</age>
+      <birthday>01.02.2021</birthday>
+      <phone>+7915343535</phone>
+      <status>
+        <activity>студент</activity>
+        <organizationName>Московский государственный университет имени М.В.Ломоносова</organizationName>
+        <address>
+          <street>ул. Колмогорова, д. 1</street>
+          <city>Москва</city>
+          <state>Московская область</state>
+          <postalCode>119991</postalCode>
+        </address>
+      </status>
+      <address>
+        <street>ул. Калинина, д. 13, кв 1</street>
+        <city>Москва</city>
+        <state>Московская область</state>
+        <postalCode>101000</postalCode>
+      </address>
+    </personsItem>
+    <personsItem>
+      <name>Адиль</name>
+      <surname>Сагдиев</surname>
+      <age>40</age>
+      <phone>+7950553535</phone>
+      <birthday>01.02.1984</birthday>
+      <status>
+        <activity>работник</activity>
+        <organizationName>Алматинский Технологический Университет</organizationName>
+        <address>
+          <street> ул. Толе Би, д. 100</street>
+          <city>Алматы</city>
+          <state>Алматинская область</state>
+          <postalCode>050012</postalCode>
+        </address>
+      </status>
+      <driver>true</driver>
+      <address>
+        <street>ул. Мирзояна, д. 12, кв 12</street>
+        <city>Алматы</city>
+        <state>Алматинская область</state>
+        <postalCode>050000</postalCode>
+      </address>
+    </personsItem>
+    <personsItem>
+      <name>Антон</name>
+      <surname>Бречка</surname>
+      <age>25</age>
+      <birthday>27.02.1999</birthday>
+      <phone>+7957553535</phone>
+      <status>
+        <activity>студент</activity>
+        <organizationName>Новосибирский национальный исследовательский государственный университет</organizationName>
+        <address>
+          <street>ул. Пирогова 1</street>
+          <city>Новосибирск</city>
+          <state>Новосибирская область</state>
+          <postalCode>630090</postalCode>
+        </address>
+      </status>
+      <address>
+        <street>ул. Иванова 25, кв 12</street>
+        <city>Новосибирск</city>
+        <state>Новосибирская область</state>
+        <postalCode>050000</postalCode>
+      </address>
+    </personsItem>
+  </persons>
+  <address>
+    <activity>студент</activity>
+    <organizationName>Московский государственный университет имени М.В.Ломоносова</organizationName>
+    <address>
+      <street>ул. Колмогорова, д. 1</street>
+      <city>Москва</city>
+      <state>Московская область</state>
+      <postalCode>119991</postalCode>
+    </address>
+  </address>
+</out>
