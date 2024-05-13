@@ -10,7 +10,7 @@ import { defined, panic } from '../support/Support';
 import { convert, create as createSchema } from 'xmlbuilder2';
 import { XMLBuilder, XMLSerializedAsObject } from 'xmlbuilder2/lib/interfaces';
 import { TypeRef } from '../TypeGraph';
-import { arrayLast, iterableFirst, mapMap } from 'collection-utils';
+import { arrayLast, iterableEvery, iterableFirst, mapMap } from 'collection-utils';
 import { matchTypeExhaustive } from '../TypeUtils';
 import { readFile } from 'fs';
 import { DateTimeRecognizer } from '../DateTime';
@@ -58,6 +58,7 @@ type XSDUnionType = {
 type ArrayItem = { kind: TypeKind, itemTag: string, itemType: string };
 type ClassProp = { isOptional: boolean, kind: TypeKind, type: string };
 
+type ConvertFormatType = 'XML' | 'JSON';
 const mapPrimitiveKindToXSDTypes: ReadonlyMap<PrimitiveTypeKind, string> = new Map([
     ["date", "dateType"],
     ["time", "timeType"],
@@ -157,6 +158,58 @@ class XMLFormatConverterHandler {
         })
     }
 
+    parseXMLtoJSON(xmlObject: object, xsdTypes: XSDTypes): object {
+        let currentPath = '';
+        const [omittedTopTag, xmlDataObject] = defined(iterableFirst(Object.entries(xmlObject)));
+        const topDataKind = xsdTypes.getXMLObjectKind(xmlDataObject, omittedTopTag);
+
+        const parseCurrentObject = (currentXMLObject: { [key: string]: any }, objectTag: string, kind: TypeKind | undefined): any => {
+            currentPath = currentPath ? `${currentPath}.${objectTag}` : objectTag;
+            let result: any = null;
+
+            if (kind === 'union') {
+                result = xsdTypes.parseUnion(currentXMLObject, currentPath, 'JSON');
+            } else if (kind === 'array' && typeof currentXMLObject === 'object') {
+                const arrayItemType = xsdTypes.getArrayType(currentPath);
+                if (!arrayItemType || !Array.isArray(currentXMLObject[arrayItemType.itemTag])) {
+                    panic(`Failed to parse array by path ${currentPath}`);
+                }
+                result = [];
+                currentXMLObject[arrayItemType.itemTag].forEach((arrayItem: any) => {
+                    result.push(parseCurrentObject(arrayItem, arrayItemType.itemTag, arrayItemType.kind));
+                })
+            } else if (kind === 'class' && typeof currentXMLObject === 'object') {
+                const classProps = xsdTypes.getClassType(currentPath);
+
+                if (!classProps || !xsdTypes.isValidClassPropsInXMLObject(currentXMLObject, currentPath)) {
+                    panic(`Failed to parse class by path ${currentPath}`);
+                }
+                result = {};
+
+                Object.entries(currentXMLObject).forEach(([propKey, propData]) => {
+                    // Omit attributes in object data
+                    if (propKey.startsWith('@') || !classProps.get(propKey)) {
+                        return;
+                    }
+                    const propType = defined(classProps.get(propKey));
+
+                    result[propKey] = parseCurrentObject(propData, propKey, propType.kind);
+                });
+            } else if (kind && isPrimitiveTypeKind(kind)) {
+                result = xsdTypes.parsePrimitiveKind(currentXMLObject, kind, 'JSON');
+            } else {
+                panic(`Failed to parse ${currentPath} with value ${currentXMLObject} and type ${kind}`);
+            }
+
+            const endOfParentPath = currentPath.lastIndexOf('.');
+            currentPath = currentPath.slice(0, endOfParentPath);
+
+            return result;
+        };
+
+        return parseCurrentObject(xmlDataObject, omittedTopTag, topDataKind);
+    }
+
     parseJSON(jsonObject: object, xsdTypes: XSDTypes, topLevelTag: string, xsdFileName: string): string {
         const topKind: TypeKind = Array.isArray(jsonObject) ? 'array' : 'class';
         let currentPath = '';
@@ -167,15 +220,21 @@ class XMLFormatConverterHandler {
             const innerSchema = currentSchema.ele(objectTag);
 
             if (kind === 'union') {
-                innerSchema.txt(xsdTypes.parseUnion(currentObject, currentPath));
+                innerSchema.txt(xsdTypes.parseUnion(currentObject, currentPath, 'XML')?.toString() ?? '');
             } else if (Array.isArray(currentObject) && kind === 'array') {
-                const { kind: arrayItemKind, itemTag } = xsdTypes.getArrayType(currentPath);
+                const arrayItem = xsdTypes.getArrayType(currentPath);
+                if (!arrayItem) {
+                    panic(`Array with path ${currentPath} not found`);
+                }
 
                 currentObject.forEach((value) => {
-                    parseCurrentObject(value, itemTag, innerSchema, arrayItemKind);
+                    parseCurrentObject(value, arrayItem.itemTag, innerSchema, arrayItem.kind);
                 });
             } else if (typeof currentObject === 'object' && kind === 'class') {
-                const objectStructure = xsdTypes.getObjectType(currentPath);
+                const objectStructure = xsdTypes.getClassType(currentPath);
+                if (!objectStructure) {
+                    panic(`Object with path ${currentPath} not found`);
+                }
 
                 Object.entries(currentObject).forEach(([propName, propValue]) => {
                     const propStructure = objectStructure.get(propName);
@@ -185,7 +244,7 @@ class XMLFormatConverterHandler {
                     parseCurrentObject(propValue, propName, innerSchema, propStructure.kind);
                 });
             } else if (isPrimitiveTypeKind(kind)) {
-                innerSchema.txt(xsdTypes.parsePrimitiveKind(currentObject, kind));
+                innerSchema.txt(xsdTypes.parsePrimitiveKind(currentObject, kind, 'XML')?.toString() ?? '');
             } else {
                 panic(`Failed to parse ${currentPath} with value ${currentObject} and type ${kind}`);
             }
@@ -556,6 +615,10 @@ export class XSDRenderer extends Renderer {
 
         // Parses input JSON to XML
         const xmlString = this.xmlFormatConverter.parseJSON(inputObject, xsdTypes, topLevelName, givenOutputFilename);
+        const xmlObject = convert(xmlString, { format: 'object' });
+        const json = this.xmlFormatConverter.parseXMLtoJSON(xmlObject, xsdTypes);
+        console.log(JSON.stringify(json, null, 4));
+
         this.emitMultiline(xmlString, 2);
         this.finishFile(`${defined(iterableFirst(givenOutputFilename.split('.')))}.xml`);
 
@@ -581,7 +644,7 @@ class XSDTypes {
     private arrayTypesByPath: Map<string, ArrayItem> = new Map();
     private unionTypesByPath: Map<string, PrimitiveTypeKind[]> = new Map();
 
-    public getPrimitiveKindValue(value: any, kind: PrimitiveTypeKind): string | undefined {
+    public getPrimitiveKindXMLValue = (value: any, kind: PrimitiveTypeKind): string | undefined => {
         switch (kind) {
             case 'integer-string':
             case 'double':
@@ -590,22 +653,9 @@ class XSDTypes {
                     return Number(value).toString();
                 }
                 break;
-            case 'string':
-                if (typeof value === 'string') {
-                    return value;
-                }
-                break;
-            case 'any':
-            case 'none':
-                return '';
-            case 'null':
-                if (value === null) {
-                    return '';
-                }
-                break;
             case 'bool-string':
             case 'bool':
-                if (typeof value === 'boolean' || (value === 'true' && value === 'false')) {
+                if (typeof value === 'boolean' || (value === 'true' || value === 'false')) {
                     return value.toString();
                 }
                 break;
@@ -628,54 +678,178 @@ class XSDTypes {
                 if (isURI(value)) {
                     return value;
                 }
+                break;
+            case 'any':
+            case 'none':
+                return '';
+            case 'null':
+                if (value === null) {
+                    return '';
+                }
+                break;
+            case 'string':
+                if (typeof value === 'string') {
+                    return value;
+                }
+                break;
         }
     }
 
-    public parseUnion(value: any, unionPath: string): string {
+    public getPrimitiveKindJSONValue = (value: any, kind: PrimitiveTypeKind):
+        number | boolean | string | null | undefined => {
+        switch (kind) {
+            case 'double':
+            case 'integer':
+                if (!isNaN(+value)) {
+                    return +value;
+                }
+                break;
+            case 'integer-string':
+                if (!isNaN(+value)) {
+                    return (+value).toString();
+                }
+                break;
+            case 'bool':
+                if (typeof value === 'boolean' || (value === 'true' || value === 'false')) {
+                    return typeof value === 'boolean' ? value : value === 'true';
+                }
+                break;
+            case 'bool-string':
+                if (typeof value === 'boolean' || (value === 'true' || value === 'false')) {
+                    return value.toString();
+                }
+                break;
+            case 'date':
+                if (this.dateTimeRecognizer.isDate(value)) {
+                    return value;
+                }
+                break;
+            case 'time':
+                if (this.dateTimeRecognizer.isTime(value)) {
+                    return value;
+                }
+                break;
+            case 'date-time':
+                if (this.dateTimeRecognizer.isDateTime(value)) {
+                    return value;
+                }
+                break;
+            case 'uri':
+                if (isURI(value)) {
+                    return value;
+                }
+                break;
+            case 'any':
+                return value;
+            case 'none':
+            case 'null':
+                if (value == null ||
+                    (typeof value === 'object' && Object.keys(value).length === 0)) {
+                    return null;
+                }
+                break;
+            case 'string':
+                if (typeof value === 'string') {
+                    return value;
+                } else if (typeof value === 'object' && Object.keys(value).length === 0) {
+                    return '';
+                }
+                break;
+        }
+    }
+
+    public parseUnion(value: any, unionPath: string, format: ConvertFormatType): string | number | boolean | null {
+        const getPrimitiveKindValue = format === 'XML' ?
+            this.getPrimitiveKindXMLValue : this.getPrimitiveKindJSONValue;
+
         const currentKind = defined(this.unionTypesByPath.get(unionPath)).find((kind) => {
-            return this.getPrimitiveKindValue(value, kind) != null;
+            return getPrimitiveKindValue(value, kind) !== undefined;
         });
 
         if (!currentKind) {
             panic(`Failed parse to XML ${value} with type union`);
         }
 
-        return this.parsePrimitiveKind(value, currentKind);
+        return this.parsePrimitiveKind(value, currentKind, format);
     }
 
-    public parsePrimitiveKind(value: any, kind: PrimitiveTypeKind): string {
-        const processedValue = this.getPrimitiveKindValue(value, kind);
+    public parsePrimitiveKind(value: any, kind: PrimitiveTypeKind, format: ConvertFormatType): string | number | boolean | null {
+        const getPrimitiveKindValue = format === 'XML' ?
+            this.getPrimitiveKindXMLValue : this.getPrimitiveKindJSONValue;
 
-        if (processedValue == null) {
+        const processedValue = getPrimitiveKindValue(value, kind);
+
+        if (processedValue === undefined) {
             panic(`Failed parse to XML ${value} with type ${kind}`);
         }
 
         return processedValue;
     }
 
+    public isValidClassPropsInXMLObject(currentXMLObject: object, path: string) {
+        const classData = this.getClassType(path);
+        if (!classData) {
+            return false;
+        }
+
+        return iterableEvery(classData, ([propName, propData]) => {
+            const propPath = `${path}.${propName}`;
+            if (!(propName in currentXMLObject) && !propData.isOptional) {
+                return false;
+            }
+
+            if (propData.kind === 'union') {
+                return !!this.getUnionType(propPath);
+            }
+            if (propData.kind === 'array') {
+                return !!this.getArrayType(propPath);
+            }
+            if (propData.kind === 'class') {
+                return !!this.getClassType(propPath);
+            }
+            return isPrimitiveTypeKind(propData.kind);
+        });
+    }
+
+    public getXMLObjectKind(currentObject: object, path: string) {
+        const unionData = this.getUnionType(path);
+        const arrayData = this.getArrayType(path);
+        const classData = this.getClassType(path);
+
+        if (unionData) {
+            return 'union'
+        }
+        if (arrayData && arrayData.itemTag in currentObject) {
+            return 'array';
+        }
+        if (classData && this.isValidClassPropsInXMLObject(currentObject, path)) {
+            return 'class';
+        }
+    }
+
     public getUnionType(unionPath: string) {
         const unionStructure = this.unionTypesByPath.get(unionPath);
 
         if (!unionStructure) {
-            panic(`Union with path ${unionPath} not found`);
+            return null;
         }
 
         return unionStructure;
     }
 
-    public getObjectType(objectPath: string): Map<string, ClassProp> {
+    public getClassType(objectPath: string): Map<string, ClassProp> | null {
         const objectStructure = this.objectTypesByPath.get(objectPath);
         if (!objectStructure) {
-            panic(`Object with path ${objectPath} not found`);
+            return null
         }
 
         return objectStructure;
     }
 
-    public getArrayType(arrayPath: string): { kind: TypeKind, itemTag: string } {
+    public getArrayType(arrayPath: string): ArrayItem | null {
         const arrayStructure = this.arrayTypesByPath.get(arrayPath);
         if (!arrayStructure) {
-            panic(`Array with path ${arrayPath} not found`);
+            return null;
         }
 
         return arrayStructure;
