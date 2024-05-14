@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-05-14T11:44:37.286Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="NwDvTdHdc9OfjZ7jPBCs" version="24.4.0" type="github">
+<mxfile host="app.diagrams.net" modified="2024-05-14T11:50:00.554Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="fyuddQsUUFfHQiGb2hxM" version="24.4.0" type="github">
   <diagram name="Page-1" id="0FUiNgVwgklD2cresCmt">
     <mxGraphModel dx="2631" dy="501" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -315,8 +315,22 @@
         <mxCell id="44Fsm7tyjWuybCelUIXg-153" value="Завершение обработки JSON файла" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="-1060" y="180" width="120" height="60" as="geometry" />
         </mxCell>
+        <mxCell id="44Fsm7tyjWuybCelUIXg-158" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="44Fsm7tyjWuybCelUIXg-154" target="44Fsm7tyjWuybCelUIXg-157">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="44Fsm7tyjWuybCelUIXg-154" value="Сформированы структуры типов, которые хранятся в переменных objects и arrays" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-1080" y="300" width="160" height="90" as="geometry" />
+          <mxGeometry x="-1080" y="320" width="160" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="44Fsm7tyjWuybCelUIXg-159" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="44Fsm7tyjWuybCelUIXg-157" target="44Fsm7tyjWuybCelUIXg-160">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-992.5" y="690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="44Fsm7tyjWuybCelUIXg-157" value="Определяем корневую структуру из массивов object и arrays, высчитываем значение хеш функции от индекса элемента, отвечающего корневой структуре&amp;nbsp; в массиве arrays или object" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1075" y="460" width="165" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="44Fsm7tyjWuybCelUIXg-160" value="Записываем значение вычисленной хеш-функции корневой структуры в паре ключ-значение, где ключ - название файла, в которое будет сохранятся XSD" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1073.5" y="710" width="162" height="130" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
