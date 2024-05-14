@@ -128,22 +128,10 @@ class XSDSchemaWrapper {
     }
 }
 
-class XMLFormatConverterHandler {
-
-    private toContentXMLString(xmlString: string): string {
-        return xmlString.split('/n').map((xmlLine) => {
-            let dataIndex = 0;
-            while (xmlLine[dataIndex] === ' ' && xmlLine.length > dataIndex) {
-                dataIndex++;
-            }
-            return xmlLine.slice(dataIndex)
-        }).join('');
-    }
+export class XMLFormatConverterHandler {
 
     toXMLObjectFromString(xmlString: string) {
-        const xmlContentString = this.toContentXMLString(xmlString);
-
-        return convert(xmlContentString, { format: 'object' }) as XMLSerializedAsObject;
+        return convert(xmlString, { format: 'object' }) as XMLSerializedAsObject;
     }
 
     toXMLObjectFromFile(fileName: string): Promise<XMLSerializedAsObject> {
@@ -626,7 +614,7 @@ export class XSDRenderer extends Renderer {
     }
 }
 
-class XSDTypes {
+export class XSDTypes {
     constructor(private xsdObject: XMLSerializedAsObject, private dateTimeRecognizer: DateTimeRecognizer) {
         this.fetchTypesFromObject();
         this.getTypesStructure();
