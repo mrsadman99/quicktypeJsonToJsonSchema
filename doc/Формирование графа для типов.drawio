@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-05-14T11:50:00.554Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="fyuddQsUUFfHQiGb2hxM" version="24.4.0" type="github">
+<mxfile host="app.diagrams.net" modified="2024-05-14T11:50:42.518Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="53dXOHguh05FYGN9eKJD" version="24.4.0" type="github">
   <diagram name="Page-1" id="0FUiNgVwgklD2cresCmt">
     <mxGraphModel dx="2631" dy="501" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -329,7 +329,7 @@
         <mxCell id="44Fsm7tyjWuybCelUIXg-157" value="Определяем корневую структуру из массивов object и arrays, высчитываем значение хеш функции от индекса элемента, отвечающего корневой структуре&amp;nbsp; в массиве arrays или object" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="-1075" y="460" width="165" height="140" as="geometry" />
         </mxCell>
-        <mxCell id="44Fsm7tyjWuybCelUIXg-160" value="Записываем значение вычисленной хеш-функции корневой структуры в паре ключ-значение, где ключ - название файла, в которое будет сохранятся XSD" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="44Fsm7tyjWuybCelUIXg-160" value="Записываем значение вычисленной хеш-функции корневой структуры в паре ключ-значение в переменную topLevels, где ключ - название файла, в которое будет сохранятся XSD" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="-1073.5" y="710" width="162" height="130" as="geometry" />
         </mxCell>
       </root>
