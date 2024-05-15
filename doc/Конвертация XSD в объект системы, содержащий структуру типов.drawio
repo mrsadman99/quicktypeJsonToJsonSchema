@@ -1,96 +1,89 @@
-<mxfile host="app.diagrams.net" modified="2024-05-15T21:01:58.026Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="kzMVDhNbhFJAQWvJT36C" version="24.4.2" type="github">
+<mxfile host="app.diagrams.net" modified="2024-05-15T22:53:55.499Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="ES1y3StzjsdHcaHM7gsl" version="24.4.2" type="github">
   <diagram name="Page-1" id="Y0XXugs0XjG0WqRuEUsn">
-    <mxGraphModel dx="1221" dy="626" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2220" dy="1138" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="o1tQwWdgHh4ZaxTUweFU-1" value="Сформированый ранее XSD" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="o1tQwWdgHh4ZaxTUweFU-1" value="Сформированый ранее XSD" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="360" y="10" width="120" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="o1tQwWdgHh4ZaxTUweFU-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="o1tQwWdgHh4ZaxTUweFU-1" target="o1tQwWdgHh4ZaxTUweFU-5">
+        <mxCell id="o1tQwWdgHh4ZaxTUweFU-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" parent="1" source="o1tQwWdgHh4ZaxTUweFU-1" target="o1tQwWdgHh4ZaxTUweFU-5" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="354" y="150" as="sourcePoint" />
             <mxPoint x="354" y="350" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="o1tQwWdgHh4ZaxTUweFU-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontSize=14;" edge="1" parent="1" source="o1tQwWdgHh4ZaxTUweFU-5" target="o1tQwWdgHh4ZaxTUweFU-6">
+        <mxCell id="o1tQwWdgHh4ZaxTUweFU-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontSize=14;" parent="1" source="o1tQwWdgHh4ZaxTUweFU-5" target="o1tQwWdgHh4ZaxTUweFU-6" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="260" y="390" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="o1tQwWdgHh4ZaxTUweFU-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontSize=14;" edge="1" parent="1" source="o1tQwWdgHh4ZaxTUweFU-5" target="o1tQwWdgHh4ZaxTUweFU-10">
+        <mxCell id="o1tQwWdgHh4ZaxTUweFU-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontSize=14;" parent="1" source="o1tQwWdgHh4ZaxTUweFU-5" target="o1tQwWdgHh4ZaxTUweFU-10" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="o1tQwWdgHh4ZaxTUweFU-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="o1tQwWdgHh4ZaxTUweFU-5" target="o1tQwWdgHh4ZaxTUweFU-23">
+        <mxCell id="o1tQwWdgHh4ZaxTUweFU-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="o1tQwWdgHh4ZaxTUweFU-5" target="o1tQwWdgHh4ZaxTUweFU-23" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="670" y="190" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="o1tQwWdgHh4ZaxTUweFU-5" value="Конвертируем сложные типы(тип-класс, тип-массив, тип-объединение), заданные в XSD в карты" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="o1tQwWdgHh4ZaxTUweFU-5" value="Конвертируем сложные типы(тип-класс, тип-массив, тип-объединение), заданные в XSD в карты" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="315" y="150" width="210" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="o1tQwWdgHh4ZaxTUweFU-6" value="Ключи для карт сложных типов составляются как путь до сложных объектов от корневой структуры topLevels&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="o1tQwWdgHh4ZaxTUweFU-6" value="Ключи для карт сложных типов составляются как путь до сложных объектов от корневой структуры topLevels&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="100" y="310" width="170" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="o1tQwWdgHh4ZaxTUweFU-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="o1tQwWdgHh4ZaxTUweFU-10" target="o1tQwWdgHh4ZaxTUweFU-12">
+        <mxCell id="o1tQwWdgHh4ZaxTUweFU-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" parent="1" source="o1tQwWdgHh4ZaxTUweFU-10" target="o1tQwWdgHh4ZaxTUweFU-12" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="330" y="470" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="o1tQwWdgHh4ZaxTUweFU-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="o1tQwWdgHh4ZaxTUweFU-10" target="o1tQwWdgHh4ZaxTUweFU-14">
+        <mxCell id="o1tQwWdgHh4ZaxTUweFU-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" parent="1" source="o1tQwWdgHh4ZaxTUweFU-10" target="o1tQwWdgHh4ZaxTUweFU-14" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="500" y="470" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="o1tQwWdgHh4ZaxTUweFU-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="o1tQwWdgHh4ZaxTUweFU-10" target="o1tQwWdgHh4ZaxTUweFU-16">
+        <mxCell id="o1tQwWdgHh4ZaxTUweFU-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" parent="1" source="o1tQwWdgHh4ZaxTUweFU-10" target="o1tQwWdgHh4ZaxTUweFU-16" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="660" y="470" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="o1tQwWdgHh4ZaxTUweFU-10" value="Значения в картах сложных объектов" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="o1tQwWdgHh4ZaxTUweFU-10" value="Значения в картах сложных объектов" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="570" y="310" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="o1tQwWdgHh4ZaxTUweFU-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="o1tQwWdgHh4ZaxTUweFU-12" target="o1tQwWdgHh4ZaxTUweFU-18">
+        <mxCell id="o1tQwWdgHh4ZaxTUweFU-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" parent="1" source="o1tQwWdgHh4ZaxTUweFU-12" target="o1tQwWdgHh4ZaxTUweFU-18" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="o1tQwWdgHh4ZaxTUweFU-12" value="Карта типов-классов" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="o1tQwWdgHh4ZaxTUweFU-12" value="Карта типов-классов" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="270" y="470" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="o1tQwWdgHh4ZaxTUweFU-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontSize=14;" edge="1" parent="1" source="o1tQwWdgHh4ZaxTUweFU-14" target="o1tQwWdgHh4ZaxTUweFU-20">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="600" y="590" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="640" y="520" />
-              <mxPoint x="640" y="580" />
-              <mxPoint x="645" y="580" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="yOHogYNuSFhYrypnCi7c-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="o1tQwWdgHh4ZaxTUweFU-14" target="o1tQwWdgHh4ZaxTUweFU-20">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="o1tQwWdgHh4ZaxTUweFU-14" value="Карта типов-массивов" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="o1tQwWdgHh4ZaxTUweFU-14" value="Карта типов-массивов" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="570" y="470" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="o1tQwWdgHh4ZaxTUweFU-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="o1tQwWdgHh4ZaxTUweFU-16" target="o1tQwWdgHh4ZaxTUweFU-21">
+        <mxCell id="o1tQwWdgHh4ZaxTUweFU-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" parent="1" source="o1tQwWdgHh4ZaxTUweFU-16" target="o1tQwWdgHh4ZaxTUweFU-21" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="o1tQwWdgHh4ZaxTUweFU-16" value="Карта типов-объединений" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="o1tQwWdgHh4ZaxTUweFU-16" value="Карта типов-объединений" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="860" y="470" width="170" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="o1tQwWdgHh4ZaxTUweFU-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="o1tQwWdgHh4ZaxTUweFU-18" target="o1tQwWdgHh4ZaxTUweFU-19">
+        <mxCell id="o1tQwWdgHh4ZaxTUweFU-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" parent="1" source="o1tQwWdgHh4ZaxTUweFU-18" target="o1tQwWdgHh4ZaxTUweFU-19" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="o1tQwWdgHh4ZaxTUweFU-18" value="Значения являются картой свойств типа-класса" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="o1tQwWdgHh4ZaxTUweFU-18" value="Значения являются картой свойств типа-класса" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="245" y="580" width="170" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="o1tQwWdgHh4ZaxTUweFU-19" value="&lt;div style=&quot;text-align: justify; font-size: 14px;&quot;&gt;&lt;span style=&quot;background-color: initial; font-size: 14px;&quot;&gt;Для каждого свойства типа-класса используется пара ключ-значение, где ключ - название свойства, значение - объект со следующими свойствами:&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: justify; font-size: 14px;&quot;&gt;&lt;ul style=&quot;font-size: 14px;&quot;&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;isOptional - логическое значение, отвечающее является ли свойство опциональным для типа-класса&lt;/li&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;kind - вид типа, поддерживаемый типовым графом(array, class, union, один ищ примитивных типов)&lt;/li&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;type - тип, соответствующий типу из xsd:element для данного свойства в файле XSD&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;spacingLeft=20;spacingRight=19;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="o1tQwWdgHh4ZaxTUweFU-19" value="&lt;div style=&quot;text-align: justify; font-size: 14px;&quot;&gt;&lt;span style=&quot;background-color: initial; font-size: 14px;&quot;&gt;Для каждого свойства типа-класса используется пара ключ-значение, где ключ - название свойства, значение - объект со следующими свойствами:&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: justify; font-size: 14px;&quot;&gt;&lt;ul style=&quot;font-size: 14px;&quot;&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;isOptional - логическое значение, отвечающее является ли свойство опциональным для типа-класса&lt;/li&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;kind - вид типа, поддерживаемый типовым графом(array, class, union, один ищ примитивных типов)&lt;/li&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;type - тип, соответствующий типу из xsd:element для данного свойства в файле XSD&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;spacingLeft=20;spacingRight=19;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="170" y="690" width="330" height="270" as="geometry" />
         </mxCell>
-        <mxCell id="o1tQwWdgHh4ZaxTUweFU-20" value="Значения являются объектом со следующими свойствами:&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;ul style=&quot;font-size: 14px;&quot;&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;kind -&amp;nbsp;&lt;span style=&quot;text-align: justify; font-size: 14px;&quot;&gt;вид типа, поддерживаемый типовым графом(array, class, union, один ищ примитивных типов)&lt;/span&gt;&lt;/li&gt;&lt;li style=&quot;text-align: justify; font-size: 14px;&quot;&gt;itemTag - название тега для элемента типа-массива из XSD&lt;/li&gt;&lt;li style=&quot;text-align: justify; font-size: 14px;&quot;&gt;&amp;nbsp;itemType - тип, соответствующий типу из xsd:element для данного свойства в файле XSD&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="530" y="630" width="300" height="250" as="geometry" />
+        <mxCell id="o1tQwWdgHh4ZaxTUweFU-20" value="Значения являются объектом со следующими свойствами:&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;ul style=&quot;font-size: 14px;&quot;&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;kind -&amp;nbsp;&lt;span style=&quot;text-align: justify; font-size: 14px;&quot;&gt;вид типа, поддерживаемый типовым графом(array, class, union, один ищ примитивных типов)&lt;/span&gt;&lt;/li&gt;&lt;li style=&quot;text-align: justify; font-size: 14px;&quot;&gt;itemTag - название тега для элемента типа-массива из XSD&lt;/li&gt;&lt;li style=&quot;text-align: justify; font-size: 14px;&quot;&gt;&amp;nbsp;itemType - тип, соответствующий типу из xsd:element для данного свойства в файле XSD&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="525" y="650" width="300" height="250" as="geometry" />
         </mxCell>
-        <mxCell id="o1tQwWdgHh4ZaxTUweFU-21" value="Значения предствляются в виде массива, содержащего примитивные типы, вложенные в тип-объединение" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="o1tQwWdgHh4ZaxTUweFU-21" value="Значения предствляются в виде массива, содержащего примитивные типы, вложенные в тип-объединение" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="860" y="620" width="185" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="o1tQwWdgHh4ZaxTUweFU-23" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Сформированы карты для сложных типов, сгруппированные по видам сложных типов и содержащих пути до данных типов от корневой структуры графа&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="o1tQwWdgHh4ZaxTUweFU-23" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Сформированы карты для сложных типов, сгруппированные по видам сложных типов и содержащих пути до данных типов от корневой структуры графа&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="690" y="125" width="260" height="130" as="geometry" />
         </mxCell>
       </root>
