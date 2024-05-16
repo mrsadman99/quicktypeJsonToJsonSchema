@@ -1,9 +1,145 @@
-<mxfile host="app.diagrams.net" modified="2024-05-16T19:11:52.397Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" version="24.4.3" etag="241BgaF9oCeeo_9TtxFp" type="github">
+<mxfile host="app.diagrams.net" modified="2024-05-16T19:24:23.488Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="1N9qHbIYaK7emxsJl3Wa" version="24.4.3" type="github">
   <diagram name="Page-1" id="w2gdxtTCb7cxTJYI_Ths">
-    <mxGraphModel>
+    <mxGraphModel dx="4316" dy="1789" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="1lumIsnWZurXr87BptjO-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="1lumIsnWZurXr87BptjO-3" target="1lumIsnWZurXr87BptjO-45">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="1lumIsnWZurXr87BptjO-3" target="1lumIsnWZurXr87BptjO-43">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-3" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-600" y="870" width="890" height="550" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="1lumIsnWZurXr87BptjO-5" target="1lumIsnWZurXr87BptjO-31">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-5" value="&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;span style=&quot;background-color: initial; font-size: 14px;&quot;&gt;Вычисляем хеш-функцию от индекса элемента в структуре, хранящей обрабатываемое значение в зависимости от его типа (strings, arrays, objects) и соответствующим ординалом типа&lt;/span&gt;&lt;br style=&quot;font-size: 14px;&quot;&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="1090" width="340" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="1lumIsnWZurXr87BptjO-9" target="1lumIsnWZurXr87BptjO-30">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-220" y="1160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-9" value="Обрабатываемое значение находится внутри массива?" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="80" y="410" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="1lumIsnWZurXr87BptjO-47" target="1lumIsnWZurXr87BptjO-33">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-15" value="Обрабатываемое значение находится внутри&amp;nbsp; объекта?" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-280" y="410" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="1lumIsnWZurXr87BptjO-20">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-339.99999999999955" y="1095" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-17" value="Да" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=14;" vertex="1" connectable="0" parent="1lumIsnWZurXr87BptjO-16">
+          <mxGeometry x="0.4098" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="1lumIsnWZurXr87BptjO-20" target="1lumIsnWZurXr87BptjO-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-19" value="Нет" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=14;" vertex="1" connectable="0" parent="1lumIsnWZurXr87BptjO-18">
+          <mxGeometry x="-0.0789" y="-3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-20" value="Обрабатываемое значение имеет тип строки, объекта или массива?" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-433" y="890" width="470" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="1lumIsnWZurXr87BptjO-22" target="1lumIsnWZurXr87BptjO-31">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-22" value="Вычисляем хеш-функцию от заданного ординала, соответствущего текщуему обрабатываемому примитивному типу, индекс элемента передается в качестве 0" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-105" y="1090" width="260" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="1lumIsnWZurXr87BptjO-24" target="1lumIsnWZurXr87BptjO-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-24" value="Обрабатываемое значение имеет примитивный тип?" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-180" y="1000" width="410" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="1lumIsnWZurXr87BptjO-40" target="1lumIsnWZurXr87BptjO-9">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-30" y="530" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="1lumIsnWZurXr87BptjO-40" target="1lumIsnWZurXr87BptjO-15">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-30" y="530" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="1lumIsnWZurXr87BptjO-30" target="1lumIsnWZurXr87BptjO-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="180" y="790" />
+              <mxPoint x="-155" y="790" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-30" value="Вычисляем хэш-функцию для обрабатываемого значения" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="110" y="650" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-31" value="Вычисленное значение на основе хеш-функции" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-270" y="1294" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="1lumIsnWZurXr87BptjO-33" target="1lumIsnWZurXr87BptjO-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-33" value="Вычисляем хэш-функцию для ключа" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-380" y="650" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="1lumIsnWZurXr87BptjO-35" target="1lumIsnWZurXr87BptjO-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-18" y="790" />
+              <mxPoint x="-155" y="790" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-35" value="Вычисляем хэш-функцию для обрабатываемого значения" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-96" y="640" width="156" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-36" value="Записываем кортеж из вычисленных хеш-функций от ключа и обрабатываемого значения ключа в элемент массива objects, отвечающий за родительский объект" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="367.5" y="1410" width="232.5" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-39" value="Записываем результат хеш-функции от значения в элемент массива arrays, отвечающий за родительский массив&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="380" y="495" width="202.5" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-40" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Данные, обрабатываемые в данный момент&lt;/span&gt;" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-130" y="250" width="190" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="1lumIsnWZurXr87BptjO-43" target="1lumIsnWZurXr87BptjO-36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-43" value="Обрабатываемое значение находится внутри&amp;nbsp; объекта?" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="390" y="1280" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="1lumIsnWZurXr87BptjO-45" target="1lumIsnWZurXr87BptjO-39">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-45" value="Обрабатываемое значение находится внутри массива?" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="380" y="680" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-46" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="1lumIsnWZurXr87BptjO-15" target="1lumIsnWZurXr87BptjO-47">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-160" y="470" as="sourcePoint" />
+            <mxPoint x="-320" y="650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="1lumIsnWZurXr87BptjO-47" target="1lumIsnWZurXr87BptjO-35">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1lumIsnWZurXr87BptjO-47" value="Вычисляем значения для пары ключ-значение свойства" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-240" y="520" width="120" height="60" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
