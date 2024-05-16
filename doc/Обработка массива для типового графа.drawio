@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-05-16T17:55:43.107Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="lEkHrdbQNvM__Ca9N5Kp" version="24.4.3" type="github">
+<mxfile host="app.diagrams.net" modified="2024-05-16T18:00:49.784Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="VCjopPD4QxWMOd6c0JuD" version="24.4.3" type="github">
   <diagram name="Page-1" id="Tq4Mh0iUMeHvWRdkkM25">
     <mxGraphModel dx="1744" dy="894" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -23,20 +23,42 @@
         <mxCell id="bV47iDsmXiQ73La2WLj5-6" value="Определяем тип элементов массива" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="952.5" y="524.5" width="205" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="bV47iDsmXiQ73La2WLj5-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="bV47iDsmXiQ73La2WLj5-8" target="bV47iDsmXiQ73La2WLj5-9">
+        <mxCell id="bV47iDsmXiQ73La2WLj5-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="bV47iDsmXiQ73La2WLj5-8" target="bV47iDsmXiQ73La2WLj5-20">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="bV47iDsmXiQ73La2WLj5-8" value="Завершение обработки массива" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="980" y="650" width="150" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="bV47iDsmXiQ73La2WLj5-9" value="Создается тип-массив в типовом графе, добавляется ссылка на тип элементов массива" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="1220" y="637.5" width="169" height="115" as="geometry" />
-        </mxCell>
         <mxCell id="bV47iDsmXiQ73La2WLj5-10" value="Обрабатывается массив для формирования типового графа" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="910" y="220" width="240" height="140" as="geometry" />
+          <mxGeometry x="935" y="310" width="240" height="140" as="geometry" />
         </mxCell>
-        <mxCell id="bV47iDsmXiQ73La2WLj5-11" value="Вызов функции формирования графа для свойства объекта" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="bV47iDsmXiQ73La2WLj5-11" value="Вызов функции формирования графа для элемента массива" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="680" y="512" width="160" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bV47iDsmXiQ73La2WLj5-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="bV47iDsmXiQ73La2WLj5-20" target="bV47iDsmXiQ73La2WLj5-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bV47iDsmXiQ73La2WLj5-13" value="Нет" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=14;" vertex="1" connectable="0" parent="bV47iDsmXiQ73La2WLj5-12">
+          <mxGeometry x="0.0338" y="4" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bV47iDsmXiQ73La2WLj5-14" value="Создается тип-массив в типовом графе, добавляется ссылка на тип элементов массива" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="990" width="169" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="bV47iDsmXiQ73La2WLj5-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="bV47iDsmXiQ73La2WLj5-20" target="bV47iDsmXiQ73La2WLj5-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bV47iDsmXiQ73La2WLj5-17" value="Да" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=14;" vertex="1" connectable="0" parent="bV47iDsmXiQ73La2WLj5-16">
+          <mxGeometry x="0.1244" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bV47iDsmXiQ73La2WLj5-18" value="Используем созданный ранее&amp;nbsp; классовый тип для текущих обрабатываемых объектов" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="797" y="990" width="218" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bV47iDsmXiQ73La2WLj5-20" value="Проверяем, был ли создан тип-массив ранее, основываясь на хеш-функцию от типа элементов массива" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="850" y="800" width="480" height="100" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
