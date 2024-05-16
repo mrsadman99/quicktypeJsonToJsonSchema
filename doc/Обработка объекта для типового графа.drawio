@@ -1,9 +1,116 @@
-<mxfile host="app.diagrams.net" modified="2024-05-16T17:43:54.488Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" version="24.4.2" etag="rVaqfapZFq0bLHvz9ZPk" type="github">
+<mxfile host="app.diagrams.net" modified="2024-05-16T17:46:52.670Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="L_1VZsL6IQftmxBKvoSD" version="24.4.3" type="github">
   <diagram name="Page-1" id="ZBsJUyROejT44VjlWgQ5">
-    <mxGraphModel>
+    <mxGraphModel dx="1221" dy="626" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="a4PXk83tqrYMim-gFMEL-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="a4PXk83tqrYMim-gFMEL-26" target="a4PXk83tqrYMim-gFMEL-8">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="525" y="580" as="targetPoint" />
+            <mxPoint x="305" y="460" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" target="a4PXk83tqrYMim-gFMEL-12" source="a4PXk83tqrYMim-gFMEL-25">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="210" y="755" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="a4PXk83tqrYMim-gFMEL-8" target="a4PXk83tqrYMim-gFMEL-25">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="115" y="700" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-5" value="Да" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=14;" vertex="1" connectable="0" parent="a4PXk83tqrYMim-gFMEL-4">
+          <mxGeometry x="-0.048" y="-3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.375;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="a4PXk83tqrYMim-gFMEL-8" target="a4PXk83tqrYMim-gFMEL-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-7" value="Нет" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=14;" vertex="1" connectable="0" parent="a4PXk83tqrYMim-gFMEL-6">
+          <mxGeometry x="-0.2203" y="-3" relative="1" as="geometry">
+            <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-8" value="Объект внутри массива?" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="192.5" y="514.5" width="225" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" target="a4PXk83tqrYMim-gFMEL-13">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="919" y="990" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="a4PXk83tqrYMim-gFMEL-12" target="a4PXk83tqrYMim-gFMEL-15">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="556.75" y="970" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="a4PXk83tqrYMim-gFMEL-12" target="a4PXk83tqrYMim-gFMEL-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-12" value="&lt;ol style=&quot;font-size: 14px;&quot;&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;Определяем типы для каждого из свойств объекта, передавая данные, относящиеся к каждому из них&amp;nbsp;&lt;/li&gt;&lt;li style=&quot;font-size: 14px;&quot;&gt;добавляем ссылку на созданый тип для свойства в классовый тип&lt;/li&gt;&lt;/ol&gt;" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;align=left;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="310" y="787.5" width="353.5" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-13" value="Свойство в классовом объекте будет иcпользовано как optional" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="842.75" y="1060" width="152" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="a4PXk83tqrYMim-gFMEL-15" target="a4PXk83tqrYMim-gFMEL-20">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="556.75" y="1080" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-15" value="Окончание обработки свойств классового типа" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="456.75" y="950" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="a4PXk83tqrYMim-gFMEL-20" target="a4PXk83tqrYMim-gFMEL-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-17" value="Да" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=14;" vertex="1" connectable="0" parent="a4PXk83tqrYMim-gFMEL-16">
+          <mxGeometry x="0.2881" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="a4PXk83tqrYMim-gFMEL-20" target="a4PXk83tqrYMim-gFMEL-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-19" value="Нет" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=14;" vertex="1" connectable="0" parent="a4PXk83tqrYMim-gFMEL-18">
+          <mxGeometry x="-0.2807" y="4" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-20" value="Проверяем, был ли создан классовый тип ранее, основываясь на хеш-функции от типов свойств данного классового объекта" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="341.75" y="1080" width="430" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-21" value="Используем созданный ранее&amp;nbsp; классовый тип для текущих обрабатываемых объектов" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="342" y="1280" width="218" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-22" value="Создаем классовый тип, добавляя в него ссылки на типы свойств" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="620" y="1287.5" width="228.25" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="a4PXk83tqrYMim-gFMEL-24">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="919" y="920" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="a4PXk83tqrYMim-gFMEL-24" target="a4PXk83tqrYMim-gFMEL-29">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-24" value="Для каждого из обрабатываемых свойств" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="800" y="817.5" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-25" value="Группируем значения свойств объектов - элементов массива, по названием свойств объекта" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="20" y="790" width="190" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-26" value="Обрабатывается объект для формирования типового графа" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="340" width="190" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-28" value="Значение свойства задано не для каждого из обрабатываемых&amp;nbsp; объектов" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="760" y="920" width="317.5" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="a4PXk83tqrYMim-gFMEL-29" value="Вызов функции формирования графа для свойства объекта" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="780" y="610" width="160" height="110" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
