@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-05-15T22:46:34.141Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="DY6yw_9W0q3cFEFWuY40" version="24.4.2" type="github">
+<mxfile host="app.diagrams.net" modified="2024-05-16T17:55:46.658Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="6FImYYyiG24KOOVAY-bs" version="24.4.2" type="github">
   <diagram name="Page-1" id="1g6iJyspXUJ4lVBro7co">
-    <mxGraphModel dx="2048" dy="626" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2184" dy="696" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -215,11 +215,25 @@
         <mxCell id="ybFJ6NvRLtgS1pNJfpIo-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontSize=14;" parent="1" source="02Kn7gCLsv_7Pjf7zpuO-86" target="02Kn7gCLsv_7Pjf7zpuO-4" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="7kiGGMUhW2Vi5Jfto_A3-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="02Kn7gCLsv_7Pjf7zpuO-86" target="7kiGGMUhW2Vi5Jfto_A3-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1055" y="670" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="02Kn7gCLsv_7Pjf7zpuO-86" value="Определяем тип элементов массива" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="952.5" y="514.5" width="205" height="85" as="geometry" />
         </mxCell>
         <mxCell id="ybFJ6NvRLtgS1pNJfpIo-3" value="Сформирован граф типов с вложеной древовидной структурой, поддерживаются типы: объединение, классовые типы, массив, примитивные типы" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="780" y="150" width="210" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="7kiGGMUhW2Vi5Jfto_A3-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="7kiGGMUhW2Vi5Jfto_A3-2" target="7kiGGMUhW2Vi5Jfto_A3-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7kiGGMUhW2Vi5Jfto_A3-2" value="Завершение обработки массива" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="980" y="640" width="150" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="7kiGGMUhW2Vi5Jfto_A3-3" value="Создается тип-массив в типовом графе, добавляется ссылка на тип элементов массива" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="627.5" width="169" height="115" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
