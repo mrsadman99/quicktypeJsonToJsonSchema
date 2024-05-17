@@ -1,24 +1,13 @@
-<mxfile host="app.diagrams.net" modified="2024-05-16T18:07:09.433Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="h0sURZ7G7MoVos3BEvzX" version="24.4.3" type="github">
+<mxfile host="app.diagrams.net" modified="2024-05-17T03:13:21.514Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="PMJe5kehljg5uS00Wcqu" version="24.4.3" type="github">
   <diagram name="Page-1" id="qWd3IOd-8dhRZZYfJvNh">
     <mxGraphModel dx="2048" dy="626" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="qgXAP9RSG6wpKUSGwU-0-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="qgXAP9RSG6wpKUSGwU-0-2" target="qgXAP9RSG6wpKUSGwU-0-9">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="qgXAP9RSG6wpKUSGwU-0-2" value="Обрабатываем данные, представимые как примитивный строковый или не строковый типы?" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="-310" y="400" width="370" height="90" as="geometry" />
-        </mxCell>
-        <mxCell id="qgXAP9RSG6wpKUSGwU-0-3" value="Обрабатываем данные, основыванные на нескольких примитивных типов?" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="-677.5" y="300" width="225" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="qgXAP9RSG6wpKUSGwU-0-4" value="Создаем новый тип объединение (union) и ссылаемся в поле members у данного типа на вложенные примитивные типы" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="-680" y="720" width="230" height="140" as="geometry" />
-        </mxCell>
-        <mxCell id="qgXAP9RSG6wpKUSGwU-0-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="qgXAP9RSG6wpKUSGwU-0-9" target="qgXAP9RSG6wpKUSGwU-0-10">
+        <mxCell id="qgXAP9RSG6wpKUSGwU-0-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="qgXAP9RSG6wpKUSGwU-0-28" target="qgXAP9RSG6wpKUSGwU-0-29">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="-220" y="750" as="targetPoint" />
+            <mxPoint x="-280" y="530" as="targetPoint" />
+            <mxPoint x="-190" y="400" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="qgXAP9RSG6wpKUSGwU-0-6" value="Нет" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=14;" vertex="1" connectable="0" parent="qgXAP9RSG6wpKUSGwU-0-5">
@@ -26,35 +15,21 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="qgXAP9RSG6wpKUSGwU-0-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="qgXAP9RSG6wpKUSGwU-0-9" target="qgXAP9RSG6wpKUSGwU-0-11">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="qgXAP9RSG6wpKUSGwU-0-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="qgXAP9RSG6wpKUSGwU-0-28" target="qgXAP9RSG6wpKUSGwU-0-30">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-132.5" y="680" as="sourcePoint" />
+            <mxPoint x="190" y="505" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="qgXAP9RSG6wpKUSGwU-0-8" value="Да" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=14;" vertex="1" connectable="0" parent="qgXAP9RSG6wpKUSGwU-0-7">
           <mxGeometry x="0.0475" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="qgXAP9RSG6wpKUSGwU-0-9" value="Был ли создан ранее примитивный тип, соотвуетствующий данной структуре?" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="-295" y="587.5" width="325" height="92.5" as="geometry" />
-        </mxCell>
-        <mxCell id="qgXAP9RSG6wpKUSGwU-0-10" value="Создаем примитивный тип" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="-370" y="760" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="qgXAP9RSG6wpKUSGwU-0-11" value="Используем созданый ранее примитивный тип" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="-130" y="750" width="140" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="qgXAP9RSG6wpKUSGwU-0-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="qgXAP9RSG6wpKUSGwU-0-15" target="qgXAP9RSG6wpKUSGwU-0-2">
+        <mxCell id="qgXAP9RSG6wpKUSGwU-0-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="qgXAP9RSG6wpKUSGwU-0-26" target="qgXAP9RSG6wpKUSGwU-0-27">
           <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="-400" y="540" />
-              <mxPoint x="-400" y="445" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="qgXAP9RSG6wpKUSGwU-0-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.445;entryY=0.007;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=14;" edge="1" parent="1" source="qgXAP9RSG6wpKUSGwU-0-3" target="qgXAP9RSG6wpKUSGwU-0-15">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="-645" y="430" as="sourcePoint" />
-            <mxPoint x="-597" y="660" as="targetPoint" />
+            <mxPoint x="-565" y="380" as="sourcePoint" />
+            <mxPoint x="-634.3499999999999" y="370.6685" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="qgXAP9RSG6wpKUSGwU-0-23" value="Да" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="qgXAP9RSG6wpKUSGwU-0-13">
@@ -62,34 +37,58 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="qgXAP9RSG6wpKUSGwU-0-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="qgXAP9RSG6wpKUSGwU-0-17" target="qgXAP9RSG6wpKUSGwU-0-4">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="qgXAP9RSG6wpKUSGwU-0-15" value="Для каждого примитивного типа с соответствующими данными" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="-650" y="479" width="170" height="95.5" as="geometry" />
-        </mxCell>
-        <mxCell id="qgXAP9RSG6wpKUSGwU-0-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="qgXAP9RSG6wpKUSGwU-0-15" target="qgXAP9RSG6wpKUSGwU-0-17">
+        <mxCell id="qgXAP9RSG6wpKUSGwU-0-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="qgXAP9RSG6wpKUSGwU-0-26" target="qgXAP9RSG6wpKUSGwU-0-28">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="-580" y="585" as="sourcePoint" />
-            <mxPoint x="-580" y="710" as="targetPoint" />
+            <mxPoint x="-462.5" y="340" as="sourcePoint" />
+            <mxPoint x="35" y="350" as="targetPoint" />
           </mxGeometry>
-        </mxCell>
-        <mxCell id="qgXAP9RSG6wpKUSGwU-0-17" value="Окончание обработки примитивных типов" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="-625" y="612.5" width="125" height="77.5" as="geometry" />
-        </mxCell>
-        <mxCell id="qgXAP9RSG6wpKUSGwU-0-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qgXAP9RSG6wpKUSGwU-0-19" target="qgXAP9RSG6wpKUSGwU-0-3">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="qgXAP9RSG6wpKUSGwU-0-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="qgXAP9RSG6wpKUSGwU-0-3" target="qgXAP9RSG6wpKUSGwU-0-2">
-          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="qgXAP9RSG6wpKUSGwU-0-24" value="Нет" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="qgXAP9RSG6wpKUSGwU-0-21">
           <mxGeometry x="-0.2713" y="1" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="qgXAP9RSG6wpKUSGwU-0-19" value="Обрабатывается примитивный тип&lt;div&gt;для формирования типового графа&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="-687.5" y="120" width="245" height="90" as="geometry" />
+        <mxCell id="qgXAP9RSG6wpKUSGwU-0-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="qgXAP9RSG6wpKUSGwU-0-25" target="qgXAP9RSG6wpKUSGwU-0-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qgXAP9RSG6wpKUSGwU-0-25" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Данные представленные в примитивных типах&lt;br&gt;&lt;/span&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="-495" y="60" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="qgXAP9RSG6wpKUSGwU-0-26" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Обрабатываем данные, основыванные на нескольких примитивных типов?&lt;/span&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-500" y="180" width="230" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="qgXAP9RSG6wpKUSGwU-0-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="qgXAP9RSG6wpKUSGwU-0-27" target="qgXAP9RSG6wpKUSGwU-0-28">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-675" y="480" />
+              <mxPoint x="-395" y="480" />
+              <mxPoint x="-395" y="395" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qgXAP9RSG6wpKUSGwU-0-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="qgXAP9RSG6wpKUSGwU-0-27" target="qgXAP9RSG6wpKUSGwU-0-32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qgXAP9RSG6wpKUSGwU-0-27" value="Итерируемся по каждому из обрабатываемых примитивных типов, передавая данные, соответствующие им" style="shape=loopLimit;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-740" y="300" width="130" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="qgXAP9RSG6wpKUSGwU-0-28" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Был ли создан ранее примитивный тип, соотвуетствующий данной структуре?&lt;/span&gt;" style="rhombus;whiteSpace=wrap;html=1;spacingLeft=20;spacingRight=20;" vertex="1" parent="1">
+          <mxGeometry x="-180" y="320" width="340" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="qgXAP9RSG6wpKUSGwU-0-29" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Создаем примитивный тип&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-330" y="530" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qgXAP9RSG6wpKUSGwU-0-30" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Используем созданый ранее примитивный тип&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="130" y="518" width="140" height="67" as="geometry" />
+        </mxCell>
+        <mxCell id="qgXAP9RSG6wpKUSGwU-0-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="qgXAP9RSG6wpKUSGwU-0-32" target="qgXAP9RSG6wpKUSGwU-0-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qgXAP9RSG6wpKUSGwU-0-32" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Окончание обработки примитивных типов&lt;/span&gt;" style="shape=loopLimit;whiteSpace=wrap;html=1;direction=west;" vertex="1" parent="1">
+          <mxGeometry x="-725" y="520" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="qgXAP9RSG6wpKUSGwU-0-34" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Создаем новый тип объединение (union) и ссылаемся в поле members у данного типа на вложенные примитивные типы&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-775" y="660" width="200" height="140" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
