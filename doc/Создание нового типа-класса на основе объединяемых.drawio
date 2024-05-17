@@ -1,9 +1,91 @@
-<mxfile host="app.diagrams.net" modified="2024-05-17T04:44:37.048Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" version="24.4.0" etag="ibOiABh0Q09-EO2g-Tsu" type="github">
+<mxfile host="app.diagrams.net" modified="2024-05-17T04:44:49.460Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="jyDMCphyo5Aq8vLJ7L16" version="24.4.3" type="github">
   <diagram name="Page-1" id="Cr2SnYiMro8fvmNUmeE-">
-    <mxGraphModel>
+    <mxGraphModel dx="6105" dy="5468" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="dukjN0Hw-iiDrcdyrHTk-2" target="dukjN0Hw-iiDrcdyrHTk-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-2" value="Двумерный массив, содержащий типы-классы для объединения" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="590" y="-1270" width="370" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="dukjN0Hw-iiDrcdyrHTk-4" target="dukjN0Hw-iiDrcdyrHTk-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-4" value="Итерация по двумерному массив" style="shape=loopLimit;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="740" y="-1130" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="dukjN0Hw-iiDrcdyrHTk-6" target="dukjN0Hw-iiDrcdyrHTk-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-6" value="Итерация по масссиву, содержащему типы-классы для объединения" style="shape=loopLimit;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="730" y="-1010" width="120" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="dukjN0Hw-iiDrcdyrHTk-8" target="dukjN0Hw-iiDrcdyrHTk-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-8" value="Итерация по каждому из свойств, типов-классов" style="shape=loopLimit;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="740" y="-880" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="dukjN0Hw-iiDrcdyrHTk-13" target="dukjN0Hw-iiDrcdyrHTk-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-10" value="Нет" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=14;" vertex="1" connectable="0" parent="dukjN0Hw-iiDrcdyrHTk-9">
+          <mxGeometry x="-0.5279" y="-5" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="dukjN0Hw-iiDrcdyrHTk-13" target="dukjN0Hw-iiDrcdyrHTk-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-12" value="Да" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=14;" vertex="1" connectable="0" parent="dukjN0Hw-iiDrcdyrHTk-11">
+          <mxGeometry x="-0.1879" y="3" relative="1" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-13" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Свойство представлено в каждом сгруппированом классовом типе?&lt;/span&gt;" style="rhombus;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="625" y="-760" width="330" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="dukjN0Hw-iiDrcdyrHTk-15" target="dukjN0Hw-iiDrcdyrHTk-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-15" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Маркируем свойство как опциональное&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="-600" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="dukjN0Hw-iiDrcdyrHTk-17" target="dukjN0Hw-iiDrcdyrHTk-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-17" value="Завершение итерации по свойства типов-классов" style="shape=loopLimit;whiteSpace=wrap;html=1;direction=west;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="740" y="-490" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="dukjN0Hw-iiDrcdyrHTk-19" target="dukjN0Hw-iiDrcdyrHTk-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-19" value="Завершение итерации по массиву, содержащему объединяемые типы-классы" style="shape=loopLimit;whiteSpace=wrap;html=1;direction=west;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="720" y="-365" width="130" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="dukjN0Hw-iiDrcdyrHTk-21" target="dukjN0Hw-iiDrcdyrHTk-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-21" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Создаем новый классовый тип со свойствами, представленными в сгруппированых классовых типах&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="955" y="-387" width="200" height="137" as="geometry" />
+        </mxCell>
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="dukjN0Hw-iiDrcdyrHTk-23" target="dukjN0Hw-iiDrcdyrHTk-25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-23" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Заменяем в графе типов ссылки на сгрупированые классовые типы ссылкой на новый созданый единый тип&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="-398.5" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="dukjN0Hw-iiDrcdyrHTk-25" target="dukjN0Hw-iiDrcdyrHTk-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-25" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Удаляем сгруппированые классовые типы из типового графа&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1654" y="-358.5" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="dukjN0Hw-iiDrcdyrHTk-26" value="Завершение итерации по двумерному массиву" style="shape=loopLimit;whiteSpace=wrap;html=1;direction=west;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1669" y="-180" width="100" height="80" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
