@@ -1,9 +1,104 @@
-<mxfile host="app.diagrams.net" modified="2024-05-17T04:41:24.369Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" version="24.4.0" etag="WwORMfk6YOgf9DjKQmGY" type="github">
+<mxfile host="app.diagrams.net" modified="2024-05-17T04:41:53.785Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="tSTOdYpmbPcpwXt9b5mS" version="24.4.3" type="github">
   <diagram name="Page-1" id="ZxtumW9TQQuDCvVQUKhD">
-    <mxGraphModel>
+    <mxGraphModel dx="394" dy="626" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="526ygfOE2EZp1fA7FXsR-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="526ygfOE2EZp1fA7FXsR-2" target="526ygfOE2EZp1fA7FXsR-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="526ygfOE2EZp1fA7FXsR-2" value="Итерация по свойствам типов-классов" style="shape=loopLimit;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1310" y="210" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="526ygfOE2EZp1fA7FXsR-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="526ygfOE2EZp1fA7FXsR-7" target="526ygfOE2EZp1fA7FXsR-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="526ygfOE2EZp1fA7FXsR-4" value="Да" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=14;" vertex="1" connectable="0" parent="526ygfOE2EZp1fA7FXsR-3">
+          <mxGeometry x="-0.7217" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="526ygfOE2EZp1fA7FXsR-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="526ygfOE2EZp1fA7FXsR-7" target="526ygfOE2EZp1fA7FXsR-20">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="980" y="385" />
+              <mxPoint x="980" y="830" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="526ygfOE2EZp1fA7FXsR-6" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Нет&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="526ygfOE2EZp1fA7FXsR-5">
+          <mxGeometry x="-0.5597" y="5" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="526ygfOE2EZp1fA7FXsR-7" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Оба свойства или опциональные или не опциональные&lt;/span&gt;" style="rhombus;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="320" width="160" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="526ygfOE2EZp1fA7FXsR-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="526ygfOE2EZp1fA7FXsR-12" target="526ygfOE2EZp1fA7FXsR-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="526ygfOE2EZp1fA7FXsR-9" value="Нет" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=14;" vertex="1" connectable="0" parent="526ygfOE2EZp1fA7FXsR-8">
+          <mxGeometry x="-0.2031" y="-3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="526ygfOE2EZp1fA7FXsR-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="526ygfOE2EZp1fA7FXsR-12" target="526ygfOE2EZp1fA7FXsR-14">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1520" y="760" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1560" y="610" />
+              <mxPoint x="1560" y="830" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="526ygfOE2EZp1fA7FXsR-11" value="Да" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=14;" vertex="1" connectable="0" parent="526ygfOE2EZp1fA7FXsR-10">
+          <mxGeometry x="-0.6502" y="5" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="526ygfOE2EZp1fA7FXsR-12" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Ссылка на тип для свойств сравнимых классовых типов совпадает&lt;/span&gt;" style="rhombus;whiteSpace=wrap;html=1;spacingLeft=20;spacingRight=20;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="530" width="270" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="526ygfOE2EZp1fA7FXsR-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="526ygfOE2EZp1fA7FXsR-14">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1210" y="960" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="526ygfOE2EZp1fA7FXsR-14" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Свойства совпадают&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="800" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="526ygfOE2EZp1fA7FXsR-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="526ygfOE2EZp1fA7FXsR-18" target="526ygfOE2EZp1fA7FXsR-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="526ygfOE2EZp1fA7FXsR-16" value="Да" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=14;" vertex="1" connectable="0" parent="526ygfOE2EZp1fA7FXsR-15">
+          <mxGeometry x="-0.7893" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="526ygfOE2EZp1fA7FXsR-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="526ygfOE2EZp1fA7FXsR-18" target="526ygfOE2EZp1fA7FXsR-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="526ygfOE2EZp1fA7FXsR-18" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Оба свойства имеют одинаковый вид типа&lt;/span&gt;" style="rhombus;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="635" width="210" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="526ygfOE2EZp1fA7FXsR-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="526ygfOE2EZp1fA7FXsR-20" target="526ygfOE2EZp1fA7FXsR-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="526ygfOE2EZp1fA7FXsR-20" value="Свойства не совпадают" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1045" y="800" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="526ygfOE2EZp1fA7FXsR-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="526ygfOE2EZp1fA7FXsR-22" target="526ygfOE2EZp1fA7FXsR-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="526ygfOE2EZp1fA7FXsR-22" value="Два типа-класса, имеющие одинаковые свойства по наименованиям" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1252.5" y="40" width="215" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="526ygfOE2EZp1fA7FXsR-23" value="Вовзращаем результат сравнения" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="950" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="526ygfOE2EZp1fA7FXsR-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontSize=14;" edge="1" parent="1" source="526ygfOE2EZp1fA7FXsR-23" target="526ygfOE2EZp1fA7FXsR-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
