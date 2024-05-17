@@ -1,16 +1,16 @@
-<mxfile host="app.diagrams.net" modified="2024-05-17T06:05:23.105Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="dDhdYL4TgTMjNQYwq-c0" version="24.4.3" type="github">
+<mxfile host="app.diagrams.net" modified="2024-05-17T06:05:40.009Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="S7pHezF0Zmx2XADAypfH" version="24.4.3" type="github">
   <diagram name="Page-1" id="F6msTyLeYe9DiGh3Is95">
-    <mxGraphModel dx="3702" dy="626" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3917" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="PEN4WoWylq-yMtjiF6jO-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="PEN4WoWylq-yMtjiF6jO-2" target="PEN4WoWylq-yMtjiF6jO-7">
+        <mxCell id="PEN4WoWylq-yMtjiF6jO-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="PEN4WoWylq-yMtjiF6jO-2" target="PEN4WoWylq-yMtjiF6jO-7">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="PEN4WoWylq-yMtjiF6jO-2" value="&lt;div style=&quot;text-align: justify;&quot;&gt;Аргументы функции конвертации типов-массивов:&lt;/div&gt;&lt;ol&gt;&lt;li style=&quot;text-align: justify;&quot;&gt;Тип-массив из типового графа&lt;/li&gt;&lt;li style=&quot;text-align: justify;&quot;&gt;Ссылка на узел структуры XSD&lt;/li&gt;&lt;li style=&quot;text-align: justify;&quot;&gt;Префикс пути до текущего типа&lt;/li&gt;&lt;li style=&quot;text-align: justify;&quot;&gt;Аттрибуты для создания элементов вложенной структуры&lt;/li&gt;&lt;/ol&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;spacingLeft=25;spacingRight=25;" vertex="1" parent="1">
-          <mxGeometry x="-1560" y="130" width="270" height="190" as="geometry" />
+        <mxCell id="PEN4WoWylq-yMtjiF6jO-2" value="&lt;div style=&quot;text-align: justify; font-size: 14px;&quot;&gt;Аргументы функции конвертации типов-массивов:&lt;/div&gt;&lt;ol style=&quot;font-size: 14px;&quot;&gt;&lt;li style=&quot;text-align: justify; font-size: 14px;&quot;&gt;Тип-массив из типового графа&lt;/li&gt;&lt;li style=&quot;text-align: justify; font-size: 14px;&quot;&gt;Ссылка на узел структуры XSD&lt;/li&gt;&lt;li style=&quot;text-align: justify; font-size: 14px;&quot;&gt;Префикс пути до текущего типа&lt;/li&gt;&lt;li style=&quot;text-align: justify; font-size: 14px;&quot;&gt;Аттрибуты для создания элементов вложенной структуры&lt;/li&gt;&lt;/ol&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;spacingLeft=25;spacingRight=25;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-1560" y="90" width="300" height="230" as="geometry" />
         </mxCell>
-        <mxCell id="PEN4WoWylq-yMtjiF6jO-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="PEN4WoWylq-yMtjiF6jO-7" target="PEN4WoWylq-yMtjiF6jO-9">
+        <mxCell id="PEN4WoWylq-yMtjiF6jO-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="PEN4WoWylq-yMtjiF6jO-7" target="PEN4WoWylq-yMtjiF6jO-9">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="PEN4WoWylq-yMtjiF6jO-4" value="Нет" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="PEN4WoWylq-yMtjiF6jO-3">
@@ -18,7 +18,7 @@
             <mxPoint x="1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="PEN4WoWylq-yMtjiF6jO-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="PEN4WoWylq-yMtjiF6jO-7" target="PEN4WoWylq-yMtjiF6jO-14">
+        <mxCell id="PEN4WoWylq-yMtjiF6jO-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="PEN4WoWylq-yMtjiF6jO-7" target="PEN4WoWylq-yMtjiF6jO-14">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="PEN4WoWylq-yMtjiF6jO-6" value="Да" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="PEN4WoWylq-yMtjiF6jO-5">
@@ -26,22 +26,22 @@
             <mxPoint y="-1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="PEN4WoWylq-yMtjiF6jO-7" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Тип был обработан ранее&lt;/span&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="PEN4WoWylq-yMtjiF6jO-7" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Тип был обработан ранее&lt;/span&gt;" style="rhombus;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="-1507.5" y="414" width="230" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="PEN4WoWylq-yMtjiF6jO-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="PEN4WoWylq-yMtjiF6jO-9" target="PEN4WoWylq-yMtjiF6jO-19">
+        <mxCell id="PEN4WoWylq-yMtjiF6jO-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="PEN4WoWylq-yMtjiF6jO-9" target="PEN4WoWylq-yMtjiF6jO-19">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="PEN4WoWylq-yMtjiF6jO-9" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Добавляем в корневую структуру XSD тег xsd:complexType с вложенным xsd:sequence и запоминаем тип-массив по ссылке на тип из графа типов&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="PEN4WoWylq-yMtjiF6jO-9" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Добавляем в корневую структуру XSD тег xsd:complexType с вложенным xsd:sequence и запоминаем тип-массив по ссылке на тип из графа типов&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="-1930" y="359" width="215" height="135" as="geometry" />
         </mxCell>
-        <mxCell id="PEN4WoWylq-yMtjiF6jO-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="PEN4WoWylq-yMtjiF6jO-11" target="PEN4WoWylq-yMtjiF6jO-14">
+        <mxCell id="PEN4WoWylq-yMtjiF6jO-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="PEN4WoWylq-yMtjiF6jO-11" target="PEN4WoWylq-yMtjiF6jO-14">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="PEN4WoWylq-yMtjiF6jO-11" value="&lt;div style=&quot;text-align: justify;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Вызывается функция конвертации типа в XSD для типа элементов типа-массива, в качестве аргументов передаются:&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;ol&gt;&lt;li style=&quot;text-align: justify;&quot;&gt;&amp;nbsp;&lt;span style=&quot;font-size: 14px;&quot;&gt;префикс пути до текущего типа, сформированный на основе ключей от корневой структуры до текущего обрабатываемого типа&lt;/span&gt;&lt;/li&gt;&lt;li style=&quot;text-align: justify;&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;Ссылка на текущий узел структуры XSD&lt;/span&gt;&lt;/li&gt;&lt;li style=&quot;text-align: justify;&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;Тип элемента массива из типового графа&lt;/span&gt;&lt;/li&gt;&lt;li style=&quot;text-align: justify;&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;Аттрибуты&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;maxOccurs=unbounded и minOccurs=0&lt;/span&gt;&lt;span style=&quot;font-size: 14px; text-align: center;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="PEN4WoWylq-yMtjiF6jO-11" value="&lt;div style=&quot;text-align: justify; font-size: 14px;&quot;&gt;&lt;span style=&quot;background-color: initial; font-size: 14px;&quot;&gt;Вызывается функция конвертации типа в XSD для типа элементов типа-массива, в качестве аргументов передаются:&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;ol style=&quot;font-size: 14px;&quot;&gt;&lt;li style=&quot;text-align: justify; font-size: 14px;&quot;&gt;&amp;nbsp;&lt;span style=&quot;font-size: 14px;&quot;&gt;префикс пути до текущего типа, сформированный на основе ключей от корневой структуры до текущего обрабатываемого типа&lt;/span&gt;&lt;/li&gt;&lt;li style=&quot;text-align: justify; font-size: 14px;&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;Ссылка на текущий узел структуры XSD&lt;/span&gt;&lt;/li&gt;&lt;li style=&quot;text-align: justify; font-size: 14px;&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;Тип элемента массива из типового графа&lt;/span&gt;&lt;/li&gt;&lt;li style=&quot;text-align: justify; font-size: 14px;&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;Аттрибуты&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;maxOccurs=unbounded и minOccurs=0&lt;/span&gt;&lt;span style=&quot;font-size: 14px; text-align: center;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="-2006.25" y="1100" width="367.5" height="240" as="geometry" />
         </mxCell>
-        <mxCell id="PEN4WoWylq-yMtjiF6jO-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="PEN4WoWylq-yMtjiF6jO-13" target="PEN4WoWylq-yMtjiF6jO-24">
+        <mxCell id="PEN4WoWylq-yMtjiF6jO-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="PEN4WoWylq-yMtjiF6jO-13" target="PEN4WoWylq-yMtjiF6jO-24">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="-2175" y="780" />
@@ -49,13 +49,13 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="PEN4WoWylq-yMtjiF6jO-13" value="Записываем в массив для создания элементов префикс пути до типа-массива, а также название структуры типа, созданного для него в XSD" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="PEN4WoWylq-yMtjiF6jO-13" value="Записываем в массив для создания элементов префикс пути до типа-массива, а также название структуры типа, созданного для него в XSD" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="-2260" y="615" width="170" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="PEN4WoWylq-yMtjiF6jO-14" value="Завершение обработки типа-массива" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="PEN4WoWylq-yMtjiF6jO-14" value="Завершение обработки типа-массива" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="-1482.5" y="859" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="PEN4WoWylq-yMtjiF6jO-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="PEN4WoWylq-yMtjiF6jO-19" target="PEN4WoWylq-yMtjiF6jO-13">
+        <mxCell id="PEN4WoWylq-yMtjiF6jO-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="PEN4WoWylq-yMtjiF6jO-19" target="PEN4WoWylq-yMtjiF6jO-13">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="PEN4WoWylq-yMtjiF6jO-16" value="Нет" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="PEN4WoWylq-yMtjiF6jO-15">
@@ -63,7 +63,7 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="PEN4WoWylq-yMtjiF6jO-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="PEN4WoWylq-yMtjiF6jO-19" target="PEN4WoWylq-yMtjiF6jO-24">
+        <mxCell id="PEN4WoWylq-yMtjiF6jO-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="PEN4WoWylq-yMtjiF6jO-19" target="PEN4WoWylq-yMtjiF6jO-24">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="PEN4WoWylq-yMtjiF6jO-18" value="Да" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="PEN4WoWylq-yMtjiF6jO-17">
@@ -71,10 +71,10 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="PEN4WoWylq-yMtjiF6jO-19" value="обрабатываемый тип находится внутри массива?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="PEN4WoWylq-yMtjiF6jO-19" value="обрабатываемый тип находится внутри массива?" style="rhombus;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="-1912.5" y="525" width="180" height="140" as="geometry" />
         </mxCell>
-        <mxCell id="PEN4WoWylq-yMtjiF6jO-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="PEN4WoWylq-yMtjiF6jO-24" target="PEN4WoWylq-yMtjiF6jO-26">
+        <mxCell id="PEN4WoWylq-yMtjiF6jO-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="PEN4WoWylq-yMtjiF6jO-24" target="PEN4WoWylq-yMtjiF6jO-26">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="PEN4WoWylq-yMtjiF6jO-21" value="Да" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="PEN4WoWylq-yMtjiF6jO-20">
@@ -82,7 +82,7 @@
             <mxPoint x="-1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="PEN4WoWylq-yMtjiF6jO-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="PEN4WoWylq-yMtjiF6jO-24" target="PEN4WoWylq-yMtjiF6jO-11">
+        <mxCell id="PEN4WoWylq-yMtjiF6jO-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="PEN4WoWylq-yMtjiF6jO-24" target="PEN4WoWylq-yMtjiF6jO-11">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="PEN4WoWylq-yMtjiF6jO-23" value="Нет" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="PEN4WoWylq-yMtjiF6jO-22">
@@ -90,13 +90,13 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="PEN4WoWylq-yMtjiF6jO-24" value="ссылка на узел структуры XSD из аргументов функцииотличается от корневого?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-1947.5" y="838.25" width="250" height="163.5" as="geometry" />
+        <mxCell id="PEN4WoWylq-yMtjiF6jO-24" value="ссылка на узел структуры XSD из аргументов функцииотличается от корневого?" style="rhombus;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-1947.5" y="820" width="287.5" height="181.75" as="geometry" />
         </mxCell>
-        <mxCell id="PEN4WoWylq-yMtjiF6jO-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="PEN4WoWylq-yMtjiF6jO-26" target="PEN4WoWylq-yMtjiF6jO-11">
+        <mxCell id="PEN4WoWylq-yMtjiF6jO-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="PEN4WoWylq-yMtjiF6jO-26" target="PEN4WoWylq-yMtjiF6jO-11">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="PEN4WoWylq-yMtjiF6jO-26" value="Создается xsd:element по ссылке на узел структуры XSD из аргумента с аттрибутами из аргумента и типом, соответствующему созданному ранее в структуре XSD" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="PEN4WoWylq-yMtjiF6jO-26" value="Создается xsd:element по ссылке на узел структуры XSD из аргумента с аттрибутами из аргумента и типом, соответствующему созданному ранее в структуре XSD" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="-2300" y="940" width="210" height="110" as="geometry" />
         </mxCell>
       </root>
