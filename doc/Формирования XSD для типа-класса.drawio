@@ -1,9 +1,115 @@
-<mxfile host="app.diagrams.net" modified="2024-05-17T06:03:48.018Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" version="24.4.0" etag="GeE9sLZWZzj5A5WFdVc4" type="github">
+<mxfile host="app.diagrams.net" modified="2024-05-17T06:04:26.852Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="iPG_ANtFI--oUZ7SXHTE" version="24.4.3" type="github">
   <diagram name="Page-1" id="p7sJZUpEMgVLA-c4JlRE">
-    <mxGraphModel>
+    <mxGraphModel dx="3282" dy="835" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="5dhT21rHCihgPubcYquQ-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="5dhT21rHCihgPubcYquQ-5" target="5dhT21rHCihgPubcYquQ-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-2" value="Нет" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="5dhT21rHCihgPubcYquQ-1">
+          <mxGeometry x="-0.4692" y="3" relative="1" as="geometry">
+            <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="5dhT21rHCihgPubcYquQ-5" target="5dhT21rHCihgPubcYquQ-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-4" value="Да" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="5dhT21rHCihgPubcYquQ-3">
+          <mxGeometry x="-0.608" y="-2" relative="1" as="geometry">
+            <mxPoint y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-5" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Тип был обработан ранее&lt;/span&gt;" style="rhombus;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-477.5" y="356.5" width="230" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="5dhT21rHCihgPubcYquQ-7" target="5dhT21rHCihgPubcYquQ-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-7" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Добавляем в корневую структуру XSD тег xsd:complexType с вложенным xsd:all и запоминаем тип-класс по ссылке на тип из графа типов&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-1000" y="301.5" width="215" height="135" as="geometry" />
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="5dhT21rHCihgPubcYquQ-9" target="5dhT21rHCihgPubcYquQ-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-9" value="Итерация по каждому из свойств типа-класса" style="shape=loopLimit;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-850" y="1070" width="120" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="5dhT21rHCihgPubcYquQ-11" target="5dhT21rHCihgPubcYquQ-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-11" value="&lt;div style=&quot;text-align: justify; font-size: 14px;&quot;&gt;&lt;span style=&quot;background-color: initial; font-size: 14px;&quot;&gt;Вызывается функция конвертации типа в XSD для текущего свойства, в качестве аргументов передаются:&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;ol style=&quot;font-size: 14px;&quot;&gt;&lt;li style=&quot;text-align: justify; font-size: 14px;&quot;&gt;&amp;nbsp;&lt;span style=&quot;font-size: 14px;&quot;&gt;префикс пути до текущего типа, сформированный на основе ключей от корневой структуры до текущего обрабатываемого типа&lt;/span&gt;&lt;/li&gt;&lt;li style=&quot;text-align: justify; font-size: 14px;&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;Ссылка на текущий узел структуры XSD&lt;/span&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-955" y="1210" width="355" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="5dhT21rHCihgPubcYquQ-13" target="5dhT21rHCihgPubcYquQ-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-13" value="Завершение конвертации свойств типа-объекта" style="shape=loopLimit;whiteSpace=wrap;html=1;direction=west;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-880" y="1480" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="5dhT21rHCihgPubcYquQ-15" target="5dhT21rHCihgPubcYquQ-28">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-1072" y="827" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-15" value="Записываем в массив для создания элементов префикс пути до типа-класса, а также название структуры типа, созданного для него в XSD" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-1157.5" y="685" width="170" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-16" value="Завершение обработки типа-класса" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-390" y="850" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="5dhT21rHCihgPubcYquQ-21" target="5dhT21rHCihgPubcYquQ-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-18" value="Нет" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="5dhT21rHCihgPubcYquQ-17">
+          <mxGeometry x="-0.39" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="5dhT21rHCihgPubcYquQ-21" target="5dhT21rHCihgPubcYquQ-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-20" value="Да" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="5dhT21rHCihgPubcYquQ-19">
+          <mxGeometry x="-0.5902" relative="1" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-21" value="обрабатываемый тип находится внутри массива?" style="rhombus;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-920" y="510" width="180" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="5dhT21rHCihgPubcYquQ-23" target="5dhT21rHCihgPubcYquQ-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-23" value="&lt;div style=&quot;text-align: justify; font-size: 14px;&quot;&gt;Аргументы функции конвертации типов-классов:&lt;/div&gt;&lt;ol style=&quot;font-size: 14px;&quot;&gt;&lt;li style=&quot;text-align: justify; font-size: 14px;&quot;&gt;Тип-класс из типового графа&lt;/li&gt;&lt;li style=&quot;text-align: justify; font-size: 14px;&quot;&gt;Ссылка на узел структуры XSD&lt;/li&gt;&lt;li style=&quot;text-align: justify; font-size: 14px;&quot;&gt;Префикс пути до текущего типа&lt;/li&gt;&lt;li style=&quot;text-align: justify; font-size: 14px;&quot;&gt;Аттрибуты для создания элементов вложенной структуры&lt;/li&gt;&lt;/ol&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;spacingLeft=25;spacingRight=25;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-497.5" y="60" width="307.5" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="5dhT21rHCihgPubcYquQ-28" target="5dhT21rHCihgPubcYquQ-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-25" value="Да" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="5dhT21rHCihgPubcYquQ-24">
+          <mxGeometry x="-0.0035" relative="1" as="geometry">
+            <mxPoint x="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="5dhT21rHCihgPubcYquQ-28" target="5dhT21rHCihgPubcYquQ-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-27" value="Нет" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="5dhT21rHCihgPubcYquQ-26">
+          <mxGeometry x="-0.6577" y="3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-28" value="ссылка на узел структуры XSD из аргументов функцииотличается от корневого?" style="rhombus;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-955" y="826.5" width="250" height="163.5" as="geometry" />
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="5dhT21rHCihgPubcYquQ-30" target="5dhT21rHCihgPubcYquQ-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5dhT21rHCihgPubcYquQ-30" value="Создается xsd:element по ссылке на узел структуры XSD из аргумента с аттрибутами из аргумента и типом, соответствующему созданному ранее в структуре XSD" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-1230" y="1000" width="210" height="110" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
