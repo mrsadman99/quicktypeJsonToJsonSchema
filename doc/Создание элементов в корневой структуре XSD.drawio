@@ -1,9 +1,71 @@
-<mxfile host="app.diagrams.net" modified="2024-05-17T06:09:33.932Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" version="24.4.0" etag="rAdsdRQjdOWnnLfQJ-rB" type="github">
+<mxfile host="app.diagrams.net" modified="2024-05-17T06:10:02.117Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="Jy7SRdg2CJ34clmhB5-F" version="24.4.3" type="github">
   <diagram name="Page-1" id="6_bwfNdzsCJzBhfLqTul">
-    <mxGraphModel>
+    <mxGraphModel dx="1221" dy="1795" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="PGdRBs4h6YDw4an3QpVc-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="PGdRBs4h6YDw4an3QpVc-2" target="PGdRBs4h6YDw4an3QpVc-4">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="660.5" y="-590" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PGdRBs4h6YDw4an3QpVc-2" value="Массив, состоящий из наименований с префиксами и типами в XSD, которые будут созданы в корневой схеме XSD" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="480" y="-870" width="400" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="PGdRBs4h6YDw4an3QpVc-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="PGdRBs4h6YDw4an3QpVc-4" target="PGdRBs4h6YDw4an3QpVc-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PGdRBs4h6YDw4an3QpVc-4" value="Итерация по массиву" style="shape=loopLimit;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="610.5" y="-640" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PGdRBs4h6YDw4an3QpVc-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="PGdRBs4h6YDw4an3QpVc-6" target="PGdRBs4h6YDw4an3QpVc-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PGdRBs4h6YDw4an3QpVc-6" value="Поиск совпадающих наименований элементов для текущего наименования элемента" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="560" y="-490" width="199.5" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="PGdRBs4h6YDw4an3QpVc-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="PGdRBs4h6YDw4an3QpVc-10" target="PGdRBs4h6YDw4an3QpVc-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PGdRBs4h6YDw4an3QpVc-8" value="Да" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="PGdRBs4h6YDw4an3QpVc-7">
+          <mxGeometry x="-0.3565" relative="1" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PGdRBs4h6YDw4an3QpVc-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="PGdRBs4h6YDw4an3QpVc-10" target="PGdRBs4h6YDw4an3QpVc-14">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="390" y="-265" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PGdRBs4h6YDw4an3QpVc-10" value="Есть совпадающие наименования" style="rhombus;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="519.5" y="-310" width="240" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="PGdRBs4h6YDw4an3QpVc-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="PGdRBs4h6YDw4an3QpVc-12" target="PGdRBs4h6YDw4an3QpVc-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="780" y="-100" />
+              <mxPoint x="780" y="-425" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PGdRBs4h6YDw4an3QpVc-12" value="Добавляем префикс к наименованию текущего элемента" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="570.25" y="-142.5" width="179" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PGdRBs4h6YDw4an3QpVc-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=14;" edge="1" parent="1" source="PGdRBs4h6YDw4an3QpVc-14" target="PGdRBs4h6YDw4an3QpVc-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PGdRBs4h6YDw4an3QpVc-14" value="Создаем xsd:element в корневой структуре XSD с наименованием и типом из обрабатываемого элемента" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="170" y="-320" width="182" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="PGdRBs4h6YDw4an3QpVc-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="PGdRBs4h6YDw4an3QpVc-16" target="PGdRBs4h6YDw4an3QpVc-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PGdRBs4h6YDw4an3QpVc-16" value="Завершение итерации массива" style="shape=loopLimit;whiteSpace=wrap;html=1;direction=west;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="217.5" y="-100" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PGdRBs4h6YDw4an3QpVc-17" value="Элементы в корневвой структуре&amp;nbsp; XSD сформированы" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="215" y="67.5" width="135" height="82.5" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
