@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-05-15T19:05:01.786Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="QGcHZ9680RpBbYMSb758" version="24.4.0" type="github">
+<mxfile host="app.diagrams.net" modified="2024-05-17T03:36:30.655Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="vQ5StiJIyCPRznwKcwNl" version="24.4.0" type="github">
   <diagram name="Page-1" id="MgCs5yewINOYIL8VQgKL">
-    <mxGraphModel dx="4897" dy="3256" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3269" dy="2421" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -130,7 +130,7 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="YhSXKYytjkp0TWgyKWoK-24" value="Свойства ссылка на тип для свойств сравнимых классовых типов совпадает" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="YhSXKYytjkp0TWgyKWoK-24" value="Ссылка на тип для свойств сравнимых классовых типов совпадает" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="232.5" y="930" width="307.5" height="80" as="geometry" />
         </mxCell>
         <mxCell id="YhSXKYytjkp0TWgyKWoK-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=14;" edge="1" parent="1" source="YhSXKYytjkp0TWgyKWoK-25" target="YhSXKYytjkp0TWgyKWoK-30">
